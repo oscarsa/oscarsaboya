@@ -1,0 +1,1108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Óscar Saboya — Product Maker & Manager</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,700;12..96,800&family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+/*
+  COLOR SYSTEM — WCAG AA verified
+  ────────────────────────────────────────────
+  DECORATIVE (large UI, not body text):
+    --yellow  #E8A800  → 9.29:1 on dark  ✅
+    --papaya  #EB6414  → 5.89:1 on dark  ✅
+
+  TEXT ON LIGHT BACKGROUNDS (#f3e9d8 / #f8f3ea):
+    --ink      #120c04  → 16.5:1 ✅  (headlines)
+    --body     #3a3020  → 10.1:1 ✅  (body copy)
+    --muted    #5a4e3a  →  6.7:1 ✅  (secondary)
+    --label    #6e6048  →  5.1:1 ✅  (captions)
+    --gold-t   #784800  →  6.4:1 ✅  (gold-tint text)
+    --pap-t    #a03400  →  5.8:1 ✅  (papaya-tint text)
+
+  TEXT ON DARK (#12080 0):
+    --cream    #f3e9d8  → 16.5:1 ✅
+    --dim      #c0b09c  →  7.2:1 ✅
+    --yellow   #E8A800  →  9.3:1 ✅
+    --papaya   #EB6414  →  5.9:1 ✅
+  ────────────────────────────────────────────
+*/
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg-cream: #f3e9d8;
+  --bg-soft:  #f9f4ea;
+  --bg-dark:  #120800;
+
+  --ink:    #12080 0;
+  --body:   #3a3020;
+  --muted:  #5a4e3a;
+  --label:  #6e6048;
+  --gold-t: #784800;
+  --pap-t:  #a03400;
+
+  --cream:  #f3e9d8;
+  --dim:    #c0b09c;
+
+  --yellow: #e8a800;
+  --papaya: #eb6414;
+  --sage:   #2e5c3a;
+  --sage-l: #3d7a50;
+
+  --ff-d: 'Bricolage Grotesque', sans-serif;
+  --ff-s: 'DM Serif Display', serif;
+  --ff-b: 'DM Sans', sans-serif;
+}
+
+html { scroll-behavior: smooth; overflow-x: hidden; }
+body {
+  background: var(--bg-cream);
+  color: #12080 0;
+  font-family: var(--ff-b);
+  overflow-x: hidden;
+}
+a { text-decoration: none; color: inherit; }
+::selection { background: var(--yellow); color: var(--bg-dark); }
+
+/* FILM GRAIN */
+.grain {
+  position: fixed; inset: 0; z-index: 9998; pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)'/%3E%3C/svg%3E");
+  background-size: 180px;
+  animation: grainAnim 0.55s steps(3) infinite;
+}
+@keyframes grainAnim {
+  0%  { background-position: 0 0; }
+  33% { background-position: -16px 11px; }
+  66% { background-position: 8px -8px; }
+}
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  padding: 1.1rem 1.5rem;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.nav-name {
+  font-family: var(--ff-d);
+  font-size: 0.88rem; font-weight: 700; letter-spacing: -0.01em;
+  color: var(--muted);
+}
+.nav-dot {
+  width: 10px; height: 10px; border-radius: 50%;
+  background: var(--papaya);
+  box-shadow: 0 0 0 0 rgba(235,100,20,0.5);
+  animation: ring 2.4s ease-out infinite;
+}
+@keyframes ring {
+  0%   { box-shadow: 0 0 0 0 rgba(235,100,20,0.55); }
+  70%  { box-shadow: 0 0 0 8px rgba(235,100,20,0); }
+  100% { box-shadow: 0 0 0 0 rgba(235,100,20,0); }
+}
+
+/* ━━━━━━━━━━━━━ HERO ━━━━━━━━━━━━━ */
+.hero {
+  min-height: 100svh;
+  padding: 5.5rem 1.5rem 3rem;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  position: relative; overflow: hidden;
+  background: var(--bg-cream);
+}
+.hero-blobs {
+  position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 80% 55% at 75% 10%, rgba(232,168,0,0.22) 0%, transparent 55%),
+    radial-gradient(ellipse 65% 60% at 8%  85%, rgba(46,92,58,0.16) 0%, transparent 50%),
+    radial-gradient(ellipse 50% 70% at 50% 48%, rgba(235,100,20,0.10) 0%, transparent 62%);
+}
+
+.hero-eyebrow {
+  font-family: var(--ff-d);
+  font-size: 0.7rem; font-weight: 700;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--pap-t);
+  margin-bottom: 1.3rem;
+  display: flex; align-items: center; gap: 0.6rem;
+  animation: up 0.65s 0.1s both;
+}
+.hero-eyebrow::before { content:''; width:1.3rem; height:1.5px; background:var(--papaya); flex-shrink:0; }
+
+.hero-h1 {
+  font-family: var(--ff-d);
+  font-size: clamp(3.2rem, 15vw, 7.5rem);
+  font-weight: 800; line-height: 0.92; letter-spacing: -0.04em;
+  color: #120800;
+  margin-bottom: 0.4rem;
+  animation: up 0.65s 0.25s both;
+}
+.hero-h1 em {
+  font-family: var(--ff-s); font-style: italic; font-weight: 400;
+  color: var(--papaya);
+}
+
+/* Big yellow accent word */
+.hero-h1-accent {
+  font-family: var(--ff-d);
+  font-size: clamp(3.2rem, 15vw, 7.5rem);
+  font-weight: 800; line-height: 0.92; letter-spacing: -0.04em;
+  color: var(--yellow);
+  display: block;
+  animation: up 0.65s 0.35s both;
+  -webkit-text-stroke: 0; /* solid fill, readable */
+}
+
+.hero-sub {
+  font-size: 1rem; line-height: 1.7; font-weight: 400;
+  color: var(--body); margin-top: 1.5rem; margin-bottom: 2.5rem;
+  max-width: 340px;
+  animation: up 0.65s 0.5s both;
+}
+.hero-sub strong { font-weight: 600; color: #120800; }
+
+.hero-cta {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: #120800; color: var(--cream);
+  font-family: var(--ff-d); font-size: 0.88rem; font-weight: 700;
+  padding: 0.9rem 1.6rem; border-radius: 999px;
+  animation: up 0.65s 0.65s both;
+  transition: background 0.2s, transform 0.15s;
+}
+.hero-cta:active { background: var(--papaya); transform: scale(0.97); }
+
+@keyframes up {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ━━━━━━━━━━━━━ MARQUEE ━━━━━━━━━━━━━ */
+.marquee {
+  background: #120800; padding: 0.9rem 0; overflow: hidden; position: relative;
+}
+.mtrack {
+  display: flex; width: max-content;
+  animation: mscroll 22s linear infinite;
+}
+.mtrack span {
+  font-family: var(--ff-d); font-size: 0.7rem; font-weight: 600;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--dim); padding: 0 2rem; white-space: nowrap;
+}
+.mtrack span.hi { color: var(--yellow); }
+@keyframes mscroll { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+/* ━━━━━━━━━━━━━ SECTIONS ━━━━━━━━━━━━━ */
+.eyebrow {
+  font-family: var(--ff-d); font-size: 0.66rem; font-weight: 700;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--label); margin-bottom: 1.8rem;
+}
+
+/* ━━━━━━━━━━━━━ ABOUT (conversational) ━━━━━━━━━━━━━ */
+.about {
+  padding: 5rem 1.5rem;
+  background: var(--bg-cream);
+  position: relative; overflow: hidden;
+}
+.about-blobs {
+  position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 75% 45% at 50% 60%, rgba(232,168,0,0.09) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 50% at 90% 15%, rgba(46,92,58,0.08) 0%, transparent 50%);
+}
+
+/* Staggered big lines — opacity+translateY (Safari-safe, no clip-path) */
+.big-line {
+  font-family: var(--ff-d);
+  font-size: clamp(2rem, 8.5vw, 3.8rem);
+  font-weight: 800; line-height: 1.04; letter-spacing: -0.035em;
+  color: #120800; margin-bottom: 0.1rem;
+  position: relative; z-index: 1;
+  /* Visible by default — JS adds .js-animate class to body to enable animation */
+  transition: opacity 0.55s ease, transform 0.55s cubic-bezier(0.16,1,0.3,1);
+}
+.js-animate .big-line:not(.vis) { opacity: 0; transform: translateY(12px); }
+.big-line.vis { opacity: 1; transform: translateY(0); }
+.big-line em { font-family: var(--ff-s); font-style: italic; font-weight: 400; }
+.big-line.yellow { color: var(--yellow); }
+.big-line.papaya { color: var(--papaya); }
+.big-line.ghost  { color: var(--label); }
+.big-line.gap    { margin-top: 2rem; }
+
+.about-card {
+  margin: 2.5rem 0;
+  padding: 1.5rem;
+  background: var(--bg-soft);
+  border-radius: 14px;
+  border: 1.5px solid rgba(18,8,0,0.08);
+  transition: opacity 0.55s ease, transform 0.55s cubic-bezier(0.16,1,0.3,1);
+}
+.js-animate .about-card:not(.vis) { opacity: 0; transform: translateY(16px); }
+.about-card.vis { opacity: 1; transform: translateY(0); }
+.about-card p {
+  font-size: 0.96rem; line-height: 1.75; font-weight: 400;
+  color: var(--body);
+}
+
+/* ━━━━━━━━━━━━━ WHAT I DO ━━━━━━━━━━━━━ */
+.what {
+  padding: 5rem 1.5rem 6rem;
+  background: #120800;
+  position: relative; overflow: hidden;
+}
+.what-blobs {
+  position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 65% 45% at 10% 20%, rgba(232,168,0,0.10) 0%, transparent 52%),
+    radial-gradient(ellipse 50% 55% at 90% 85%, rgba(46,92,58,0.10) 0%, transparent 50%);
+}
+.what-blobs::after {
+  content:''; position:absolute; inset:0; opacity:0.065;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.68' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 160px;
+}
+
+.what-header {
+  position: relative; z-index: 1;
+  margin-bottom: 3.5rem;
+}
+.what-title {
+  font-family: var(--ff-d);
+  font-size: clamp(1.9rem, 8vw, 3.2rem);
+  font-weight: 800; letter-spacing: -0.03em; line-height: 1.05;
+  color: var(--cream); margin-bottom: 1rem;
+}
+.what-title em { font-family: var(--ff-s); font-style: italic; font-weight: 400; color: var(--yellow); }
+
+/* The philosophy quote */
+.what-quote {
+  font-family: var(--ff-s);
+  font-style: italic;
+  font-size: clamp(0.95rem, 3.5vw, 1.15rem);
+  line-height: 1.65;
+  color: var(--dim);
+  max-width: 480px;
+  padding-left: 1rem;
+  border-left: 2px solid var(--papaya);
+}
+
+/* Cards — horizontal editorial layout */
+.wcards {
+  display: flex; flex-direction: column;
+  gap: 0;
+  position: relative; z-index: 1;
+  border-top: 1px solid rgba(243,233,216,0.10);
+  padding-left: 1.5rem;
+  margin-left: -1.5rem;
+}
+
+.wcard {
+  display: grid;
+  grid-template-columns: 3.5rem 1fr;
+  gap: 0 1.4rem;
+  align-items: start;
+  padding: 2rem 0;
+  border-bottom: 1px solid rgba(243,233,216,0.10);
+  position: relative;
+  transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.16,1,0.3,1);
+  cursor: default;
+}
+.js-animate .wcard:not(.vis) { opacity: 0; transform: translateY(16px); }
+.wcard.vis { opacity: 1; transform: translateY(0); }
+.wcard:nth-child(2) { transition-delay: 0.09s; }
+.wcard:nth-child(3) { transition-delay: 0.18s; }
+.wcard:nth-child(4) { transition-delay: 0.27s; }
+
+/* Hover: subtle left line — sits outside the padding, doesn't overlap the number */
+.wcard::before {
+  content:'';
+  position: absolute; left: -1.5rem; top: 0; bottom: 0;
+  width: 0;
+  background: var(--wcard-accent, var(--yellow));
+  border-radius: 0 2px 2px 0;
+  transition: width 0.3s cubic-bezier(0.16,1,0.3,1);
+}
+.wcard:hover::before,
+.wcard:active::before { width: 3px; }
+
+.wcard.c1 { --wcard-accent: var(--yellow); }
+.wcard.c2 { --wcard-accent: var(--papaya); }
+.wcard.c3 { --wcard-accent: #3d7a50; }
+.wcard.c4 { --wcard-accent: var(--yellow); }
+
+/* Left column: big number */
+.wcard-num {
+  font-family: var(--ff-d);
+  font-size: 0.75rem; font-weight: 800;
+  letter-spacing: 0.06em;
+  color: var(--wcard-accent, var(--yellow));
+  padding-top: 0.22rem;
+  user-select: none;
+}
+
+/* Right column content */
+.wcard-body {}
+
+.wcard-label {
+  font-family: var(--ff-d);
+  font-size: 0.62rem; font-weight: 700;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--dim); opacity: 0.65;
+  margin-bottom: 0.4rem;
+}
+
+.wcard h3 {
+  font-family: var(--ff-d);
+  font-size: clamp(1.15rem, 4.5vw, 1.55rem);
+  font-weight: 800; letter-spacing: -0.025em; line-height: 1.15;
+  color: var(--cream); margin-bottom: 0.7rem;
+}
+
+.wcard p {
+  font-size: 0.85rem; line-height: 1.72; font-weight: 400;
+  color: var(--dim);
+  max-width: 420px;
+}
+
+/* ━━━━━━━━━━━━━ NUMBERS ━━━━━━━━━━━━━ */
+.nums {
+  background: #120800; padding: 4.5rem 1.5rem;
+  position: relative; overflow: hidden;
+}
+.nums-blobs {
+  position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 80% 55% at 12% 28%, rgba(232,168,0,0.16) 0%, transparent 52%),
+    radial-gradient(ellipse 55% 55% at 88% 78%, rgba(46,92,58,0.14) 0%, transparent 50%),
+    radial-gradient(ellipse 35% 35% at 55% 5%,  rgba(235,100,20,0.12) 0%, transparent 46%);
+}
+.nums-blobs::after {
+  content:''; position:absolute; inset:0; opacity: 0.07;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.62' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 180px;
+}
+.nums .eyebrow { color: var(--dim); position: relative; z-index: 1; }
+
+.nrow {
+  display: flex; align-items: flex-start; gap: 1rem;
+  padding: 1.8rem 0;
+  border-bottom: 1px solid rgba(243,233,216,0.08);
+  position: relative; z-index: 1;
+  transition: opacity 0.55s ease, transform 0.55s cubic-bezier(0.16,1,0.3,1);
+}
+.js-animate .nrow:not(.vis) { opacity: 0; transform: translateX(-16px); }
+.nrow.vis { opacity: 1; transform: translateX(0); }
+.nrow:nth-child(2) { transition-delay: 0.10s; }
+.nrow:nth-child(3) { transition-delay: 0.20s; }
+.nrow:nth-child(4) { transition-delay: 0.30s; }
+.nrow:first-of-type { border-top: 1px solid rgba(243,233,216,0.08); }
+
+.nnum {
+  font-family: var(--ff-d);
+  font-size: clamp(2.6rem, 11vw, 4.8rem);
+  font-weight: 800; letter-spacing: -0.04em; line-height: 1;
+  color: var(--yellow); min-width: 128px; flex-shrink: 0;
+}
+.nnum sup { font-size: 0.45em; vertical-align: super; color: var(--papaya); }
+
+.ntxt { padding-top: 0.2rem; }
+.nlabel {
+  font-family: var(--ff-d); font-size: 0.92rem; font-weight: 700;
+  color: var(--cream); line-height: 1.25; margin-bottom: 0.3rem;
+}
+.ndesc { font-size: 0.82rem; line-height: 1.65; font-weight: 400; color: var(--dim); }
+
+/* ━━━━━━━━━━━━━ JOURNEY ━━━━━━━━━━━━━ */
+.journey {
+  padding: 5rem 1.5rem;
+  background: var(--bg-cream);
+  position: relative; overflow: hidden;
+}
+.journey-blobs {
+  position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 55% 35% at 82% 12%, rgba(232,168,0,0.09) 0%, transparent 52%),
+    radial-gradient(ellipse 38% 38% at 15% 88%, rgba(235,100,20,0.07) 0%, transparent 50%);
+}
+.journey-title {
+  font-family: var(--ff-d);
+  font-size: clamp(1.9rem, 8vw, 3.2rem);
+  font-weight: 800; letter-spacing: -0.03em; line-height: 1.05;
+  color: #120800; margin-bottom: 2.5rem;
+  position: relative; z-index: 1;
+}
+.journey-title em { font-family: var(--ff-s); font-style: italic; font-weight: 400; color: var(--papaya); }
+
+.jlist { position: relative; z-index: 1; }
+.jitem {
+  display: flex; gap: 1.1rem;
+  padding: 1.5rem 0;
+  border-bottom: 1px solid rgba(18,8,0,0.08);
+  transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.16,1,0.3,1);
+}
+.js-animate .jitem:not(.vis) { opacity: 0; transform: translateY(12px); }
+.jitem.vis { opacity: 1; transform: translateY(0); }
+.jitem:nth-child(2) { transition-delay: 0.07s; }
+.jitem:nth-child(3) { transition-delay: 0.14s; }
+.jitem:nth-child(4) { transition-delay: 0.21s; }
+.jitem:nth-child(5) { transition-delay: 0.28s; }
+.jitem:first-child  { border-top: 1px solid rgba(18,8,0,0.08); }
+
+.jdot { width:9px; height:9px; border-radius:50%; background:var(--papaya); flex-shrink:0; margin-top:0.42rem; }
+.jyear { font-family:var(--ff-d); font-size:0.62rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--label); margin-bottom:0.18rem; }
+.jrole { font-family:var(--ff-d); font-size:1rem; font-weight:700; letter-spacing:-0.02em; color:#120800; margin-bottom:0.1rem; }
+.jco   { font-size:0.78rem; color:var(--muted); margin-bottom:0.5rem; }
+.jnote { font-size:0.83rem; line-height:1.66; color:var(--body); }
+.jpill {
+  display:inline-block; margin-top:0.5rem;
+  background: rgba(232,168,0,0.12); color: var(--gold-t);
+  font-family:var(--ff-d); font-size:0.62rem; font-weight:700;
+  letter-spacing:0.06em; text-transform:uppercase;
+  padding:0.22rem 0.6rem; border-radius:5px;
+  border: 1px solid rgba(120,72,0,0.2);
+}
+
+/* ━━━━━━━━━━━━━ TOOLS ━━━━━━━━━━━━━ */
+.tools {
+  padding: 3.5rem 1.5rem;
+  background: var(--bg-soft);
+  border-top: 1.5px solid rgba(18,8,0,0.07);
+}
+.tools-label { font-family:var(--ff-d); font-size:0.65rem; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:var(--label); margin-bottom:1.3rem; }
+.chips { display:flex; flex-wrap:wrap; gap:0.45rem; }
+.chip {
+  font-family:var(--ff-d); font-size:0.78rem; font-weight:600; letter-spacing:-0.01em;
+  padding:0.42rem 0.9rem; border-radius:999px;
+  border: 1.5px solid rgba(18,8,0,0.13); color:var(--body);
+  transition: border-color 0.2s, background 0.2s;
+}
+.chip:active { border-color:var(--papaya); background:rgba(235,100,20,0.07); }
+.chip.hi { border-color:rgba(232,168,0,0.4); color:var(--gold-t); background:rgba(232,168,0,0.07); }
+
+/* ━━━━━━━━━━━━━ CONTACT ━━━━━━━━━━━━━ */
+.contact {
+  padding: 5rem 1.5rem 4.5rem;
+  background: #120800;
+  position: relative; overflow: hidden;
+}
+.contact-blobs {
+  position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 80% 60% at 15% 25%, rgba(232,168,0,0.16) 0%, transparent 55%),
+    radial-gradient(ellipse 55% 55% at 85% 78%, rgba(46,92,58,0.14) 0%, transparent 50%),
+    radial-gradient(ellipse 40% 38% at 58%  6%, rgba(235,100,20,0.12) 0%, transparent 48%);
+}
+.contact-blobs::after {
+  content:''; position:absolute; inset:0; opacity:0.07;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 165px;
+}
+
+.contact-inner { position:relative; z-index:1; }
+.contact .eyebrow { color:var(--dim); margin-bottom:1.3rem; }
+
+.contact-h2 {
+  font-family: var(--ff-d);
+  font-size: clamp(2.8rem, 13vw, 7rem);
+  font-weight: 800; letter-spacing: -0.04em; line-height: 0.93;
+  color: var(--cream); margin-bottom: 1.8rem;
+}
+.contact-h2 em { font-family:var(--ff-s); font-style:italic; font-weight:400; color:var(--yellow); }
+
+.contact-body { font-size:0.97rem; line-height:1.72; font-weight:400; color:var(--dim); max-width:320px; margin-bottom:2.2rem; }
+
+.cta-pill {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: var(--yellow); color: #120800;
+  font-family: var(--ff-d); font-size: 0.9rem; font-weight: 800;
+  letter-spacing: -0.01em;
+  padding: 1rem 1.8rem; border-radius: 999px;
+  transition: background 0.2s, transform 0.15s;
+  margin-bottom: 2.5rem;
+}
+.cta-pill:active { background: var(--papaya); color: var(--cream); transform: scale(0.97); }
+
+.clinks { display:flex; flex-direction:column; }
+.clink {
+  display:flex; justify-content:space-between; align-items:center;
+  padding:0.88rem 0;
+  border-bottom: 1px solid rgba(243,233,216,0.09);
+  font-family:var(--ff-d); font-size:0.95rem; font-weight:600;
+  color:var(--dim); transition:color 0.2s;
+}
+.clink:first-child { border-top: 1px solid rgba(243,233,216,0.09); }
+.clink:active { color: var(--yellow); }
+.carr { opacity:0.4; font-size:0.85rem; }
+
+.contact-foot { margin-top:3.5rem; padding-top:1.5rem; border-top:1px solid rgba(243,233,216,0.07); }
+.contact-foot p { font-family:var(--ff-d); font-size:0.65rem; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; color:var(--dim); opacity:0.55; line-height:1.8; }
+
+/* ━━━━━━━━━━━━━ DESKTOP ━━━━━━━━━━━━━ */
+@media (min-width: 768px) {
+  nav, .hero, .about, .what, .nums, .journey, .tools, .contact { padding-left:4rem; padding-right:4rem; }
+  .big-line { font-size: clamp(2.8rem, 5.5vw, 5.2rem); }
+  .nnum { min-width: 180px; }
+  .wcard { grid-template-columns: 5rem 1fr; gap: 0 2.5rem; padding: 2.5rem 0; }
+  .wcard h3 { font-size: 1.55rem; }
+  .what-quote { font-size: 1.1rem; }
+}
+
+/* ━━━━━━━━━━━━━ LARGE SCREEN CENTERING ━━━━━━━━━━━━━ */
+@media (min-width: 1200px) {
+  /* Each section fills full width but its content is capped and centered */
+  nav {
+    padding-left: calc((100vw - 1100px) / 2);
+    padding-right: calc((100vw - 1100px) / 2);
+  }
+  .hero, .about, .what, .nums, .journey, .tools, .contact {
+    padding-left: calc((100vw - 1100px) / 2);
+    padding-right: calc((100vw - 1100px) / 2);
+  }
+  /* Decorative circle follows content edge */
+  .hero-circle {
+    right: calc((100vw - 1100px) / 2 - 6rem);
+  }
+  .what-shape {
+    right: calc((100vw - 1100px) / 2);
+  }
+  .contact-deco-arrow {
+    right: calc((100vw - 1100px) / 2);
+  }
+}
+
+/* ━━━━━━━━━━━━━ DECORATIVE GRAPHICS ━━━━━━━━━━━━━ */
+
+/* HERO — large circle outline top-right */
+.hero-circle {
+  position: absolute;
+  top: -6rem; right: -6rem;
+  width: 22rem; height: 22rem;
+  border-radius: 50%;
+  border: 1.5px solid rgba(235,100,20,0.20);
+  pointer-events: none; z-index: 0;
+}
+.hero-circle::after {
+  content:'';
+  position: absolute;
+  top: 2.5rem; left: 2.5rem; right: 2.5rem; bottom: 2.5rem;
+  border-radius: 50%;
+  border: 1px solid rgba(232,168,0,0.13);
+}
+/* Hero dot-grid bottom left */
+.hero-dots {
+  position: absolute;
+  bottom: 4rem; left: 1.5rem;
+  display: grid; grid-template-columns: repeat(6, 1fr); gap: 0.55rem;
+  pointer-events: none; z-index: 0;
+}
+.hero-dots span {
+  width: 3px; height: 3px; border-radius: 50%;
+  background: rgba(18,8,0,0.18); display: block;
+}
+
+/* ABOUT — oversized decorative quote behind text */
+.about-deco-quote {
+  position: absolute;
+  top: 2rem; right: -1rem;
+  font-family: var(--ff-s);
+  font-size: 18rem; line-height: 1;
+  color: rgba(232,168,0,0.07);
+  pointer-events: none; z-index: 0;
+  user-select: none;
+  letter-spacing: -0.05em;
+  /* Never cover text */
+  mix-blend-mode: multiply;
+}
+
+/* ABOUT — horizontal rule with accent */
+.about-rule {
+  position: relative; z-index: 1;
+  display: flex; align-items: center; gap: 1rem;
+  margin: 3rem 0;
+}
+.about-rule::before {
+  content:''; flex: 1; height: 1px;
+  background: linear-gradient(to right, rgba(18,8,0,0.12), transparent);
+}
+.about-rule-symbol {
+  font-family: var(--ff-d);
+  font-size: 0.75rem; font-weight: 800;
+  color: var(--papaya);
+  letter-spacing: 0.08em;
+}
+.about-rule::after {
+  content:''; flex: 1; height: 1px;
+  background: linear-gradient(to left, rgba(18,8,0,0.12), transparent);
+}
+
+/* NUMS — large background arc SVG */
+.nums-arc {
+  position: absolute;
+  right: -4rem; top: 50%;
+  transform: translateY(-50%);
+  width: 20rem; height: 20rem;
+  pointer-events: none; z-index: 0;
+  opacity: 0.07;
+}
+
+/* JOURNEY — vertical connecting line through dots */
+.jlist {
+  position: relative;
+}
+.jlist::before {
+  content: '';
+  position: absolute;
+  left: 3.5px; /* center of the 9px dot (4.5px - half stroke) */
+  top: 1.5rem;
+  bottom: 1.5rem;
+  width: 1px;
+  background: linear-gradient(to bottom,
+    var(--papaya) 0%,
+    rgba(235,100,20,0.3) 60%,
+    transparent 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+.jitem { position: relative; z-index: 1; }
+.jdot {
+  position: relative; z-index: 2;
+  box-shadow: 0 0 0 3px rgba(235,100,20,0.15);
+}
+
+/* CONTACT — big decorative arrow */
+.contact-deco-arrow {
+  position: absolute;
+  bottom: 3rem; right: 1.5rem;
+  font-family: var(--ff-d);
+  font-size: 9rem; line-height: 1;
+  font-weight: 800;
+  color: rgba(232,168,0,0.06);
+  pointer-events: none; user-select: none;
+  letter-spacing: -0.05em;
+  z-index: 0;
+}
+
+/* TOOLS — subtle diagonal lines background */
+.tools {
+  background-image: repeating-linear-gradient(
+    -55deg,
+    transparent,
+    transparent 28px,
+    rgba(18,8,0,0.025) 28px,
+    rgba(18,8,0,0.025) 29px
+  );
+}
+
+/* Floating shape in what section header */
+.what-shape {
+  position: absolute;
+  top: 2.5rem; right: 1.5rem;
+  width: 5rem; height: 5rem;
+  border: 1.5px solid rgba(232,168,0,0.18);
+  border-radius: 50%;
+  pointer-events: none; z-index: 1;
+}
+.what-shape::after {
+  content: '';
+  position: absolute;
+  inset: 0.8rem;
+  border-radius: 50%;
+  background: rgba(232,168,0,0.08);
+}
+
+/* ━━━━━━━━━━━━━ ROTATING WORDS ━━━━━━━━━━━━━ */
+.hero-rotating-wrap {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.25em;
+  line-height: 0.93;
+}
+.hero-product-word {
+  font-family: var(--ff-d);
+  font-size: clamp(3.2rem, 15vw, 7.5rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  color: #120800;
+  flex-shrink: 0;
+}
+.hero-rotating {
+  display: block;
+  overflow: hidden;
+  /* Extra padding-bottom so descenders on letters like g/y don't clip */
+  padding-bottom: 0.18em;
+  height: calc(clamp(3.2rem, 15vw, 7.5rem) * 0.93 + 0.18em);
+}
+.hero-rotating-inner {
+  display: flex;
+  flex-direction: column;
+  animation: rotateWords 5s cubic-bezier(0.76, 0, 0.24, 1) infinite;
+}
+.hero-rotating-inner span {
+  display: block;
+  height: calc(clamp(3.2rem, 15vw, 7.5rem) * 0.93);
+  line-height: calc(clamp(3.2rem, 15vw, 7.5rem) * 0.93);
+  font-family: var(--ff-s);
+  font-style: italic;
+  font-weight: 400;
+  color: #e8a800;
+  white-space: nowrap;
+  font-size: clamp(3.2rem, 15vw, 7.5rem);
+}
+@keyframes rotateWords {
+  0%   { transform: translateY(0); }
+  42%  { transform: translateY(0); }
+  50%  { transform: translateY(-50%); }
+  92%  { transform: translateY(-50%); }
+  100% { transform: translateY(0); }
+}
+
+/* ━━━━━━━━━━━━━ REDUCED MOTION ━━━━━━━━━━━━━ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration:0.01ms!important; transition-duration:0.01ms!important; }
+  .grain { animation:none; }
+  .big-line, .wcard, .about-card, .nrow, .jitem { opacity:1!important; transform:none!important; }
+}
+</style>
+</head>
+<body>
+
+<div class="grain" aria-hidden="true"></div>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-name">Óscar Saboya</span>
+  <div class="nav-dot" title="Open to new opportunities"></div>
+</nav>
+
+<!-- ━━━━━━ HERO ━━━━━━ -->
+<section class="hero">
+  <div class="hero-blobs" aria-hidden="true"></div>
+  <!-- Decorative circle rings -->
+  <div class="hero-circle" aria-hidden="true"></div>
+  <!-- Dot grid bottom left -->
+  <div class="hero-dots" aria-hidden="true">
+    <span></span><span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span><span></span>
+  </div>
+  <div style="position:relative;z-index:1">
+    <p class="hero-eyebrow">Product Manager · Engineer · Zaragoza, Spain</p>
+    <h1 class="hero-h1">Hey.<br>I'm <em>Óscar.</em></h1>
+    <!-- "Product" stays fixed, Maker/Manager rotate -->
+    <div class="hero-rotating-wrap">
+      <span class="hero-product-word">Product</span>
+      <div class="hero-rotating">
+        <div class="hero-rotating-inner">
+          <span>Maker.</span>
+          <span>Manager.</span>
+        </div>
+      </div>
+    </div>
+    <p class="hero-sub" style="margin-top:1.8rem;">
+      Software engineer turned product manager. 7+ years building digital products.<br>
+      Experience in B2B SaaS, logistics and AI-powered automation.
+    </p>
+    <div style="display:flex;gap:1rem;flex-wrap:wrap;align-items:center;margin-top:2rem;">
+      <a href="https://www.linkedin.com/in/oscarsaboya" class="hero-cta" target="_blank">LinkedIn →</a>
+      <a href="#journey" style="font-family:var(--ff-d);font-size:0.85rem;font-weight:600;color:var(--muted);border-bottom:1.5px solid rgba(90,78,58,0.35);padding-bottom:0.1rem;">See my work</a>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee" aria-hidden="true">
+  <div class="mtrack">
+    <span>Product Strategy</span><span class="hi">✦</span>
+    <span>AI-native PM</span><span class="hi">✦</span>
+    <span>0 → 1</span><span class="hi">✦</span>
+    <span>User Research</span><span class="hi">✦</span>
+    <span>LLM Integration</span><span class="hi">✦</span>
+    <span>Growth</span><span class="hi">✦</span>
+    <span>Data-driven</span><span class="hi">✦</span>
+    <span>Agile / Scrum</span><span class="hi">✦</span>
+    <span>Cross-functional leadership</span><span class="hi">✦</span>
+    <span>Automation</span><span class="hi">✦</span>
+    <span>B2B SaaS</span><span class="hi">✦</span>
+    <span>Product Strategy</span><span class="hi">✦</span>
+    <span>AI-native PM</span><span class="hi">✦</span>
+    <span>0 → 1</span><span class="hi">✦</span>
+    <span>User Research</span><span class="hi">✦</span>
+    <span>LLM Integration</span><span class="hi">✦</span>
+    <span>Growth</span><span class="hi">✦</span>
+    <span>Data-driven</span><span class="hi">✦</span>
+    <span>Agile / Scrum</span><span class="hi">✦</span>
+    <span>Cross-functional leadership</span><span class="hi">✦</span>
+    <span>Automation</span><span class="hi">✦</span>
+    <span>B2B SaaS</span><span class="hi">✦</span>
+  </div>
+</div>
+
+<!-- ━━━━━━ ABOUT ━━━━━━ -->
+<section class="about">
+  <div class="about-blobs" aria-hidden="true"></div>
+  <!-- Big decorative quote mark -->
+  <div class="about-deco-quote" aria-hidden="true">"</div>
+
+  <p class="eyebrow" style="position:relative;z-index:1">About me</p>
+
+  <div class="big-line" data-rev>I'm a software</div>
+  <div class="big-line" data-rev>engineer.</div>
+  <div class="big-line gap" data-rev>But what I love</div>
+  <div class="big-line" data-rev>is building <em>product.</em></div>
+
+  <div class="about-card" data-rev>
+    <p>I've spent 7+ years turning ideas into things people actually use. I've worked across startups, product studios, hotel tech and international logistics. I've written code, prioritised roadmaps, done user interviews at 8am and shipped MVPs on a shoestring budget.</p>
+  </div>
+
+  <!-- Decorative divider -->
+  <div class="about-rule" aria-hidden="true">
+    <span class="about-rule-symbol">✦ ✦ ✦</span>
+  </div>
+
+  <div class="big-line ghost" data-rev>I use the best</div>
+  <div class="big-line ghost" data-rev>tools available</div>
+  <div class="big-line ghost" data-rev>at any given time.</div>
+  <div class="big-line gap" data-rev>Right now,</div>
+  <div class="big-line papaya" data-rev>that includes AI.</div>
+
+  <div class="about-card" data-rev style="margin-top:2rem">
+    <p>I don't use technology because it's trendy. I use it when it solves real problems. And when I apply it well, the results are concrete: I went from 40 hours of manual work per week to under 5. That's what impact looks like.</p>
+  </div>
+</section>
+
+<!-- ━━━━━━ WHAT I DO ━━━━━━ -->
+<section class="what">
+  <div class="what-blobs" aria-hidden="true"></div>
+  <!-- Small floating circle in header area -->
+  <div class="what-shape" aria-hidden="true"></div>
+
+  <div class="what-header">
+    <p class="eyebrow" style="color:var(--dim)">How I work</p>
+    <h2 class="what-title">What defines me<br>as a <em>PM.</em></h2>
+    <p class="what-quote">Human judgment makes the difference between producing results and reproducing noise. Especially when the tool is AI.</p>
+  </div>
+
+  <div class="wcards">
+    <div class="wcard c1" data-rev>
+      <span class="wcard-num">01</span>
+      <div class="wcard-body">
+        <p class="wcard-label">Zero to product</p>
+        <h3>Shipping from scratch at startup speed</h3>
+        <p>Discovery, prototyping, user validation and dev coordination. I've launched MVPs in weeks that would have taken months. With AI in the loop, the pace is something else entirely.</p>
+      </div>
+    </div>
+    <div class="wcard c2" data-rev>
+      <span class="wcard-num">02</span>
+      <div class="wcard-body">
+        <p class="wcard-label">AI-native product thinking</p>
+        <h3>Embedding AI where it creates real impact, not hype</h3>
+        <p>I'm not a PM who "knows ChatGPT". I've integrated LLMs into real product workflows, designed automation systems that eliminated 35h/week of manual work, and I think about AI as a product lever from day one.</p>
+      </div>
+    </div>
+    <div class="wcard c3" data-rev>
+      <span class="wcard-num">03</span>
+      <div class="wcard-body">
+        <p class="wcard-label">Technical product leadership</p>
+        <h3>A PM who actually understands what can be built</h3>
+        <p>I'm a software engineer by training. I speak engineering's language, can review a PR when needed, and make product decisions grounded in real technical understanding. No classic PM–eng gap.</p>
+      </div>
+    </div>
+    <div class="wcard c4" data-rev>
+      <span class="wcard-num">04</span>
+      <div class="wcard-body">
+        <p class="wcard-label">Data & decisions</p>
+        <h3>Setting the right metrics, measuring what matters, acting on it</h3>
+        <p>Master's in BI & Big Data. I've built dashboards from scratch, defined North Star metrics and prioritised roadmaps with real data. No gut-feel without something to back it up.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ━━━━━━ NUMBERS ━━━━━━ -->
+<section class="nums">
+  <div class="nums-blobs" aria-hidden="true"></div>
+  <!-- Decorative arc -->
+  <svg class="nums-arc" viewBox="0 0 320 320" fill="none" aria-hidden="true">
+    <circle cx="160" cy="160" r="140" stroke="#e8a800" stroke-width="1"/>
+    <circle cx="160" cy="160" r="100" stroke="#eb6414" stroke-width="0.75"/>
+    <circle cx="160" cy="160" r="60"  stroke="#e8a800" stroke-width="0.5"/>
+    <line x1="160" y1="20" x2="160" y2="300" stroke="#e8a800" stroke-width="0.5"/>
+    <line x1="20"  y1="160" x2="300" y2="160" stroke="#e8a800" stroke-width="0.5"/>
+  </svg>
+  <p class="eyebrow">By the numbers</p>
+  <div class="nrow" data-rev>
+    <div class="nnum">7<sup>+</sup></div>
+    <div class="ntxt">
+      <p class="nlabel">years in digital product</p>
+      <p class="ndesc">From Software Engineer to PM at international SaaS companies. I've operated across every angle of product — technical, strategic and user-facing — which bridges the classic PM–engineering gap.</p>
+    </div>
+  </div>
+  <div class="nrow" data-rev>
+    <div class="nnum">35<sup>h</sup></div>
+    <div class="ntxt">
+      <p class="nlabel">hours per week saved through automation</p>
+      <p class="ndesc">At The Hotels Network I designed and built an automation system that cut the team's manual workload from 40h to under 5h per week. I didn't delegate it — I built it.</p>
+    </div>
+  </div>
+  <div class="nrow" data-rev>
+    <div class="nnum">+15</div>
+    <div class="ntxt">
+      <p class="nlabel">external API integrations led end-to-end</p>
+      <p class="ndesc">From payment gateways and insurance providers to booking systems and logistics platforms. I own the full cycle: scoping, technical negotiation, implementation and monitoring.</p>
+    </div>
+  </div>
+  <div class="nrow" data-rev>
+    <div class="nnum">3<sup>+</sup></div>
+    <div class="ntxt">
+      <p class="nlabel">products launched from zero to one</p>
+      <p class="ndesc">MVPs with real traction built from scratch at Minimum.run and Frogtek — from BI tools that generated revenue in their first month to apps adopted by enterprise clients.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ━━━━━━ JOURNEY ━━━━━━ -->
+<section class="journey">
+  <div class="journey-blobs" aria-hidden="true"></div>
+  <h2 class="journey-title">My <em>journey</em></h2>
+  <div class="jlist" id="journey">
+    <div class="jitem" data-rev>
+      <div class="jdot"></div>
+      <div>
+        <p class="jyear">2025 — now</p>
+        <p class="jrole">Product Manager</p>
+        <p class="jco">Citibox · PUDO Network · Spain & Europe</p>
+        <p class="jnote">Responsible for the product strategy and roadmap of Citibox/Celeritas' pick-up and drop-off network. I work across multiple user types — carriers, point operators and end users — in several European markets. Day-to-day I partner with engineering, ops, sales and data teams to make sure we're solving real problems in a high-complexity logistics environment.</p>
+      </div>
+    </div>
+    <div class="jitem" data-rev>
+      <div class="jdot"></div>
+      <div>
+        <p class="jyear">2023 — 2025</p>
+        <p class="jrole">Product Manager</p>
+        <p class="jco">The Hotels Network · B2B SaaS · Hotel Tech · International</p>
+        <p class="jnote">Led cross-functional teams to integrate AI into hotel tech products, improving UX and product value. Drove end-to-end development of an optimised checkout that improved hotel conversion rates. Managed third-party API integrations processing thousands of daily bookings and hundreds of insurance policies. Automated internal processes using Low-Code/No-Code tools, cutting manual work from 40h to under 5h/week.</p>
+        <span class="jpill">40h → 5h/week · AI-powered automation</span>
+      </div>
+    </div>
+    <div class="jitem" data-rev>
+      <div class="jdot"></div>
+      <div>
+        <p class="jyear">2020 — 2023</p>
+        <p class="jrole">Senior Product Maker</p>
+        <p class="jco">Minimum.run · Product Studio · Startups & Corporates</p>
+        <p class="jnote">Defined, managed and developed MVPs using both code and Low-Code tools, working with large corporates and startups in agile environments. Led projects from concept to launch with a focus on product-market fit and iteration speed. Supported teams in accelerating product delivery and improving operational efficiency through automation and external API integrations.</p>
+      </div>
+    </div>
+    <div class="jitem" data-rev>
+      <div class="jdot"></div>
+      <div>
+        <p class="jyear">2019 — 2020</p>
+        <p class="jrole">Software & Data Engineer</p>
+        <p class="jco">Frogtek · Food Industry Intelligence · Spain</p>
+        <p class="jnote">Built and launched a BI tool that automated dashboard creation for food industry clients, generating thousands of euros in revenue within its first month. Processed and analysed large datasets using Python and JavaScript, optimised complex SQL queries in BigQuery and delivered actionable data visualisations with Tableau for enterprise clients.</p>
+      </div>
+    </div>
+    <div class="jitem" data-rev>
+      <div class="jdot"></div>
+      <div>
+        <p class="jyear">2014 — 2019</p>
+        <p class="jrole">Computer Engineering · Erasmus · Master's in BI & Big Data</p>
+        <p class="jco">Univ. of Zaragoza · University College Cork (IE) · EOI Madrid</p>
+        <p class="jnote">Computer Engineering degree with a focus on Software Engineering. Erasmus year at University College Cork, Ireland. Master's in Business Intelligence & Big Data at EOI. A solid technical foundation complemented by training in data, business and artificial intelligence.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ━━━━━━ TOOLS ━━━━━━ -->
+<section class="tools">
+  <p class="tools-label">Skills & stack</p>
+  <div class="chips">
+    <span class="chip hi">Product Strategy</span>
+    <span class="chip hi">AI / LLM Integration</span>
+    <span class="chip hi">User Research & Discovery</span>
+    <span class="chip hi">0 → 1 Launches</span>
+    <span class="chip hi">Data-driven decisions</span>
+    <span class="chip">Python</span>
+    <span class="chip">SQL / BigQuery</span>
+    <span class="chip">JavaScript</span>
+    <span class="chip hi">Roadmapping & prioritization</span>
+    <span class="chip hi">Cross-functional leadership</span>
+    <span class="chip">Figma</span>
+    <span class="chip hi">B2B SaaS</span>
+    <span class="chip">API integrations</span>
+    <span class="chip hi">Growth metrics & KPIs</span>
+    <span class="chip">Agile / Scrum</span>
+  </div>
+</section>
+
+<!-- ━━━━━━ CONTACT ━━━━━━ -->
+<section class="contact" id="contacto">
+  <div class="contact-blobs" aria-hidden="true"></div>
+  <!-- Decorative big arrow -->
+  <div class="contact-deco-arrow" aria-hidden="true">→</div>
+  <div class="contact-inner">
+    <p class="eyebrow">Get in touch</p>
+    <h2 class="contact-h2">If you made it<br>this far,<br><em>let's talk.</em></h2>
+    <p class="contact-body">I'm in a phase of selective exploration. If you're building something worth caring about and think we'd be a good fit, I'd love to hear from you.</p>
+    <a href="https://tidycal.com/saboya/charla-de-15-minutos/" class="cta-pill" target="_blank">
+      Book a call →
+    </a>
+    <div class="clinks">
+      <a href="mailto:oscar@oscarsaboya.com" class="clink">
+        oscar@oscarsaboya.com <span class="carr">↗</span>
+      </a>
+      <a href="https://www.linkedin.com/in/oscarsaboya" class="clink" target="_blank">
+        LinkedIn <span class="carr">↗</span>
+      </a>
+      <a href="https://twitter.com/oscarsaboy/" class="clink" target="_blank">
+        X / Twitter <span class="carr">↗</span>
+      </a>
+    </div>
+    <div class="contact-foot">
+      <p>© 2025 Óscar Saboya · Zaragoza, Spain<br>Product Maker · Human in the Loop</p>
+    </div>
+  </div>
+</section>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+// Enable animations only when JS is confirmed running
+document.body.classList.add('js-animate');
+
+// Fallback: reveal everything after 800ms in case observer fails on iOS Safari
+const fallback = setTimeout(() => {
+  document.querySelectorAll('[data-rev]').forEach(el => el.classList.add('vis'));
+}, 800);
+
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    e.target.classList.add('vis');
+    obs.unobserve(e.target);
+  });
+}, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+
+document.querySelectorAll('[data-rev]').forEach(el => obs.observe(el));
+
+// Clear fallback once all visible
+const check = setInterval(() => {
+  if (!document.querySelector('[data-rev]:not(.vis)')) {
+    clearTimeout(fallback);
+    clearInterval(check);
+  }
+}, 200);
+
+// Tilt on desktop
+if (window.matchMedia('(hover: hover)').matches) {
+  document.querySelectorAll('.wcard').forEach(c => {
+    c.addEventListener('mousemove', e => {
+      const r = c.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width  - 0.5;
+      const y = (e.clientY - r.top)  / r.height - 0.5;
+      c.style.transform = `perspective(700px) rotateY(${x*6}deg) rotateX(${-y*6}deg) scale(1.012)`;
+    });
+    c.addEventListener('mouseleave', () => c.style.tr
