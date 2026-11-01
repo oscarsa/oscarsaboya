@@ -80,9 +80,9 @@ T = [
     # ---------- how I work ----------
     ('aria-label="How I work"', 'aria-label="Cómo trabajo"', 1),
     ('<p class="mono eyebrow">How I work</p>', '<p class="mono eyebrow">Cómo trabajo</p>', 1),
-    ('Tools change.<br><span class="outline">Judgment compounds.</span>', 'Las herramientas pasan.<br><span class="outline">El criterio se queda.</span>', 1),
+    ('Tools change.<br><span class="outline">Judgment compounds.</span>', 'Las herramientas caducan.<br><span class="outline">El criterio, no.</span>', 1),
     ("I use AI wherever it makes the work better, and nowhere just to say I do. What it can't replace is what years of shipping taught me.",
-     'Uso la IA donde de verdad mejora el trabajo, no por postureo. Lo que no puede sustituir es lo que he aprendido en años sacando productos adelante.', 1),
+     'Uso la IA donde mejora el trabajo, no por moda. Lo que no puede darme es el criterio que he ganado en años lanzando productos y equivocándome por el camino.', 1),
     ('<h3>I hand to AI</h3>', '<h3>Se lo dejo a la IA</h3>', 1),
     ('<li>Research and synthesis</li><li>Prototypes and code</li><li>Crunching the data</li><li>First drafts of specs</li><li>Repetitive work</li>',
      '<li>Investigar y resumir</li><li>Prototipos y código</li><li>Analizar datos</li><li>Primeras versiones de las specs</li><li>Tareas repetitivas</li>', 1),
