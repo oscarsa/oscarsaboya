@@ -18,7 +18,7 @@ T = [
      '<meta name="description" content="Óscar Saboya, product manager en Zaragoza. Seis años programando y seis en producto. Uso la IA donde aporta; el criterio, siempre.">', 1),
     ('<link rel="canonical" href="https://oscarsaboya.com/">', '<link rel="canonical" href="https://oscarsaboya.com/es/">', 1),
     ('<meta property="og:url" content="https://oscarsaboya.com/">', '<meta property="og:url" content="https://oscarsaboya.com/es/">\n<meta property="og:locale" content="es_ES">', 1),
-    ('content="From writing code to deciding what\'s worth building."', 'content="De escribir código a decidir qué merece construirse."', 2),
+    ('content="From writing code to deciding what\'s worth building."', 'content="De escribir código a decidir qué vale la pena construir."', 2),
     ('https://oscarsaboya.com/og-image.jpg', 'https://oscarsaboya.com/og-image-es.jpg', 2),
 
     # ---------- nav ----------
@@ -35,7 +35,7 @@ T = [
      'Hoy construir cuesta poco. Lo difícil es saber qué merece la pena. A eso me dedico.', 1),
     ('</i>See the journey</a>', '</i>Ver mi trayectoria</a>', 1),
     ("<h1 class=\"display\">From writing code to deciding what's worth building.</h1>",
-     '<h1 class="display">De escribir código a decidir qué merece construirse.</h1>', 2),
+     '<h1 class="display">De escribir código a decidir qué vale la pena construir.</h1>', 2),
 
     # ---------- at a glance ----------
     ('aria-label="At a glance"', 'aria-label="De un vistazo"', 1),
@@ -44,13 +44,13 @@ T = [
      '<p class="brief"><b>Ingeniero informático</b>. Pasé <b>seis años programando</b> y llevo <b>seis en producto</b>. Lo mío es <b>arrancar productos desde cero</b>, <b>hacerlos crecer</b> y <b>cambiar la forma de trabajar de los equipos</b>. He dirigido equipos de producto de <b>más de diez personas</b> y uso <b>IA a diario</b> para investigar, prototipar y sacar cosas adelante. Vivo en <b>Zaragoza</b> y trabajo <b>en remoto</b> sin problema.</p>', 1),
 
     # ---------- bands ----------
-    ('aria-label="Deciding what\'s worth building, and shipping it"', 'aria-label="Decidir qué merece construirse, y sacarlo adelante"', 1),
-    ("<span>deciding what's worth building</span>", '<span>decidir qué merece construirse</span>', 4),
+    ('aria-label="Deciding what\'s worth building, and shipping it"', 'aria-label="Decidir qué construir, y sacarlo adelante"', 1),
+    ("<span>deciding what's worth building</span>", '<span>decidir qué construir</span>', 4),
     ('<span>and shipping it</span>', '<span>y sacarlo adelante</span>', 6),
 
     # ---------- journey ----------
     ('aria-label="Journey"', 'aria-label="Trayectoria"', 1),
-    ('Product, <span class="outline">from<br>the code up.</span>', 'Producto, <span class="outline">desde<br>el código.</span>', 1),
+    ('Product, <span class="outline">from<br>the code up.</span>', 'Del código<br><span class="outline">al producto.</span>', 1),
     ('<p class="mono">2014 → now</p>', '<p class="mono">2014 → hoy</p>', 1),
     ('<span class="yrs">Before that</span>', '<span class="yrs">Los inicios</span>', 1),
     ('<span class="role">Software developer</span>', '<span class="role">Desarrollador de software</span>', 1),
@@ -66,15 +66,15 @@ T = [
     ('<b>Product-led</b>', '<b>Más producto</b>', 1),
     ('<b>Mostly product</b>', '<b>Sobre todo producto</b>', 1),
     ('Ideas taken to live products for startups and corporates, from Iberia to Kpler.',
-     'De la idea al producto en marcha, para startups y grandes empresas como Iberia o Kpler.', 1),
-    ('<b>Weeks</b><span>from idea to live MVP, not quarters</span>', '<b>Semanas</b><span>para pasar de la idea a un MVP en producción, no trimestres</span>', 1),
+     'Llevé ideas a producto real para startups y grandes empresas como Iberia o Kpler.', 1),
+    ('<b>Weeks</b><span>from idea to live MVP, not quarters</span>', '<b>Semanas</b><span>de la idea al MVP en producción. No trimestres.</span>', 1),
     ('SafeDirect: travel insurance that gives guests a reason to book direct, plugged into insurers and PMSs. Plus AI content generation, and KITT, the first AI receptionist for hotels.',
-     'Lancé SafeDirect, un seguro de viaje que anima al huésped a reservar en la web del hotel, integrado con aseguradoras y PMS. También generación de contenido con IA y KITT, el primer recepcionista con IA para hoteles.', 1),
+     'Lancé SafeDirect, un seguro de viaje que anima a reservar directamente en la web del hotel, conectado con aseguradoras y PMS. También trabajé en la generación de contenido con IA y en KITT, el primer recepcionista con IA para hoteles.', 1),
     ('<span>SafeDirect revenue in its first year, and +12% conversion for hotels</span>',
-     '<span>los ingresos de SafeDirect en un año, y un 12 % más de conversión para los hoteles</span>', 1),
+     '<span>de crecimiento en SafeDirect en un año, y un 12 % más de conversión para los hoteles</span>', 1),
     ('</i>Now, since 2025</span>', '</i>Ahora, desde 2025</span>', 1),
     ('The product behind 5,000 pick-up stores. A 15-person team that works on metrics, not deadlines, with AI built into how we work.',
-     'Llevo el producto de una red de 5.000 tiendas de recogida. Mi equipo, de 15 personas, se guía por métricas y no por fechas, y tiene la IA integrada en su forma de trabajar.', 1),
+     'Llevo el producto de una red de 5.000 puntos de recogida, con un equipo de 15 personas que se guía por métricas y no por fechas, y que usa la IA en su día a día.', 1),
     ('<span>parcels a month across Spain and Portugal</span>', '<span>paquetes al mes en España y Portugal</span>', 1),
 
     # ---------- how I work ----------
@@ -85,12 +85,12 @@ T = [
      'Uso la IA donde mejora el trabajo, no por moda. Lo que no puede darme es el criterio que he ganado en años lanzando productos y equivocándome por el camino.', 1),
     ('<h3>I hand to AI</h3>', '<h3>Se lo dejo a la IA</h3>', 1),
     ('<li>Research and synthesis</li><li>Prototypes and code</li><li>Crunching the data</li><li>First drafts of specs</li><li>Repetitive work</li>',
-     '<li>Investigar y resumir</li><li>Prototipos y código</li><li>Analizar datos</li><li>Primeras versiones de las specs</li><li>Tareas repetitivas</li>', 1),
+     '<li>Investigación y resúmenes</li><li>Prototipos y código</li><li>Análisis de datos</li><li>Primeros borradores</li><li>Tareas repetitivas</li>', 1),
     ('<h3>Stays with me</h3>', '<h3>Me lo quedo yo</h3>', 1),
     ('<li>Which problem is worth solving</li><li>What users actually need</li><li>What to leave out</li><li>The quality bar</li><li>Getting the team behind it</li>',
-     '<li>Qué problema merece la pena resolver</li><li>Qué necesita de verdad el usuario</li><li>Qué se queda fuera</li><li>El nivel de calidad</li><li>Que el equipo se lo crea</li>', 1),
+     '<li>Qué problema merece la pena resolver</li><li>Qué necesita de verdad el usuario</li><li>Qué se queda fuera</li><li>Dónde poner el listón</li><li>Que el equipo se lo crea</li>', 1),
     ('<p class="mono">My workspace</p><p>Meetings, tasks, data and specs, all in one repo with AI on top.</p>',
-     '<p class="mono">Mi espacio de trabajo</p><p>Reuniones, tareas, datos y specs viven en un mismo repo, con la IA trabajando encima.</p>', 1),
+     '<p class="mono">Mi espacio de trabajo</p><p>Reuniones, tareas, datos y specs, todo en un mismo repo y con la IA a mano.</p>', 1),
 
     # ---------- zgzbus ----------
     ('aria-label="Side project"', 'aria-label="Proyecto personal"', 1),
@@ -109,10 +109,10 @@ T = [
     ('<p class="for mono">For founders and new bets</p><h3>Taking ideas live</h3><p>From a rough idea to a product people actually use. Prototypes in days, and real users deciding what stays.</p>',
      '<p class="for mono">Para fundadores y proyectos nuevos</p><h3>Sacar ideas adelante</h3><p>De una idea a medio cocinar a un producto que la gente usa. Prototipos en días, y que sean los usuarios quienes decidan qué se queda.</p>', 1),
     ("<p class=\"for mono\">For products with traction</p><h3>Growing what's already live</h3><p>Finding what moves conversion and revenue, testing it fast, scaling what works.</p>",
-     '<p class="for mono">Para productos con tracción</p><h3>Hacer crecer lo que ya está en marcha</h3><p>Encontrar qué mueve la conversión y los ingresos, probarlo rápido y escalar lo que funciona.</p>', 1),
+     '<p class="for mono">Para productos que ya tienen usuarios</p><h3>Hacer crecer lo que ya está en marcha</h3><p>Encontrar qué mueve la conversión y los ingresos, probarlo rápido y escalar lo que funciona.</p>', 1),
     ('<p class="proof mono">SafeDirect: 10x revenue in its first year, +12% conversion</p>', '<p class="proof mono">SafeDirect: 10x en ingresos el primer año, +12 % de conversión</p>', 1),
     ('<p class="for mono">For companies adding AI</p><h3>Bringing AI into products</h3><p>Where AI genuinely helps users, shipped and measured. In production, not in a demo.</p><p class="proof mono">The Hotels Network: AI receptionist, AI content</p>',
-     '<p class="for mono">Para empresas que quieren meter IA</p><h3>Llevar la IA al producto</h3><p>Ponerla donde de verdad ayuda al usuario, lanzarla y medirla. En producción, no en una demo.</p><p class="proof mono">The Hotels Network: recepcionista y contenido con IA</p>', 1),
+     '<p class="for mono">Para empresas que quieren sumar IA</p><h3>Llevar la IA al producto</h3><p>Usarla donde de verdad ayuda al usuario y medir si funciona. En producción, no en una demo.</p><p class="proof mono">The Hotels Network: recepcionista y contenido con IA</p>', 1),
     ('<p class="for mono">For teams that need focus</p><h3>Changing how teams work</h3><p>From shipping tasks to shipping results, with goals and metrics everyone can see.</p><p class="proof mono">Citibox: 15 people now run on metrics</p>',
      '<p class="for mono">Para equipos que necesitan foco</p><h3>Cambiar cómo trabaja un equipo</h3><p>Pasar de entregar tareas a conseguir resultados, con objetivos y métricas que todo el mundo ve.</p><p class="proof mono">Citibox: un equipo de 15 que ahora trabaja con métricas</p>', 1),
 
@@ -133,7 +133,7 @@ T = [
     ('<span class="mono">Email</span>', '<span class="mono">Correo</span>', 1),
     ('<p class="big">Always up for a good conversation.<br>About roles, collaborations or just good ideas.</p>',
      '<p class="big">Siempre me apetece una buena charla.<br>Sobre trabajo, colaboraciones o, simplemente, buenas ideas.</p>', 1),
-    ('<nav aria-label="Footer"><b>Explore</b><b>Elsewhere</b><a href="#journey">Journey</a>', '<nav aria-label="Pie de página"><b>Explorar</b><b>En otros sitios</b><a href="#journey">Trayectoria</a>', 1),
+    ('<nav aria-label="Footer"><b>Explore</b><b>Elsewhere</b><a href="#journey">Journey</a>', '<nav aria-label="Pie de página"><b>Explorar</b><b>Encuéntrame</b><a href="#journey">Trayectoria</a>', 1),
     ('<a href="#side">Side project</a><a href="#mail">Email</a><a href="#help">How I help</a>', '<a href="#side">Proyecto personal</a><a href="#mail">Correo</a><a href="#help">Cómo ayudo</a>', 1),
     ('<small>© 2026 Óscar Saboya, Zaragoza, Spain</small>', '<small>© 2026 Óscar Saboya, Zaragoza</small>', 1),
 ]
