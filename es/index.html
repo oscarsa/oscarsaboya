@@ -84,14 +84,14 @@ body::after{content:""; position:fixed; inset:0; z-index:100; pointer-events:non
 .pill a:hover::after{transform:scaleX(1); transform-origin:left}
 .talk{font-family:var(--f-body); font-weight:600; font-size:16px; text-decoration:none; background:var(--ink); color:var(--bone); padding:11px 18px; border-radius:999px; transition:background .35s ease, color .35s ease}
 .end-nav{display:flex; align-items:center; gap:clamp(14px,1.8vw,26px)}
-.lang{display:flex; gap:12px; font-family:var(--f-body); font-weight:600; font-size:15px; letter-spacing:.02em}
-.lang a{position:relative; color:inherit; text-decoration:none; opacity:.5; padding-block:6px; transition:opacity .25s ease}
-.lang a[aria-current]{opacity:1}
-.lang a::after{content:""; position:absolute; left:50%; bottom:-3px; width:5px; height:5px; margin-left:-2.5px; border-radius:50%; background:conic-gradient(from 200deg, #FF4F3A, #FF8000, #E8368F, #7B3FE4, #FF4F3A); transform:scale(0); transition:transform .3s cubic-bezier(.3,1.6,.5,1)}
-.lang a[aria-current]::after{transform:scale(1)}
+/* Language switcher: plain type; the active one is full strength, the other dimmed, with the menu's hover underline */
+.lang{display:flex; align-items:center; gap:8px; font-family:var(--f-body); font-weight:600; font-size:15px; letter-spacing:.02em}
+.lang a{position:relative; color:inherit; text-decoration:none; opacity:.45; padding-block:6px; transition:opacity .25s ease}
+.lang i{font-style:normal; opacity:.3}
+.lang a[aria-current]{opacity:1; pointer-events:none}
 .lang a:not([aria-current]):hover{opacity:1}
-.lang a:not([aria-current]):hover::after{transform:scale(1)}
-.lang:has(a:not([aria-current]):hover) a[aria-current]::after{transform:scale(0)}
+.lang a::after{content:""; position:absolute; left:0; right:0; bottom:2px; height:1.5px; background:currentColor; transform:scaleX(0); transform-origin:right; transition:transform .35s cubic-bezier(.6,0,.2,1)}
+.lang a:not([aria-current]):hover::after{transform:scaleX(1); transform-origin:left}
 .nav.solid .talk{background:var(--bone); color:var(--ink)}
 
 /* ---------- Hero ---------- */
@@ -316,7 +316,7 @@ body::after{content:""; position:fixed; inset:0; z-index:100; pointer-events:non
   .logo{font-size:18px; gap:8px}
   .logo i{width:22px; height:22px}
   .end-nav{gap:12px}
-  .lang{gap:9px; font-size:14px}
+  .lang{gap:8px; font-size:14px}
   .talk{font-size:15px; padding:10px 15px}
   .hero{min-height:max(660px, 92svh)}
   .hero .copy{flex-direction:column; gap:18px}
@@ -358,7 +358,7 @@ body::after{content:""; position:fixed; inset:0; z-index:100; pointer-events:non
   <a class="logo" href="#top" aria-label="Óscar Saboya, volver arriba"><i aria-hidden="true"></i>óscar saboya</a>
   <nav class="pill" aria-label="Principal"><a href="#journey">trayectoria</a><a href="#side">proyecto personal</a><a href="#help">cómo ayudo</a><a href="#about">sobre mí</a></nav>
   <div class="end-nav">
-    <nav class="lang" aria-label="Idioma"><a href="/" hreflang="en" lang="en">EN</a><a href="/es/" hreflang="es" lang="es" aria-current="true">ES</a></nav>
+    <nav class="lang" aria-label="Idioma"><a href="/" hreflang="en" lang="en">EN</a><i aria-hidden="true">/</i><a href="/es/" hreflang="es" lang="es" aria-current="true">ES</a></nav>
     <a class="talk" href="#contact">Hablemos</a>
   </div>
 </div>

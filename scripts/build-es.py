@@ -25,8 +25,8 @@ T = [
     ('aria-label="Óscar Saboya, back to top"', 'aria-label="Óscar Saboya, volver arriba"', 1),
     ('<nav class="pill" aria-label="Main"><a href="#journey">journey</a><a href="#side">side project</a><a href="#help">how I help</a><a href="#about">about</a></nav>',
      '<nav class="pill" aria-label="Principal"><a href="#journey">trayectoria</a><a href="#side">proyecto personal</a><a href="#help">cómo ayudo</a><a href="#about">sobre mí</a></nav>', 1),
-    ('<nav class="lang" aria-label="Language"><a href="/" hreflang="en" lang="en" aria-current="true">EN</a><a href="/es/" hreflang="es" lang="es">ES</a></nav>',
-     '<nav class="lang" aria-label="Idioma"><a href="/" hreflang="en" lang="en">EN</a><a href="/es/" hreflang="es" lang="es" aria-current="true">ES</a></nav>', 1),
+    ('<nav class="lang" aria-label="Language"><a href="/" hreflang="en" lang="en" aria-current="true">EN</a><i aria-hidden="true">/</i><a href="/es/" hreflang="es" lang="es">ES</a></nav>',
+     '<nav class="lang" aria-label="Idioma"><a href="/" hreflang="en" lang="en">EN</a><i aria-hidden="true">/</i><a href="/es/" hreflang="es" lang="es" aria-current="true">ES</a></nav>', 1),
     ('<a class="talk" href="#contact">Get in touch</a>', '<a class="talk" href="#contact">Hablemos</a>', 1),
 
     # ---------- hero ----------
