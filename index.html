@@ -46,70 +46,94 @@ h1,h2,h3,p{margin:0}
 .hero ::selection, .card.c-bone ::selection, .card.c-papaya ::selection, .card.c-pomelo ::selection{background:var(--ink); color:var(--bone)}
 .card.c-grad ::selection, .closer ::selection{background:var(--bone); color:var(--violet)}
 a{color:inherit}
-.mono{font-family:var(--f-mono); font-size:11.5px; letter-spacing:.1em; text-transform:uppercase}
+.mono{font-family:var(--f-mono); font-size:12.5px; letter-spacing:.1em; text-transform:uppercase}
 .display{font-family:var(--f-display); font-weight:800; letter-spacing:-.035em; line-height:.9}
 .outline{color:transparent; -webkit-text-stroke:1.5px var(--stroke, var(--bone))}
 .inner{max-width:1360px; margin:0 auto; padding-left:var(--gl); padding-right:var(--gr)}
 /* Page-wide print grain: a quiet, static paper texture over everything, so the dark never reads as flat digital black */
-body::after{content:""; position:fixed; inset:0; z-index:100; pointer-events:none; background-image:var(--grain); background-size:180px; opacity:.07}
+body::after{content:""; position:fixed; inset:0; z-index:100; pointer-events:none; background-image:var(--grain); background-size:180px; opacity:.07; transform:translateZ(0)}
 .grain{position:relative; isolation:isolate}
 .grain::after{content:""; position:absolute; inset:0; background-image:var(--grain); background-size:220px; mix-blend-mode:overlay; opacity:.55; pointer-events:none; z-index:2}
 .chips{display:flex; flex-wrap:wrap; gap:6px 22px}
-.chips span{font-family:var(--f-mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase; opacity:.75}
+.chips span{font-family:var(--f-mono); font-size:12px; letter-spacing:.1em; text-transform:uppercase; opacity:.75}
 
 /* ---------- Nav: bare type over the hero; past it, everything gathers into one glass bar ---------- */
-.nav{--g:0; isolation:isolate; position:fixed; z-index:40; top:calc(env(safe-area-inset-top,0px) + 14px); left:var(--gl); right:var(--gr); display:flex; justify-content:space-between; align-items:center; gap:16px; padding:6px 6px 6px 4px; border-radius:999px; color:var(--ink); padding-left:calc(4px + var(--g) * 12px); background:linear-gradient(120deg, rgba(255,255,255,calc(var(--g) * .26)), rgba(255,236,220,calc(var(--g) * .12))); border:1px solid rgba(255,255,255,calc(var(--g) * .38)); box-shadow:0 8px 30px rgba(40,10,30,calc(var(--g) * .12)), inset 0 1px 0 rgba(255,255,255,calc(var(--g) * .35)); backdrop-filter:blur(calc(var(--g) * 18px)) saturate(calc(1 + var(--g) * .5)); -webkit-backdrop-filter:blur(calc(var(--g) * 18px)) saturate(calc(1 + var(--g) * .5)); transition:background .35s ease, border-color .35s ease, color .35s ease}
-/* grain inside the glass so it reads as frosted, not plastic */
-.nav::before{content:""; position:absolute; inset:0; z-index:-1; border-radius:inherit; background-image:var(--grain); background-size:160px; mix-blend-mode:overlay; opacity:calc(var(--g) * .7); pointer-events:none}
-.nav.solid{color:var(--bone); padding-left:16px; background:rgba(20,16,18,.62); border-color:rgba(243,237,230,.14); box-shadow:none; backdrop-filter:blur(16px) saturate(1.4); -webkit-backdrop-filter:blur(16px) saturate(1.4)}
+.nav{position:fixed; z-index:40; top:calc(env(safe-area-inset-top,0px) + 14px); left:calc(var(--gl) - 12px); right:var(--gr); display:flex; justify-content:space-between; align-items:center; gap:16px; padding:6px 6px 6px 16px; border-radius:999px; color:var(--ink); transition:color .35s ease}
+/* Glass appears as soon as you scroll: a class toggles once and CSS fades it, so nothing is recomputed per frame.
+   The layers sit at z-index 0 (not negative) so Safari applies their backdrop blur */
+.nav .glass{position:absolute; inset:0; z-index:0; border-radius:inherit; pointer-events:none; opacity:0; transition:opacity .35s ease}
+.nav > :not(.glass){position:relative; z-index:1}
+.nav .glass.light{background:linear-gradient(120deg, rgba(255,255,255,.26), rgba(255,236,220,.12)); border:1px solid rgba(255,255,255,.38); box-shadow:0 8px 30px rgba(40,10,30,.12), inset 0 1px 0 rgba(255,255,255,.35); backdrop-filter:blur(18px) saturate(1.5); -webkit-backdrop-filter:blur(18px) saturate(1.5)}
+.nav .glass.dark{background:rgba(52,44,48,.58); box-shadow:inset 0 1px 0 rgba(243,237,230,.10), 0 10px 30px rgba(0,0,0,.25); backdrop-filter:blur(16px) saturate(1.4); -webkit-backdrop-filter:blur(16px) saturate(1.4)}
+.nav.scrolled .glass.light{opacity:1}
+.nav.solid .glass.light{opacity:0}
+.nav.solid{color:var(--bone)}
+.nav.solid .glass.dark{opacity:1}
 /* Wordmark: lowercase, like zgzbus; a tiny piece of the hero gradient as the mark */
-.logo{display:inline-flex; align-items:center; gap:10px; font-family:var(--f-display); font-weight:700; font-size:clamp(17px,1.35vw,19px); letter-spacing:-.03em; line-height:1; text-decoration:none; color:inherit}
+.logo{display:inline-flex; align-items:center; gap:10px; font-family:var(--f-display); font-weight:700; font-size:clamp(20px,1.6vw,23px); letter-spacing:-.03em; line-height:1; text-decoration:none; color:inherit}
 /* The mark turns with the scroll (driven in JS); flat and grainy like the rest of the page, no rings or bevels */
-.logo i{width:22px; height:22px; border-radius:50%; background:var(--grain), conic-gradient(from 200deg, #FF4F3A, #FF8000, #E8368F, #7B3FE4, #FF4F3A); background-size:60px, auto; background-blend-mode:overlay, normal; will-change:transform}
+.logo i{width:26px; height:26px; border-radius:50%; background:var(--grain), conic-gradient(from 200deg, #FF4F3A, #FF8000, #E8368F, #7B3FE4, #FF4F3A); background-size:60px, auto; background-blend-mode:overlay, normal; will-change:transform}
 .pill{display:flex; gap:clamp(16px,2.2vw,34px)}
-.pill a{position:relative; font-family:var(--f-body); font-size:15px; font-weight:500; text-decoration:none; color:inherit; padding-block:6px}
+.pill a{position:relative; font-family:var(--f-body); font-size:16px; font-weight:500; text-decoration:none; color:inherit; padding-block:6px}
 .pill a::after{content:""; position:absolute; left:0; right:0; bottom:2px; height:1.5px; background:currentColor; transform:scaleX(0); transform-origin:right; transition:transform .35s cubic-bezier(.6,0,.2,1)}
 .pill a:hover::after{transform:scaleX(1); transform-origin:left}
-.talk{font-family:var(--f-body); font-weight:600; font-size:14.5px; text-decoration:none; background:var(--ink); color:var(--bone); padding:11px 18px; border-radius:999px; transition:background .35s ease, color .35s ease}
-.nav.solid::before{opacity:.12}
+.talk{font-family:var(--f-body); font-weight:600; font-size:16px; text-decoration:none; background:var(--ink); color:var(--bone); padding:11px 18px; border-radius:999px; transition:background .35s ease, color .35s ease}
 .nav.solid .talk{background:var(--bone); color:var(--ink)}
 
 /* ---------- Hero ---------- */
 .hero{position:relative; min-height:clamp(600px, 100svh, 980px); overflow:hidden; background:var(--pomelo); color:var(--ink); cursor:crosshair; touch-action:pan-y; container-type:inline-size}
-.hero canvas{position:absolute; inset:0; width:100%; height:100%; display:block; z-index:0}
+/* Sky: colour patches as CSS layers drifting on their own, and a violet light that follows the cursor.
+   Everything moves with transforms only, so Safari composites it on the GPU like Chrome does */
+.hero .sky{position:absolute; inset:0; z-index:0; overflow:hidden; background:#FF4F3A}
+.hero .sky i{position:absolute; left:0; top:0; aspect-ratio:1; border-radius:50%; will-change:transform}
+.sky .b1{width:180vmax; left:calc(5% - 90vmax); top:calc(90% - 90vmax); background:radial-gradient(closest-side, #FF4F3A, rgba(255,79,58,0)); animation:drift-a 39s ease-in-out infinite}
+.sky .b2{width:120vmax; left:calc(30% - 60vmax); top:calc(55% - 60vmax); background:radial-gradient(closest-side, #FF8000, rgba(255,128,0,0)); animation:drift-b 30s ease-in-out infinite}
+.sky .b3{width:110vmax; left:calc(70% - 55vmax); top:calc(35% - 55vmax); background:radial-gradient(closest-side, #E8368F, rgba(232,54,143,0)); animation:drift-a 36s ease-in-out -9s infinite reverse}
+.sky .b4{width:150vmax; left:calc(95% - 75vmax); top:calc(15% - 75vmax); background:radial-gradient(closest-side, #7B3FE4, rgba(123,63,228,0)); animation:drift-b 26s ease-in-out -5s infinite}
+.sky .light{background:radial-gradient(closest-side, rgba(123,63,228,.95), rgba(123,63,228,.55) 60%, rgba(123,63,228,0))}
+@keyframes drift-a{25%{transform:translate(11vw,-7vh)} 50%{transform:translate(0,-12vh)} 75%{transform:translate(-11vw,-5vh)}}
+@keyframes drift-b{25%{transform:translate(-9vw,8vh)} 50%{transform:translate(-12vw,0)} 75%{transform:translate(-4vw,-10vh)}}
 .hero .copy{position:absolute; z-index:4; top:clamp(110px,11cqw,170px); left:var(--gl); right:var(--gr); display:flex; justify-content:space-between; gap:24px; align-items:flex-start}
 .hero .intro{display:grid; gap:clamp(18px,1.8cqw,26px); justify-items:start}
-.hero .tag{display:inline-flex; align-items:center; gap:12px; font-family:var(--f-mono); font-size:11.5px; letter-spacing:.1em; text-transform:uppercase}
+.hero .tag{display:inline-flex; align-items:center; gap:12px; font-family:var(--f-body); font-weight:600; font-size:16px}
 .hero .tag i{position:relative; width:8px; height:8px; margin-left:4px; border-radius:50%; background:var(--ink)}
 .hero .tag i::after{content:""; position:absolute; inset:-5px; border-radius:50%; border:1.5px solid var(--ink); animation:ring 2s cubic-bezier(.2,.6,.3,1) infinite}
 @keyframes ring{from{transform:scale(.4); opacity:1} to{transform:scale(1.6); opacity:0}}
-.hero .tag b{font-weight:400; border-bottom:1.5px solid currentColor}
-.hero .meta{max-width:34ch; font-size:clamp(19px,1.75cqw,25px); line-height:1.32; font-weight:500; letter-spacing:-.01em}
+.hero .tag b{font-weight:600; border-bottom:1.5px solid currentColor}
+.hero .meta{max-width:34ch; font-size:clamp(20px,1.7cqw,24px); line-height:1.32; font-weight:500; letter-spacing:-.01em}
 /* Single CTA: words + a circle that fills on hover */
-.go{display:inline-flex; align-items:center; gap:12px; font-family:var(--f-body); font-weight:600; font-size:clamp(16px,1.25cqw,18px); text-decoration:none; color:inherit}
+.go{display:inline-flex; align-items:center; gap:12px; font-family:var(--f-body); font-weight:600; font-size:16px; text-decoration:none; color:inherit}
 .go i{display:grid; place-items:center; width:34px; height:34px; border-radius:50%; border:1.5px solid currentColor; transition:background .3s ease, color .3s ease}
-.go svg{width:13px; height:13px; fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; transition:transform .3s ease}
-.go:hover i{background:var(--ink); color:var(--bone)}
-.go:hover svg{transform:translateY(3px)}
+.go svg{width:13px; height:13px; fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round}
+.go:hover i, .go:focus-visible i{background:var(--ink); color:var(--bone)}
 .hero .cta{display:flex; gap:10px; flex-wrap:wrap}
 .btn{font-family:var(--f-body); font-weight:600; font-size:15px; border:1.5px solid currentColor; border-radius:999px; padding:10px 18px; text-decoration:none; color:inherit; background:none; cursor:pointer; white-space:nowrap}
 .btn.solid{background:var(--ink); color:var(--bone); border-color:var(--ink)}
 .hero .layer{position:absolute; inset:0; z-index:3; pointer-events:none}
 .hero h1{position:absolute; left:var(--gl); right:var(--gr); bottom:clamp(36px,4cqw,64px); font-size:8.2cqw}
-.hero .layer.on{color:var(--bone)}
+/* The bone headline is seen through a moving circle: the circle and its content shift in opposite directions (two transforms, no clip-path repaint) */
+.hero .spot{position:absolute; left:0; top:0; z-index:3; border-radius:50%; overflow:hidden; pointer-events:none; will-change:transform}
+.hero .spot-in{position:absolute; left:0; top:0; color:var(--bone); will-change:transform}
 
-/* ---------- At a glance ---------- */
-.glance{border-bottom:1px dashed var(--rule)}
-.glance dl{margin:0; display:grid; grid-template-columns:repeat(6, minmax(0,1fr))}
-.glance dl > div{padding:clamp(18px,2.4vw,30px) clamp(12px,1.6vw,22px); border-left:1px dashed var(--rule); display:grid; gap:8px; align-content:start}
-.glance dl > div:first-child{border-left:0; padding-left:0}
-.glance dt{font-family:var(--f-mono); font-size:11.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--papaya)}
-.glance dd{margin:0; font-family:var(--f-body); font-weight:600; font-size:clamp(16px,1.3vw,19px); line-height:1.3}
+/* ---------- At a glance: one editorial sentence; the keywords carry the scan, the connectors stay quiet ---------- */
+.glance{padding-block:clamp(48px,6vw,96px); border-bottom:1px dashed var(--rule)}
+.glance .inner{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,5fr); gap:16px clamp(24px,4vw,64px); align-items:start}
+.glance .mono{color:var(--papaya); padding-top:.9em}
+.glance .brief{font-family:var(--f-body); font-weight:500; font-size:clamp(24px,2.9vw,44px); line-height:1.28; letter-spacing:-.018em; color:rgba(243,237,230,.42); max-width:32ch; text-wrap:pretty}
+.glance .brief b{font-weight:600; color:var(--bone)}
 
 /* ---------- Curved line ---------- */
-.bridge{padding-block:clamp(40px,6vw,90px) 0; overflow:hidden}
-.bridge svg{display:block; width:100%; height:auto}
-.bridge text{font-family:var(--f-display); font-weight:800; font-size:96px; letter-spacing:-3.5px}
+.bridge{padding-block:clamp(56px,8vw,120px) clamp(24px,4vw,56px); overflow:hidden}
+/* Two type bands crossing in opposite directions; plain HTML text moved by transforms, so it is equally smooth in Safari and Chrome */
+.band{transform:rotate(-3deg); display:grid; gap:.08em; font-family:var(--f-display); font-weight:800; font-size:clamp(46px,8.4vw,140px); letter-spacing:-.04em; line-height:1.05}
+.band .line{display:flex; align-items:center; gap:.32em; width:max-content; white-space:nowrap; will-change:transform}
+.band .l1 span{background:linear-gradient(90deg, #9A7BFF, #E8609F 50%, #FF6A3A); -webkit-background-clip:text; background-clip:text; color:transparent; padding-bottom:.06em}
+.band .l2 span{color:transparent; -webkit-text-stroke:1.5px var(--lilac)}
+/* Separator: a soft editorial asterisk (six round-ended arms). It is a box painted with CSS and cut out by a mask,
+   so the gradient renders the same in Safari and Chrome: filled on top, outlined like the text below */
+.band .ast{flex:none; display:block; width:.58em; height:.58em; -webkit-mask:var(--ast) center / contain no-repeat; mask:var(--ast) center / contain no-repeat}
+.band .l1 .ast{--ast:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240' viewBox='-50 -50 100 100'><path d='M0 -35V35M-30.3 -17.5L30.3 17.5M-30.3 17.5L30.3 -17.5' stroke='%23000' stroke-width='23' stroke-linecap='round'/></svg>"); background:linear-gradient(135deg, #9A7BFF, #E8609F 55%, #FF6A3A)}
+.band .ast-o{flex:none; display:block; width:.6em; height:.6em; overflow:visible; fill:none; stroke:var(--lilac); stroke-width:1.5px; stroke-linejoin:round}
 
 /* ---------- Journey ---------- */
 .journey{padding-block:clamp(40px,6vw,80px) clamp(60px,8vw,120px)}
@@ -117,14 +141,14 @@ body::after{content:""; position:fixed; inset:0; z-index:100; pointer-events:non
 .sec-head h2{font-size:clamp(52px,9vw,148px)}
 .sec-head .mono{color:var(--muted)}
 .stack{display:grid}
-.card{--top:calc(env(safe-area-inset-top,0px) + 86px + var(--i) * 16px); position:sticky; top:var(--top); min-height:min(70vh, 600px); margin-bottom:9vh; border-radius:30px; padding:clamp(22px,3vw,44px); display:grid; grid-template-columns:minmax(0,1.2fr) minmax(0,1fr); grid-template-rows:auto 1fr auto; gap:20px clamp(24px,4vw,64px); transform-origin:50% 0; will-change:transform; box-shadow:0 -10px 40px rgba(0,0,0,.25); overflow:hidden}
+.card{--top:calc(env(safe-area-inset-top,0px) + 86px + var(--i) * 16px); position:sticky; top:var(--top); min-height:min(70vh, 600px); margin-bottom:9vh; border-radius:30px; padding:clamp(22px,3vw,44px); display:grid; grid-template-columns:minmax(0,1.2fr) minmax(0,1fr); grid-template-rows:auto 1fr auto; gap:20px clamp(24px,4vw,64px); transform-origin:50% 0; will-change:transform; backface-visibility:hidden; box-shadow:0 -10px 40px rgba(0,0,0,.25); overflow:hidden}
 .card:last-child{margin-bottom:0}
 .card > *{position:relative; z-index:1}
 .card .top{grid-column:1 / -1; display:flex; justify-content:space-between; align-items:center; gap:16px; flex-wrap:wrap}
-.card .yrs{font-family:var(--f-mono); font-size:11.5px; letter-spacing:.1em}
+.card .yrs{font-family:var(--f-mono); font-size:12.5px; letter-spacing:.1em}
 .card .role{font-family:var(--f-body); font-weight:600; font-size:clamp(15px,1.3vw,18px)}
 .card .role .arr{display:inline-block; width:1.35em; height:.65em; margin:0 .35em; vertical-align:baseline; position:relative; top:0; fill:none; stroke:currentColor; stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round; overflow:visible}
-.card .state{display:inline-flex; align-items:center; gap:12px; font-family:var(--f-mono); font-size:11.5px; letter-spacing:.1em; text-transform:uppercase}
+.card .state{display:inline-flex; align-items:center; gap:12px; font-family:var(--f-mono); font-size:12.5px; letter-spacing:.1em; text-transform:uppercase}
 .card .state i{position:relative; width:8px; height:8px; margin-left:4px; border-radius:50%; background:currentColor}
 .card .state i::after{content:""; position:absolute; inset:-5px; border-radius:50%; border:1.5px solid currentColor; animation:ring 2s cubic-bezier(.2,.6,.3,1) infinite}
 @keyframes pulse{50%{opacity:.25}}
@@ -137,7 +161,7 @@ body::after{content:""; position:fixed; inset:0; z-index:100; pointer-events:non
 .card .foot{grid-column:1 / -1; padding-top:8px}
 /* code ↔ product: one continuous fader; the knob slides in from the previous stage, ghosts mark where I was */
 .mix{width:min(560px,100%); margin-left:auto; display:grid; grid-template-columns:auto minmax(0,1fr) auto auto; align-items:center; column-gap:12px}
-.mix .end{font-family:var(--f-mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase; opacity:.6}
+.mix .end{font-family:var(--f-mono); font-size:12px; letter-spacing:.1em; text-transform:uppercase; opacity:.6}
 .mix b{font-family:var(--f-body); font-weight:600; font-size:16px; margin-left:16px; white-space:nowrap}
 .mix .track{position:relative; height:14px; background:linear-gradient(currentColor,currentColor) center/100% 1px no-repeat}
 .mix .ghost{position:absolute; top:50%; width:5px; height:5px; margin:-2.5px 0 0 -2.5px; border-radius:50%; background:currentColor; opacity:.35}
@@ -145,14 +169,13 @@ body::after{content:""; position:fixed; inset:0; z-index:100; pointer-events:non
 .card.in .knob{left:calc(var(--p) * 100%)}
 .card.c-bone{background:var(--bone); color:var(--ink)}
 /* Older stages, condensed into one card: the technical base, without stealing the spotlight */
-.card-compact{grid-template-columns:minmax(0,1fr) minmax(0,1fr); grid-template-rows:auto auto; min-height:auto}
-.card-compact .mini{display:grid; gap:14px; align-content:start; justify-items:start}
-.card-compact .line{display:flex; gap:16px; align-items:baseline; flex-wrap:wrap}
-.card-compact .mini + .mini{padding-left:clamp(24px,4vw,64px); border-left:1px solid color-mix(in srgb, currentColor 22%, transparent)}
-.card-compact .co{font-size:clamp(34px,3.6vw,60px)}
-.card-compact .what{font-size:clamp(17px,1.4vw,20px)}
-.card-compact .stat{font-size:15px}
-.card-compact .stat b{display:block; font-family:var(--f-display); font-weight:800; font-size:clamp(36px,3.4vw,56px); line-height:.9; letter-spacing:-.04em; margin-bottom:4px}
+/* The prelude: a quiet two-column card that reads in seconds and leaves the spotlight to the stages after it */
+.card-compact{grid-template-columns:minmax(0,1fr) minmax(0,1fr); grid-template-rows:auto auto; min-height:auto; row-gap:clamp(24px,3vw,40px)}
+.card-compact .mini{display:grid; gap:12px; align-content:start; justify-items:start; max-width:46ch}
+.card-compact .line{display:flex; gap:14px; align-items:baseline; flex-wrap:wrap}
+.card-compact .mini + .mini{padding-left:clamp(32px,5vw,80px); border-left:1px solid color-mix(in srgb, currentColor 18%, transparent)}
+.card-compact .co{font-size:clamp(28px,2.6vw,40px); line-height:1}
+.card-compact .what{font-size:clamp(16px,1.2vw,18px); line-height:1.45; max-width:40ch; opacity:.8}
 .card.c-plum{background:var(--plum); color:var(--bone)}
 .card.c-papaya{background:var(--papaya); color:var(--ink)}
 .card.c-pomelo{background:var(--pomelo); color:var(--ink)}
@@ -165,14 +188,17 @@ body::after{content:""; position:fixed; inset:0; z-index:100; pointer-events:non
 .craft h2{font-size:clamp(40px,7.4vw,124px)}
 .craft .intro{font-size:clamp(19px,1.6vw,23px); line-height:1.45; max-width:44ch; margin:clamp(24px,3vw,40px) 0 clamp(40px,5vw,72px)}
 /* two columns read as one table: same row height, rows line up across the gap, no vertical rule */
-.split, .workspace{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.3fr); column-gap:clamp(32px,5vw,88px)}
-.split h3{font-family:var(--f-body); font-weight:600; font-size:16px; color:var(--muted); padding-bottom:14px; border-bottom:1px solid var(--rule)}
+.split{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.3fr); column-gap:clamp(32px,5vw,88px)}
+/* matching column labels: same style, colour tells them apart */
+.split h3{display:flex; align-items:center; gap:10px; font-family:var(--f-mono); font-weight:400; font-size:12.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); padding-bottom:16px; border-bottom:1px solid var(--rule)}
+.split h3::before{content:""; width:7px; height:7px; border-radius:50%; background:currentColor}
 .split .mine h3{color:var(--papaya)}
 .split ul{list-style:none; margin:0; padding:0}
 .split li{display:flex; align-items:center; min-height:64px; border-bottom:1px dashed var(--rule); color:var(--muted); font-size:18px}
 .split .mine li{color:var(--bone); font-weight:600; font-size:clamp(20px,1.8vw,25px); letter-spacing:-.01em}
-.workspace{margin-top:clamp(32px,4vw,56px); align-items:baseline}
-.workspace .mono{color:var(--muted)}
+/* one full-width line under the table */
+.workspace{display:flex; flex-wrap:wrap; align-items:baseline; gap:8px 20px; margin-top:clamp(32px,4vw,56px)}
+.workspace .mono{color:var(--papaya)}
 .workspace p:not(.mono){font-size:18px; color:var(--bone)}
 
 /* ---------- Side project ---------- */
@@ -181,12 +207,14 @@ body::after{content:""; position:fixed; inset:0; z-index:100; pointer-events:non
 .side h2{font-size:clamp(64px,11vw,190px); color:var(--lilac); --stroke:var(--lilac)}
 .side .lead{font-size:clamp(18px,1.6vw,23px); line-height:1.45; max-width:36ch; margin-block:24px}
 .side .chips{color:var(--lilac)}
+.side .platforms{display:flex; flex-wrap:wrap; align-items:baseline; gap:6px 14px; font-weight:600; font-size:17px}
+.side .platforms .mono{color:var(--lilac)}
 .side .try{margin-top:32px; display:inline-block; color:var(--lilac)}
 .side .try:hover{background:var(--lilac); color:var(--ink)}
 /* Showcase: real screens rising out of a grainy violet field, cropped by the panel */
 /* Showcase: every zgzbus line drifting on its own behind the phones; the scroll only fans the phones apart */
 .showcase{position:relative; margin:0; height:clamp(460px,46vw,640px); border-radius:30px; overflow:hidden; isolation:isolate; background:#1C1218}
-.showcase.grain::after{z-index:3; opacity:.5}
+.showcase.grain::after{z-index:3; mix-blend-mode:normal; opacity:.14}
 .showcase .rows{position:absolute; inset:-12% -6%; display:grid; align-content:center; gap:14px; transform:rotate(-8deg)}
 .showcase .row{display:flex; gap:14px; white-space:nowrap; will-change:transform}
 .showcase .ln{flex:none; display:grid; place-items:center; min-width:clamp(64px,7vw,96px); height:clamp(54px,6vw,80px); padding-inline:14px; border-radius:16px; font-family:var(--f-display); font-weight:800; font-size:clamp(26px,3vw,42px); letter-spacing:-.03em}
@@ -242,6 +270,31 @@ body::after{content:""; position:fixed; inset:0; z-index:100; pointer-events:non
   .offers li:nth-child(odd){border-left:0; padding-left:0}
   .offers li:nth-child(n+3){margin-top:32px; border-top:1px solid var(--rule)}
 }
+/* ---------- Native scroll-driven animations ---------- */
+@media (prefers-reduced-motion: no-preference){
+  @supports (animation-timeline: scroll()){
+    .logo i{animation:mark-spin linear both; animation-timeline:scroll(root block)}
+    @keyframes mark-spin{to{transform:rotate(var(--spin, 2400deg))}}
+  }
+  @supports (animation-timeline: view()){
+    .bridge{view-timeline-name:--bridge}
+    .band .line{animation:linear both; animation-timeline:--bridge; animation-range:cover 0% cover 100%}
+    .band .l1{animation-name:band-l1}
+    .band .l2{animation-name:band-l2}
+    @keyframes band-l1{from{transform:translateX(var(--a0, 0px))} to{transform:translateX(var(--a1, 0px))}}
+    @keyframes band-l2{from{transform:translateX(var(--b0, 0px))} to{transform:translateX(var(--b1, 0px))}}
+    .band .ast, .band .ast-o{animation:ast-spin linear both; animation-timeline:--bridge; animation-range:cover 0% cover 100%}
+    .band .ast-o{animation-direction:reverse}
+    @keyframes ast-spin{from{transform:rotate(0deg)} to{transform:rotate(-180deg)}}
+    .showcase{view-timeline-name:--show}
+    .showcase .device{animation:linear both; animation-timeline:--show; animation-range:cover 15% cover 55%; animation-timing-function:cubic-bezier(.65,0,.35,1)}
+    .showcase .back{animation-name:fan-back}
+    .showcase .front{animation-name:fan-front}
+    @keyframes fan-back{from{transform:translate(-50%,-46%) rotate(-2deg)} to{transform:translate(-102%,-50%) rotate(-11deg)}}
+    @keyframes fan-front{from{transform:translate(-50%,-50%) rotate(2deg)} to{transform:translate(-6%,-52%) rotate(8deg)}}
+  }
+}
+
 /* ---------- Mobile ---------- */
 @media (max-width:900px){
   .pill{display:none}
@@ -255,14 +308,13 @@ body::after{content:""; position:fixed; inset:0; z-index:100; pointer-events:non
   .card-compact .mini + .mini{padding-left:0; border-left:0; padding-top:24px; border-top:1px solid color-mix(in srgb, currentColor 22%, transparent)}
   .card .num span{justify-self:start}
   .side .grid, .about .grid{grid-template-columns:1fr}
-  .glance dl{grid-template-columns:1fr 1fr}
-  .glance dl > div{border-left:0; border-top:1px dashed var(--rule); padding-left:0}
-  .glance dl > div:nth-child(-n+2){border-top:0}
+  .glance .inner{grid-template-columns:1fr}
+  .glance .mono{padding-top:0}
   .offers{grid-template-columns:1fr}
-  .split, .workspace{grid-template-columns:1fr}
+  .split{grid-template-columns:1fr}
   .split .mine{margin-top:36px}
   .split li{min-height:56px}
-  .workspace{row-gap:8px}
+  .workspace{flex-direction:column; gap:8px}
   .offers li{border-left:0; padding:32px 0 36px; border-top:1px solid var(--rule)}
   .offers li:first-child{border-top:0}
   .portrait{max-width:420px}
@@ -281,6 +333,7 @@ body::after{content:""; position:fixed; inset:0; z-index:100; pointer-events:non
 <body>
 <!-- ============ NAV ============ -->
 <div class="nav">
+  <span class="glass light" aria-hidden="true"></span><span class="glass dark" aria-hidden="true"></span>
   <a class="logo" href="#top" aria-label="Óscar Saboya, back to top"><i aria-hidden="true"></i>óscar saboya</a>
   <nav class="pill" aria-label="Main"><a href="#journey">journey</a><a href="#side">side project</a><a href="#help">how I help</a><a href="#about">about</a></nav>
   <a class="talk" href="#contact">Get in touch</a>
@@ -288,43 +341,32 @@ body::after{content:""; position:fixed; inset:0; z-index:100; pointer-events:non
 
 <!-- ============ HERO ============ -->
 <header class="hero grain" id="top">
-  <canvas aria-hidden="true"></canvas>
+  <div class="sky" aria-hidden="true"><i class="b1"></i><i class="b2"></i><i class="b3"></i><i class="b4"></i><i class="light"></i></div>
   <div class="copy">
     <div class="intro">
-      <p class="tag"><i aria-hidden="true"></i>Currently product manager at <b>Citibox</b></p>
+      <p class="tag"><i aria-hidden="true"></i><span>Product manager at <b>Citibox</b></span></p>
       <p class="meta">Building got cheap. Knowing what's worth building didn't. Six years writing code and six leading product taught me the second part. I use AI where it makes sense, and judgment everywhere.</p>
       <a class="go" href="#journey"><i aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M8 2v12M3 9l5 5 5-5"/></svg></i>See the journey</a>
     </div>
   </div>
   <div class="layer"><h1 class="display">From writing code to deciding what's worth building.</h1></div>
-  <div class="layer on" data-clip aria-hidden="true"><h1 class="display">From writing code to deciding what's worth building.</h1></div>
+  <div class="spot" aria-hidden="true"><div class="spot-in"><h1 class="display">From writing code to deciding what's worth building.</h1></div></div>
 </header>
 
 <!-- ============ AT A GLANCE ============ -->
 <section class="glance" aria-label="At a glance">
   <div class="inner">
-    <dl>
-      <div><dt>Now</dt><dd>Product manager at Citibox</dd></div>
-      <div><dt>Background</dt><dd>Computer engineer<br>6 yrs code, 6 yrs product</dd></div>
-      <div><dt>Best at</dt><dd>Zero-to-one, growth, team change</dd></div>
-      <div><dt>Builds with</dt><dd>Claude Code, Codex, n8n, SQL</dd></div>
-      <div><dt>Teams</dt><dd>International, up to 15 people</dd></div>
-      <div><dt>Based in</dt><dd>Zaragoza<br>or remote</dd></div>
-    </dl>
+    <p class="mono">At a glance</p>
+    <p class="brief"><b>Product manager</b> at Citibox, <b>computer engineer</b> by training: <b>six years of code</b>, <b>six of product</b>. At my best taking things from <b>zero to one</b>, <b>growing</b> them and <b>changing how teams work</b>. Product teams of <b>more than ten people</b> led so far, with <b>AI in the loop every day</b> to research, prototype and ship. Based in <b>Zaragoza</b>, happy working <b>remote</b>.</p>
   </div>
 </section>
 
 <!-- ============ CURVED LINE ============ -->
 <section class="bridge" aria-label="Deciding what's worth building, and shipping it">
-  <svg viewBox="0 0 1600 420" role="img" aria-label="Deciding what's worth building, and shipping it">
-    <defs>
-      <linearGradient id="tg" x1="0" x2="1"><stop offset="0" stop-color="#9A7BFF"/><stop offset=".5" stop-color="#E8609F"/><stop offset="1" stop-color="#FF6A3A"/></linearGradient>
-      <linearGradient id="dg" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#FF4F3A"/><stop offset=".3" stop-color="#FF8000"/><stop offset=".65" stop-color="#E8368F"/><stop offset="1" stop-color="#7B3FE4"/></linearGradient>
-      <path id="curve" d="M -200 330 C 300 330, 500 90, 900 120 S 1500 300, 1900 160"/>
-    </defs>
-    <text fill="url(#tg)"><textPath href="#curve" id="tp" startOffset="0">deciding what's worth building, and shipping it.</textPath></text>
-    <g id="seps" fill="url(#dg)"></g>
-  </svg>
+  <div class="band" aria-hidden="true">
+    <div class="line l1"><span>deciding what's worth building</span><i class="ast"></i><span>deciding what's worth building</span><i class="ast"></i><span>deciding what's worth building</span><i class="ast"></i><span>deciding what's worth building</span><i class="ast"></i></div>
+    <div class="line l2"><span>and shipping it</span><svg class="ast-o" viewBox="-50 -50 100 100" aria-hidden="true"><path d="M-11.50 -19.92 L-11.50 -35.00 A11.5 11.5 0 0 1 11.50 -35.00 L11.50 -19.92 L24.56 -27.46 A11.5 11.5 0 0 1 36.06 -7.54 L23.00 0.00 L36.06 7.54 A11.5 11.5 0 0 1 24.56 27.46 L11.50 19.92 L11.50 35.00 A11.5 11.5 0 0 1 -11.50 35.00 L-11.50 19.92 L-24.56 27.46 A11.5 11.5 0 0 1 -36.06 7.54 L-23.00 -0.00 L-36.06 -7.54 A11.5 11.5 0 0 1 -24.56 -27.46 Z" vector-effect="non-scaling-stroke"/></svg><span>and shipping it</span><svg class="ast-o" viewBox="-50 -50 100 100" aria-hidden="true"><path d="M-11.50 -19.92 L-11.50 -35.00 A11.5 11.5 0 0 1 11.50 -35.00 L11.50 -19.92 L24.56 -27.46 A11.5 11.5 0 0 1 36.06 -7.54 L23.00 0.00 L36.06 7.54 A11.5 11.5 0 0 1 24.56 27.46 L11.50 19.92 L11.50 35.00 A11.5 11.5 0 0 1 -11.50 35.00 L-11.50 19.92 L-24.56 27.46 A11.5 11.5 0 0 1 -36.06 7.54 L-23.00 -0.00 L-36.06 -7.54 A11.5 11.5 0 0 1 -24.56 -27.46 Z" vector-effect="non-scaling-stroke"/></svg><span>and shipping it</span><svg class="ast-o" viewBox="-50 -50 100 100" aria-hidden="true"><path d="M-11.50 -19.92 L-11.50 -35.00 A11.5 11.5 0 0 1 11.50 -35.00 L11.50 -19.92 L24.56 -27.46 A11.5 11.5 0 0 1 36.06 -7.54 L23.00 0.00 L36.06 7.54 A11.5 11.5 0 0 1 24.56 27.46 L11.50 19.92 L11.50 35.00 A11.5 11.5 0 0 1 -11.50 35.00 L-11.50 19.92 L-24.56 27.46 A11.5 11.5 0 0 1 -36.06 7.54 L-23.00 -0.00 L-36.06 -7.54 A11.5 11.5 0 0 1 -24.56 -27.46 Z" vector-effect="non-scaling-stroke"/></svg><span>and shipping it</span><svg class="ast-o" viewBox="-50 -50 100 100" aria-hidden="true"><path d="M-11.50 -19.92 L-11.50 -35.00 A11.5 11.5 0 0 1 11.50 -35.00 L11.50 -19.92 L24.56 -27.46 A11.5 11.5 0 0 1 36.06 -7.54 L23.00 0.00 L36.06 7.54 A11.5 11.5 0 0 1 24.56 27.46 L11.50 19.92 L11.50 35.00 A11.5 11.5 0 0 1 -11.50 35.00 L-11.50 19.92 L-24.56 27.46 A11.5 11.5 0 0 1 -36.06 7.54 L-23.00 -0.00 L-36.06 -7.54 A11.5 11.5 0 0 1 -24.56 -27.46 Z" vector-effect="non-scaling-stroke"/></svg><span>and shipping it</span><svg class="ast-o" viewBox="-50 -50 100 100" aria-hidden="true"><path d="M-11.50 -19.92 L-11.50 -35.00 A11.5 11.5 0 0 1 11.50 -35.00 L11.50 -19.92 L24.56 -27.46 A11.5 11.5 0 0 1 36.06 -7.54 L23.00 0.00 L36.06 7.54 A11.5 11.5 0 0 1 24.56 27.46 L11.50 19.92 L11.50 35.00 A11.5 11.5 0 0 1 -11.50 35.00 L-11.50 19.92 L-24.56 27.46 A11.5 11.5 0 0 1 -36.06 7.54 L-23.00 -0.00 L-36.06 -7.54 A11.5 11.5 0 0 1 -24.56 -27.46 Z" vector-effect="non-scaling-stroke"/></svg><span>and shipping it</span><svg class="ast-o" viewBox="-50 -50 100 100" aria-hidden="true"><path d="M-11.50 -19.92 L-11.50 -35.00 A11.5 11.5 0 0 1 11.50 -35.00 L11.50 -19.92 L24.56 -27.46 A11.5 11.5 0 0 1 36.06 -7.54 L23.00 0.00 L36.06 7.54 A11.5 11.5 0 0 1 24.56 27.46 L11.50 19.92 L11.50 35.00 A11.5 11.5 0 0 1 -11.50 35.00 L-11.50 19.92 L-24.56 27.46 A11.5 11.5 0 0 1 -36.06 7.54 L-23.00 -0.00 L-36.06 -7.54 A11.5 11.5 0 0 1 -24.56 -27.46 Z" vector-effect="non-scaling-stroke"/></svg></div>
+  </div>
 </section>
 
 <!-- ============ JOURNEY ============ -->
@@ -338,27 +380,27 @@ body::after{content:""; position:fixed; inset:0; z-index:100; pointer-events:non
     <div class="stack" id="stack">
       <article class="card c-bone card-compact" style="--i:0">
         <div class="top"><span class="yrs">Before that</span></div>
-        <div class="mini" data-p=".1"><p class="line"><span class="yrs">2014 – 2017</span><span class="role">Software developer</span></p><h3 class="co display">Neki, Apex44, Ibercivis</h3><p class="what">Shipped my first apps to real people, before I'd even graduated.</p><p class="stat"><b>3</b> apps for wearables, physio clinics and citizen science</p></div>
-        <div class="mini" data-p=".3"><p class="line"><span class="yrs">2018 – 2020</span><span class="role">Product engineer</span></p><h3 class="co display">Frogtek</h3><p class="what">Turned corner-shop sales across Latin America into dashboards for brands like Coca-Cola.</p><p class="stat"><b>$15K</b> revenue in the product's first month</p></div>
+        <div class="mini" data-p=".1"><p class="line"><span class="yrs">2014 – 2017</span><span class="role">Software developer</span></p><h3 class="co display">Neki, Apex44, Ibercivis</h3><p class="what">Three apps in real people's hands before graduating: wearables, physio clinics and citizen science.</p></div>
+        <div class="mini" data-p=".3"><p class="line"><span class="yrs">2018 – 2020</span><span class="role">Product engineer</span></p><h3 class="co display">Frogtek</h3><p class="what">Corner-shop sales across Latin America, turned into dashboards for brands like Coca-Cola. $15K in its first month.</p></div>
       </article>
 
       <article class="card c-papaya" style="--i:1">
         <div class="top"><span class="yrs">2020 – 2023</span><span class="role">Product maker<svg class="arr" viewBox="0 0 30 14" aria-label="to"><path d="M2 7c6-5 12 5 18 0" /><path d="M21.5 2.5 27 7l-5.5 4.5"/><path d="M20 7h7"/></svg>Product manager</span></div>
-        <div class="who"><h3 class="co display">Minimum.run</h3><p class="what">Took ideas to live products for startups and corporates, from Iberia to Kpler.</p></div>
+        <div class="who"><h3 class="co display">Minimum.run</h3><p class="what">Ideas taken to live products for startups and corporates, from Iberia to Kpler.</p></div>
         <div class="num"><b>Weeks</b><span>from idea to live MVP, not quarters</span></div>
         <div class="foot"><div class="mix" style="--p:.5"><span class="end">code</span><div class="track"><i class="knob"></i></div><span class="end">product</span><b>Half and half</b></div></div>
       </article>
 
       <article class="card c-pomelo" style="--i:2">
         <div class="top"><span class="yrs">2023 – 2025</span><span class="role">Product manager</span></div>
-        <div class="who"><h3 class="co display">The Hotels Network</h3><p class="what">Launched SafeDirect, travel insurance that gives guests a reason to book direct, integrated with insurers and PMSs. Shipped AI content generation and worked on KITT, the first AI receptionist for hotels.</p></div>
+        <div class="who"><h3 class="co display">The Hotels Network</h3><p class="what">SafeDirect: travel insurance that gives guests a reason to book direct, plugged into insurers and PMSs. Plus AI content generation, and KITT, the first AI receptionist for hotels.</p></div>
         <div class="num"><b>10x</b><span>SafeDirect revenue in its first year, and +12% conversion for hotels</span></div>
         <div class="foot"><div class="mix" style="--p:.8"><span class="end">code</span><div class="track"><i class="knob"></i></div><span class="end">product</span><b>Product-led</b></div></div>
       </article>
 
       <article class="card c-grad" style="--i:3">
         <div class="top"><span class="state"><i aria-hidden="true"></i>Now, since 2025</span><span class="role">Product manager</span></div>
-        <div class="who"><h3 class="co display">Citibox</h3><p class="what">Run the product behind 5,000 pick-up stores. My 15-person team works on metrics, not deadlines, with AI built into how we work.</p></div>
+        <div class="who"><h3 class="co display">Citibox</h3><p class="what">The product behind 5,000 pick-up stores. A 15-person team that works on metrics, not deadlines, with AI built into how we work.</p></div>
         <div class="num"><b>500K</b><span>parcels a month across Spain and Portugal</span></div>
         <div class="foot"><div class="mix" style="--p:.92"><span class="end">code</span><div class="track"><i class="knob"></i></div><span class="end">product</span><b>Mostly product</b></div></div>
       </article>
@@ -376,7 +418,7 @@ body::after{content:""; position:fixed; inset:0; z-index:100; pointer-events:non
       <div><h3>I hand to AI</h3><ul><li>Research and synthesis</li><li>Prototypes and code</li><li>Crunching the data</li><li>First drafts of specs</li><li>Repetitive work</li></ul></div>
       <div class="mine"><h3>Stays with me</h3><ul><li>Which problem is worth solving</li><li>What users actually need</li><li>What to leave out</li><li>The quality bar</li><li>Getting the team behind it</li></ul></div>
     </div>
-    <div class="workspace"><p class="mono">My workspace</p><p>Meetings, tasks, data and specs live in one repo, with AI on top.</p></div>
+    <div class="workspace"><p class="mono">My workspace</p><p>Meetings, tasks, data and specs, all in one repo with AI on top.</p></div>
   </div>
 </section>
 
@@ -386,8 +428,8 @@ body::after{content:""; position:fixed; inset:0; z-index:100; pointer-events:non
     <div>
       <p class="mono" style="color:var(--muted)">On the side</p>
       <h2 class="display" style="margin-top:14px">zgz<span class="outline">bus</span></h2>
-      <p class="lead">Zaragoza's transit data is public. A good app to read it wasn't. So I built one in a few weekends: AI wrote every line of code, I made every product decision, and kept it tested and properly deployed.</p>
-      <div class="chips"><span>iOS</span><span>Android</span><span>Web</span><span>Claude Code &amp; Codex</span></div>
+      <p class="lead">Zaragoza's transit data is public. A good app to read it wasn't, so I built one in a few weekends. AI wrote every line of code; every product decision, test and deploy was mine.</p>
+      <p class="platforms"><span class="mono">Available on</span> iOS, Android and web</p>
       <a class="btn try" href="https://zgzbus.com" target="_blank" rel="noopener">Try it on the web ↗</a>
     </div>
     <figure class="showcase grain" id="showcase">
@@ -403,10 +445,10 @@ body::after{content:""; position:fixed; inset:0; z-index:100; pointer-events:non
   <div class="inner">
     <div class="sec-head"><h2 class="display">How I can <span class="outline">help.</span></h2><p class="mono">Four things I do best</p></div>
     <ol class="offers">
-      <li><p class="for mono">For founders and new bets</p><h3>Take an idea live</h3><p>From a rough idea to a product people use. I prototype in days and let real users decide what stays.</p><p class="proof mono">Minimum.run, zgzbus</p></li>
-      <li><p class="for mono">For products with traction</p><h3>Grow what's already live</h3><p>Find what moves conversion and revenue, test it fast, scale what works.</p><p class="proof mono">SafeDirect: 10x revenue in its first year, +12% conversion</p></li>
-      <li><p class="for mono">For companies adding AI</p><h3>Bring AI into the product</h3><p>Find where AI genuinely helps users, ship it and measure it. In production, not in a demo.</p><p class="proof mono">The Hotels Network: AI receptionist, AI content</p></li>
-      <li><p class="for mono">For teams that need focus</p><h3>Change how a team works</h3><p>From shipping tasks to shipping results, with goals and metrics everyone can see.</p><p class="proof mono">Citibox: 15 people now run on metrics</p></li>
+      <li><p class="for mono">For founders and new bets</p><h3>Taking ideas live</h3><p>From a rough idea to a product people actually use. Prototypes in days, and real users deciding what stays.</p><p class="proof mono">Minimum.run, zgzbus</p></li>
+      <li><p class="for mono">For products with traction</p><h3>Growing what's already live</h3><p>Finding what moves conversion and revenue, testing it fast, scaling what works.</p><p class="proof mono">SafeDirect: 10x revenue in its first year, +12% conversion</p></li>
+      <li><p class="for mono">For companies adding AI</p><h3>Bringing AI into products</h3><p>Where AI genuinely helps users, shipped and measured. In production, not in a demo.</p><p class="proof mono">The Hotels Network: AI receptionist, AI content</p></li>
+      <li><p class="for mono">For teams that need focus</p><h3>Changing how teams work</h3><p>From shipping tasks to shipping results, with goals and metrics everyone can see.</p><p class="proof mono">Citibox: 15 people now run on metrics</p></li>
     </ol>
   </div>
 </section>
@@ -485,7 +527,7 @@ body::after{content:""; position:fixed; inset:0; z-index:100; pointer-events:non
     </div>
   </div>
   <footer class="closer grain">
-    <p class="big">Open to a good conversation.<br>About roles, collaborations and good ideas.</p>
+    <p class="big">Always up for a good conversation.<br>About roles, collaborations or just good ideas.</p>
     <nav aria-label="Footer"><b>Explore</b><b>Elsewhere</b><a href="#journey">Journey</a><a href="https://www.linkedin.com/in/oscarsaboya" target="_blank" rel="noopener">LinkedIn</a><a href="#side">Side project</a><a href="#mail">Email</a><a href="#help">How I help</a><span></span></nav>
     <small>© 2026 Óscar Saboya, Zaragoza, Spain</small>
   </footer>
@@ -495,94 +537,73 @@ body::after{content:""; position:fixed; inset:0; z-index:100; pointer-events:non
 (() => {
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* ---------- Hero: animated grain gradient, light follows cursor ---------- */
-  const hero = document.querySelector('.hero');
-  const cv = hero.querySelector('canvas'), ctx = cv.getContext('2d');
-  const clip = hero.querySelector('[data-clip]');
-  const blobs = [
-    {c:'255,79,58',  x:.05, y:.9, r:.9, s:.00016, p:0},
-    {c:'255,128,0',  x:.3,  y:.55, r:.6, s:.00021, p:1},
-    {c:'232,54,143', x:.7,  y:.35, r:.55, s:.00017, p:2},
-    {c:'123,63,228', x:.95, y:.15, r:.75, s:.00024, p:4}
-  ];
-  let sx=.7, sy=.5, tx=.7, ty=.5, heroOn = true;
-  const size = () => { const r = hero.getBoundingClientRect(); cv.width = Math.max(64, r.width/4|0); cv.height = Math.max(48, r.height/4|0); };
-  function paint(t){
-    const w = cv.width, h = cv.height, m = Math.max(w,h);
-    ctx.fillStyle = '#FF4F3A'; ctx.fillRect(0,0,w,h);
-    for (const b of blobs){
-      const x = (b.x + Math.sin(t*b.s+b.p)*.12)*w, y = (b.y + Math.cos(t*b.s*1.3+b.p)*.12)*h;
-      const g = ctx.createRadialGradient(x,y,0,x,y,b.r*m);
-      g.addColorStop(0,`rgba(${b.c},1)`); g.addColorStop(1,`rgba(${b.c},0)`);
-      ctx.fillStyle = g; ctx.fillRect(0,0,w,h);
-    }
-    const g = ctx.createRadialGradient(sx*w, sy*h, 0, sx*w, sy*h, .38*m);
-    g.addColorStop(0,'rgba(123,63,228,.95)'); g.addColorStop(.6,'rgba(123,63,228,.55)'); g.addColorStop(1,'rgba(123,63,228,0)');
-    ctx.fillStyle = g; ctx.fillRect(0,0,w,h);
+  /* ---------- Hero: the light (and the bone headline under it) follows the cursor, eased ---------- */
+  const hero = document.querySelector('.hero'), light = hero.querySelector('.light');
+  const spot = hero.querySelector('.spot'), spotIn = spot.firstElementChild;
+  let sx = .7, sy = .5, tx = .7, ty = .5, hw = 0, hh = 0, R = 0, L = 0, heroMoving = false;
+  function sizeHero(){
+    hw = hero.offsetWidth; hh = hero.offsetHeight;
+    R = Math.max(hw, hh) * (innerWidth <= 900 ? .26 : .2); // radius of the bone reveal
+    L = Math.max(hw, hh) * .38;                            // radius of the violet light
+    spot.style.width = spot.style.height = 2 * R + 'px';
+    spotIn.style.width = hw + 'px'; spotIn.style.height = hh + 'px';
+    light.style.width = 2 * L + 'px';
+    placeLight();
   }
-  function clipText(){
-    const r = hero.getBoundingClientRect();
-    const rad = Math.max(r.width, r.height) * (innerWidth <= 900 ? .26 : .2);
-    clip.style.clipPath = `circle(${rad}px at ${sx*r.width}px ${sy*r.height}px)`;
+  function placeLight(){
+    const x = sx * hw, y = sy * hh;
+    light.style.transform = `translate3d(${(x - L).toFixed(1)}px, ${(y - L).toFixed(1)}px, 0)`;
+    spot.style.transform = `translate3d(${(x - R).toFixed(1)}px, ${(y - R).toFixed(1)}px, 0)`;
+    spotIn.style.transform = `translate3d(${(R - x).toFixed(1)}px, ${(R - y).toFixed(1)}px, 0)`;
   }
+  function heroTick(){
+    const dx = tx - sx, dy = ty - sy;
+    if (Math.abs(dx) + Math.abs(dy) < .0008){ sx = tx; sy = ty; placeLight(); heroMoving = false; return; }
+    sx += dx * .09; sy += dy * .09;
+    placeLight();
+    requestAnimationFrame(heroTick);
+  }
+  // Safari resizes the hero as its toolbar settles (svh): keep the reveal matched to the real size
+  if ('ResizeObserver' in window) new ResizeObserver(() => sizeHero()).observe(hero);
   hero.addEventListener('pointermove', e => {
-    const r = hero.getBoundingClientRect(); tx = (e.clientX-r.left)/r.width; ty = (e.clientY-r.top)/r.height;
-    if (reduce){ sx = tx; sy = ty; paint(0); clipText(); }
+    const r = hero.getBoundingClientRect(); tx = (e.clientX - r.left) / r.width; ty = (e.clientY - r.top) / r.height;
+    if (reduce){ sx = tx; sy = ty; placeLight(); return; }
+    if (!heroMoving){ heroMoving = true; requestAnimationFrame(heroTick); }
   });
-  new IntersectionObserver(([e]) => heroOn = e.isIntersecting).observe(hero);
 
-  /* ---------- Curved line: an endless ribbon; the logo's disc marks where the phrase starts ---------- */
-  const bridge = document.querySelector('.bridge'), tp = document.getElementById('tp'), curve = document.getElementById('curve');
-  const sepG = document.getElementById('seps'), SVGNS = 'http://www.w3.org/2000/svg';
-  const phraseText = tp.textContent, REPEATS = 4, MAIN = 1; // one copy before the main one, so the ribbon never starts empty
-  tp.textContent = '';
-  const sepIdx = [];
-  for (let i = 0; i < REPEATS; i++){
-    tp.append(phraseText + ' ');
-    const t = document.createElementNS(SVGNS, 'tspan'); t.textContent = '\u2003'; tp.append(t); // em space reserves room for the disc
-    sepIdx.push(tp.textContent.length - 1);
-    tp.append(' ');
-    sepG.append(document.createElementNS(SVGNS, 'circle'));
+  /* ---------- Bands: the top line slides left and the bottom one right as the section passes ---------- */
+  const bridge = document.querySelector('.bridge'), l1 = bridge.querySelector('.l1'), l2 = bridge.querySelector('.l2');
+  let a0 = 0, a1 = 0, b0 = 0, b1 = 0;
+  function layoutBand(){
+    const vw = bridge.offsetWidth, s1 = l1.children[2]; // the second phrase of the top line
+    // it starts just inside the left edge, with the end of the previous phrase and a disc before it, and travels far enough to be read whole
+    a0 = -s1.offsetLeft + vw * .24;
+    a1 = a0 - Math.max(vw * .5, s1.offsetWidth - vw * .55);
+    b0 = -l2.children[6].offsetLeft + vw * .1;
+    b1 = b0 + vw * .4;
+    l1.style.setProperty('--a0', a0.toFixed(1) + 'px'); l1.style.setProperty('--a1', a1.toFixed(1) + 'px');
+    l2.style.setProperty('--b0', b0.toFixed(1) + 'px'); l2.style.setProperty('--b1', b1.toFixed(1) + 'px');
   }
-  const atX = x => { const L = curve.getTotalLength(); let s = 0; while (s < L && curve.getPointAtLength(s).x < x) s += 4; return s; };
-  const sLeft = atX(40), sMid = atX(760), sRight = atX(1560);
-  const unit = phraseText.length + 3; // phrase + space + em space + space
-  const lead = tp.getSubStringLength(0, unit * MAIN); // distance from the ribbon's start to the main phrase
-  const phrase = tp.getSubStringLength(unit * MAIN, phraseText.length);
-  const fs = parseFloat(getComputedStyle(tp.parentNode).fontSize);
-  // keyframes over q (0 = section enters, 1 = its top hits the top of the screen) for where the main phrase starts
-  const keys = [[.15, sMid], [.55, sLeft], [.95, sRight - phrase - 40]];
-  function placeSeps(){
-    [...sepG.children].forEach((c, i) => {
-      const k = sepIdx[i];
-      try {
-        const a = tp.getStartPositionOfChar(k), b = tp.getEndPositionOfChar(k), rot = tp.getRotationOfChar(k) * Math.PI / 180;
-        const h = fs * .27; // lift to the middle of the x-height, perpendicular to the curve
-        c.setAttribute('cx', (a.x + b.x) / 2 + Math.sin(rot) * h);
-        c.setAttribute('cy', (a.y + b.y) / 2 - Math.cos(rot) * h);
-        c.setAttribute('r', fs * .2);
-      } catch { c.setAttribute('r', 0); } // the disc's spot is off the path
-    });
-  }
-  function bridgeScroll(){
-    const r = bridge.getBoundingClientRect(), vh = innerHeight;
-    const q = (vh - r.top) / vh;
-    let i = q < keys[1][0] ? 0 : 1;
-    const [q0, s0] = keys[i], [q1, s1] = keys[i+1];
-    tp.setAttribute('startOffset', s0 + (s1 - s0) * (q - q0) / (q1 - q0) - lead);
-    placeSeps();
+  const cssBand = CSS.supports('animation-timeline: view()');
+  function drawBridge(){
+    if (cssBand) return; // the browser drives it
+    const q = Math.min(1, Math.max(0, (vh - (geo.bridge - sY)) / (vh + geo.bridgeH)));
+    l1.style.transform = `translate3d(${(a0 + (a1 - a0) * q).toFixed(1)}px, 0, 0)`;
+    l2.style.transform = `translate3d(${(b0 + (b1 - b0) * q).toFixed(1)}px, 0, 0)`;
   }
 
   /* ---------- Stacked cards: earlier cards recede ---------- */
-  const cards = [...document.querySelectorAll('.card')];
-  function stackScroll(){
-    cards.forEach((c, i) => {
-      const next = cards[i+1];
-      if (!next){ c.style.transform = ''; c.style.filter = ''; return; }
-      const top = parseFloat(getComputedStyle(c).top) || 0;
-      const cover = Math.min(1, Math.max(0, 1 - (next.getBoundingClientRect().top - top) / (c.offsetHeight || 1)));
-      c.style.transform = `scale(${1 - cover * .05})`;
-      c.style.filter = `brightness(${1 - cover * .25})`;
+  const cards = [...document.querySelectorAll('.card')], stackEl = document.getElementById('stack');
+  function drawStack(){
+    geo.cards.forEach((g, i) => {
+      const next = geo.cards[i+1];
+      if (!next) return;
+      // the next card's natural (unstuck) top on screen; it covers this one as it rises
+      const cover = Math.min(1, Math.max(0, 1 - (next.top - sY - g.stick) / g.h));
+      const v = Math.round(cover * 500);
+      if (v === g.v) return;
+      g.v = v;
+      cards[i].style.transform = `scale(${1 - cover * .05})`;
     });
   }
 
@@ -596,17 +617,8 @@ body::after{content:""; position:fixed; inset:0; z-index:100; pointer-events:non
   const cardIO = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting){ e.target.classList.add('in'); cardIO.unobserve(e.target); } }), {threshold:.5});
   cards.forEach(c => cardIO.observe(c));
 
-  /* ---------- Logo mark: turns with the scroll, both ways; it trails the page slightly so fast flicks spin it up and it glides to rest ---------- */
+  /* ---------- Logo mark: turns with the eased scroll, both ways ---------- */
   const mark = document.querySelector('.logo i');
-  let markAng = scrollY * .45, markOn = false;
-  function markSpin(){
-    const target = scrollY * .45, d = target - markAng;
-    markAng += d * .12;
-    mark.style.transform = `rotate(${markAng}deg)`;
-    if (Math.abs(d) > .2) requestAnimationFrame(markSpin); else markOn = false;
-  }
-  mark.style.transform = `rotate(${markAng}deg)`;
-  if (!reduce) addEventListener('scroll', () => { if (!markOn){ markOn = true; requestAnimationFrame(markSpin); } }, {passive:true});
 
   /* ---------- zgzbus showcase: all 47 real lines drift on their own; scroll only fans the phones ---------- */
   const zLines = [["L1","#e91e8c","#FFFFFF"],["Ci1","#e45514","#FFFFFF"],["Ci2","#5b106f","#FFFFFF"],["Ci3","#af1380","#FFFFFF"],["Ci4","#2b4b88","#FFFFFF"],["C1","#7e860d","#FFFFFF"],["C4","#773283","#FFFFFF"],["21","#847272","#FFFFFF"],["22","#00787e","#FFFFFF"],["23","#407926","#FFFFFF"],["25","#e19100","#FFFFFF"],["28","#b67100","#FFFFFF"],["29","#efb500","#FFFFFF"],["30","#16a8c9","#FFFFFF"],["31","#c30c17","#FFFFFF"],["32","#dc4b8d","#FFFFFF"],["33","#b8c500","#FFFFFF"],["34","#660033","#FFFFFF"],["35","#35478c","#FFFFFF"],["36","#0080c5","#FFFFFF"],["38","#7a9a13","#FFFFFF"],["39","#5b428e","#FFFFFF"],["40","#920051","#FFFFFF"],["41","#c28c38","#FFFFFF"],["42","#1ea7b3","#FFFFFF"],["43","#f49d0d","#FFFFFF"],["44","#259a2a","#FFFFFF"],["50","#b11765","#FFFFFF"],["51","#d23b3f","#FFFFFF"],["52","#115143","#FFFFFF"],["53","#d00053","#FFFFFF"],["54","#cd2e15","#FFFFFF"],["55","#43246c","#FFFFFF"],["56","#0c9a80","#FFFFFF"],["57","#053420","#FFFFFF"],["58","#007035","#FFFFFF"],["59","#95be13","#FFFFFF"],["60","#361851","#FFFFFF"],["N1","#17143b","#82b541"],["N2","#17143b","#d64289"],["N3","#17143b","#00a3e0"],["N4","#17143b","#e50065"],["N5","#17143b","#f7941d"],["N6","#17143b","#009688"],["N7","#17143b","#ffd700"],["ES1","#4a5568","#FFFFFF"],["TR1","#4a5568","#FFFFFF"]];
@@ -619,10 +631,11 @@ body::after{content:""; position:fixed; inset:0; z-index:100; pointer-events:non
     zRowsEl.append(row); zRows.push({el: row, dir: r % 2 ? 1 : -1, speed: 14 + (r * 5) % 14});
   }
   const zEase = t => t < .5 ? 4*t*t*t : 1 - Math.pow(-2*t + 2, 3) / 2;
-  function fanScroll(){
-    const r = show.getBoundingClientRect(), vh = innerHeight;
-    const p = Math.min(1, Math.max(0, (vh - r.top) / (vh + r.height)));
-    const k = zEase(Math.min(1, Math.max(0, (p - .15) / .4)));
+  function drawFan(){
+    const p = Math.min(1, Math.max(0, (vh - (geo.show - sY)) / (vh + geo.showH)));
+    const k = Math.round(zEase(Math.min(1, Math.max(0, (p - .15) / .4))) * 1000) / 1000;
+    if (k === geo.fanK) return;
+    geo.fanK = k;
     zBack.style.transform  = `translate(${-50 - 52 * k}%, ${-46 - 4 * k}%) rotate(${-2 - 9 * k}deg)`;
     zFront.style.transform = `translate(${-50 + 44 * k}%, ${-50 - 2 * k}%) rotate(${2 + 6 * k}deg)`;
   }
@@ -635,14 +648,39 @@ body::after{content:""; position:fixed; inset:0; z-index:100; pointer-events:non
   // only animate the ticker while the showcase is on screen
   if (!reduce) new IntersectionObserver(([e]) => { if (e.isIntersecting && !zOn){ zOn = true; zLast = performance.now(); requestAnimationFrame(ticker); } else if (!e.isIntersecting) zOn = false; }).observe(show);
 
-  let ticking = false;
+  /* ---------- Scroll engine: measure the page once (and on resize), then each frame every effect reads one eased
+     scroll value and writes only transforms, opacity and the curve offset. No layout reads while scrolling. ---------- */
   const nav = document.querySelector('.nav');
-  const navScroll = () => {
-    nav.style.setProperty('--g', Math.min(1, scrollY / 140).toFixed(3));
-    nav.classList.toggle('solid', hero.getBoundingClientRect().bottom < 70);
-  };
-  const onScroll = () => { navScroll(); bridgeScroll(); stackScroll(); portraitScroll(); fanScroll(); };
-  addEventListener('scroll', () => { if (!ticking){ ticking = true; requestAnimationFrame(() => { onScroll(); ticking = false; }); } }, {passive:true});
+  const docTop = el => el.getBoundingClientRect().top + scrollY;
+  let vh = innerHeight, geo = {cards: []}, sY = scrollY, scrollOn = false, solid = null;
+  function measure(){
+    vh = innerHeight;
+    geo.hero = hero.offsetHeight;
+    geo.bridge = docTop(bridge);
+    geo.show = docTop(show); geo.showH = show.offsetHeight; geo.fanK = NaN;
+    geo.portrait = docTop(portrait); geo.portraitH = portrait.offsetHeight; geo.pv = NaN;
+    // sticky cards: rebuild their natural tops from the stack's top plus each card's height and margin
+    let y = docTop(stackEl);
+    geo.cards = cards.map(c => { const cs = getComputedStyle(c), g = {top: y, stick: parseFloat(cs.top) || 0, h: c.offsetHeight}; y += g.h + (parseFloat(cs.marginBottom) || 0); return g; });
+    geo.bridgeH = bridge.offsetHeight; layoutBand();
+    document.querySelector('.logo i').style.setProperty('--spin', ((document.documentElement.scrollHeight - vh) * .45).toFixed(0) + 'deg');
+  }
+  const cssSpin = CSS.supports('animation-timeline: scroll()'), cssFan = CSS.supports('animation-timeline: view()');
+  let scrolled = null;
+  function render(){
+    const isScrolled = sY > 8, isSolid = geo.hero - sY < 70;
+    if (isScrolled !== scrolled){ scrolled = isScrolled; nav.classList.toggle('scrolled', scrolled); }
+    if (isSolid !== solid){ solid = isSolid; nav.classList.toggle('solid', solid); }
+    if (!cssSpin && !reduce) mark.style.transform = `rotate(${(sY * .45).toFixed(1)}deg)`;
+    drawBridge(); drawStack(); if (!cssFan) drawFan(); drawPortrait();
+  }
+  function frame(){
+    const d = scrollY - sY;
+    sY = Math.abs(d) < .5 ? scrollY : sY + d * .35; // light easing evens out uneven scroll events on phones
+    render();
+    if (sY !== scrollY) requestAnimationFrame(frame); else scrollOn = false;
+  }
+  addEventListener('scroll', () => { if (!scrollOn){ scrollOn = true; requestAnimationFrame(frame); } }, {passive:true});
 
   /* ---------- Portrait: drawn by the scroll, stroke after stroke (and undrawn going back up) ---------- */
   const portrait = document.getElementById('portrait');
@@ -651,10 +689,12 @@ body::after{content:""; position:fixed; inset:0; z-index:100; pointer-events:non
   const total = strokes.reduce((a, s) => a + s.len, 0);
   let acc = 0;
   strokes.forEach(s => { s.a = acc / total; acc += s.len; s.b = acc / total; s.el.style.strokeDasharray = s.len; });
-  function portraitScroll(){
-    const r = portrait.getBoundingClientRect(), vh = innerHeight;
-    const start = vh * .92, end = vh * .5 - r.height / 2;
-    const p = reduce ? 1 : Math.min(1, Math.max(0, (start - r.top) / (start - end)));
+  function drawPortrait(){
+    const top = geo.portrait - sY, start = vh * .92, end = vh * .5 - geo.portraitH / 2;
+    const p = reduce ? 1 : Math.min(1, Math.max(0, (start - top) / (start - end)));
+    const v = Math.round(p * 600);
+    if (v === geo.pv) return;
+    geo.pv = v;
     const d = Math.min(1, p / .85);
     strokes.forEach(s => { const k = Math.min(1, Math.max(0, (d - s.a) / (s.b - s.a))); s.el.style.strokeDashoffset = s.len * (1 - k); });
     riso.style.opacity = Math.min(1, Math.max(0, (p - .8) / .2));
@@ -662,10 +702,11 @@ body::after{content:""; position:fixed; inset:0; z-index:100; pointer-events:non
 
 
   /* ---------- Loop ---------- */
-  function loop(t){ if (heroOn){ paint(t); sx += (tx-sx)*.07; sy += (ty-sy)*.07; clipText(); } requestAnimationFrame(loop); }
-  addEventListener('resize', () => { size(); paint(0); clipText(); onScroll(); });
-  size(); paint(0); clipText(); onScroll();
-  if (!reduce) requestAnimationFrame(loop);
+  const relayout = () => { measure(); sY = scrollY; render(); };
+  addEventListener('resize', () => { sizeHero(); relayout(); });
+  addEventListener('load', relayout);
+  if (document.fonts) document.fonts.ready.then(relayout); // web fonts change heights
+  sizeHero(); relayout();
 })();
 </script>
 </body>
