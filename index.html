@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Óscar Saboya, product manager</title>
-<meta name="description" content="Óscar Saboya, product manager in Zaragoza. Six years writing code, six years leading product. I use AI where it makes sense, and judgment everywhere.">
+<meta name="description" content="Óscar Saboya, product manager in Zaragoza, Spain. Six years writing code, six years leading product. I use AI where it makes sense, and judgment everywhere.">
 <meta name="author" content="Óscar Saboya">
 <meta name="theme-color" content="#141012">
 <link rel="canonical" href="https://oscarsaboya.com/">
@@ -36,6 +36,7 @@
   --f-mono:"Fragment Mono", ui-monospace, Menlo, monospace;
   --gl:max(20px, env(safe-area-inset-left,0px)); --gr:max(20px, env(safe-area-inset-right,0px));
   --grain:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .9 -.25'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  --sec:clamp(96px,13vw,208px); /* vertical rhythm between sections */
   color-scheme:dark;
 }
 *{box-sizing:border-box}
@@ -116,14 +117,14 @@ body::after{content:""; position:fixed; inset:0; z-index:100; pointer-events:non
 .hero .spot-in{position:absolute; left:0; top:0; color:var(--bone); will-change:transform}
 
 /* ---------- At a glance: one editorial sentence; the keywords carry the scan, the connectors stay quiet ---------- */
-.glance{padding-block:clamp(48px,6vw,96px); border-bottom:1px dashed var(--rule)}
+.glance{padding-block:var(--sec) 0}
 .glance .inner{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,5fr); gap:16px clamp(24px,4vw,64px); align-items:start}
 .glance .mono{color:var(--papaya); padding-top:.9em}
 .glance .brief{font-family:var(--f-body); font-weight:500; font-size:clamp(24px,2.9vw,44px); line-height:1.28; letter-spacing:-.018em; color:rgba(243,237,230,.42); max-width:32ch; text-wrap:pretty}
 .glance .brief b{font-weight:600; color:var(--bone)}
 
 /* ---------- Curved line ---------- */
-.bridge{padding-block:clamp(56px,8vw,120px) clamp(24px,4vw,56px); overflow:hidden}
+.bridge{padding-block:var(--sec) calc(var(--sec) * .5); overflow:hidden}
 /* Two type bands crossing in opposite directions; plain HTML text moved by transforms, so it is equally smooth in Safari and Chrome */
 .band{transform:rotate(-3deg); display:grid; gap:.08em; font-family:var(--f-display); font-weight:800; font-size:clamp(46px,8.4vw,140px); letter-spacing:-.04em; line-height:1.05}
 .band .line{display:flex; align-items:center; gap:.32em; width:max-content; white-space:nowrap; will-change:transform}
@@ -136,8 +137,8 @@ body::after{content:""; position:fixed; inset:0; z-index:100; pointer-events:non
 .band .ast-o{flex:none; display:block; width:.6em; height:.6em; overflow:visible; fill:none; stroke:var(--lilac); stroke-width:1.5px; stroke-linejoin:round}
 
 /* ---------- Journey ---------- */
-.journey{padding-block:clamp(40px,6vw,80px) clamp(60px,8vw,120px)}
-.sec-head{display:flex; justify-content:space-between; align-items:flex-end; gap:24px; flex-wrap:wrap; margin-bottom:clamp(32px,4vw,56px)}
+.journey{padding-block:calc(var(--sec) * .5) var(--sec)}
+.sec-head{display:flex; justify-content:space-between; align-items:flex-end; gap:24px; flex-wrap:wrap; margin-bottom:clamp(40px,5vw,80px)}
 .sec-head h2{font-size:clamp(52px,9vw,148px)}
 .sec-head .mono{color:var(--muted)}
 .stack{display:grid}
@@ -183,7 +184,7 @@ body::after{content:""; position:fixed; inset:0; z-index:100; pointer-events:non
 .card.c-grad::after{content:""; position:absolute; inset:0; background-image:var(--grain); background-size:220px; mix-blend-mode:overlay; opacity:.6; pointer-events:none; z-index:0}
 
 /* ---------- How I work: what goes to AI (quiet) vs. what stays with me (loud) ---------- */
-.craft{padding-block:clamp(60px,8vw,120px); border-top:1px dashed var(--rule)}
+.craft{padding-block:var(--sec) 0}
 .craft .eyebrow{color:var(--muted); margin-bottom:14px}
 .craft h2{font-size:clamp(40px,7.4vw,124px)}
 .craft .intro{font-size:clamp(19px,1.6vw,23px); line-height:1.45; max-width:44ch; margin:clamp(24px,3vw,40px) 0 clamp(40px,5vw,72px)}
@@ -202,7 +203,7 @@ body::after{content:""; position:fixed; inset:0; z-index:100; pointer-events:non
 .workspace p:not(.mono){font-size:18px; color:var(--bone)}
 
 /* ---------- Side project ---------- */
-.side{padding-block:clamp(60px,8vw,120px); border-top:1px dashed var(--rule)}
+.side{padding-block:var(--sec) 0}
 .side .grid{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.1fr); gap:clamp(32px,6vw,96px); align-items:center}
 .side h2{font-size:clamp(64px,11vw,190px); color:var(--lilac); --stroke:var(--lilac)}
 .side .lead{font-size:clamp(18px,1.6vw,23px); line-height:1.45; max-width:36ch; margin-block:24px}
@@ -222,7 +223,7 @@ body::after{content:""; position:fixed; inset:0; z-index:100; pointer-events:non
 .device img{display:block; width:100%; height:auto; border-radius:clamp(28px,2.9vw,40px)}
 
 /* ---------- How I can help ---------- */
-.help{padding-block:clamp(60px,8vw,120px)}
+.help{padding-block:var(--sec) 0}
 /* Offers: three quiet columns; the audience line leads, the title stays small enough not to compete with the section heading */
 .offers{list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); border-top:1px solid var(--rule)}
 .offers li{display:grid; gap:14px; align-content:start; padding:clamp(28px,3vw,40px) clamp(24px,3vw,44px) 0; border-left:1px solid var(--rule)}
@@ -233,7 +234,7 @@ body::after{content:""; position:fixed; inset:0; z-index:100; pointer-events:non
 .offers .proof{margin-top:10px; color:var(--bone); opacity:.75}
 
 /* ---------- About ---------- */
-.about{padding-block:clamp(60px,8vw,120px)}
+.about{padding-block:var(--sec)}
 .about .grid{display:grid; grid-template-columns:minmax(0,4fr) minmax(0,6fr); gap:clamp(24px,5vw,80px); align-items:center}
 .portrait{position:relative; aspect-ratio:1/1; max-width:100%}
 .portrait svg{display:block; width:100%; height:100%; overflow:visible}
@@ -242,7 +243,7 @@ body::after{content:""; position:fixed; inset:0; z-index:100; pointer-events:non
 .about .chips{margin-top:28px; color:var(--muted)}
 
 /* ---------- Contact ---------- */
-.contact{padding-block:clamp(40px,6vw,80px) 0}
+.contact{padding-block:calc(var(--sec) * .5) 0}
 .marquee{overflow:hidden; white-space:nowrap; padding-block:10px}
 .marquee .track{display:inline-flex; gap:.35em; font-size:clamp(84px,15vw,250px); animation:slide 26s linear infinite; padding-right:.35em}
 .marquee .track span{color:var(--lilac)}
@@ -345,7 +346,7 @@ body::after{content:""; position:fixed; inset:0; z-index:100; pointer-events:non
   <div class="copy">
     <div class="intro">
       <p class="tag"><i aria-hidden="true"></i><span>Product manager at <b>Citibox</b></span></p>
-      <p class="meta">Building got cheap. Knowing what's worth building didn't. Six years writing code and six leading product taught me the second part. I use AI where it makes sense, and judgment everywhere.</p>
+      <p class="meta">Building got cheap. Knowing what's worth building didn't. That's the part I'm good at.</p>
       <a class="go" href="#journey"><i aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M8 2v12M3 9l5 5 5-5"/></svg></i>See the journey</a>
     </div>
   </div>
@@ -357,7 +358,7 @@ body::after{content:""; position:fixed; inset:0; z-index:100; pointer-events:non
 <section class="glance" aria-label="At a glance">
   <div class="inner">
     <p class="mono">At a glance</p>
-    <p class="brief"><b>Product manager</b> at Citibox, <b>computer engineer</b> by training: <b>six years of code</b>, <b>six of product</b>. At my best taking things from <b>zero to one</b>, <b>growing</b> them and <b>changing how teams work</b>. Product teams of <b>more than ten people</b> led so far, with <b>AI in the loop every day</b> to research, prototype and ship. Based in <b>Zaragoza</b>, happy working <b>remote</b>.</p>
+    <p class="brief"><b>Computer engineer</b> by training: <b>six years of code</b>, then <b>six of product</b>. At my best taking things from <b>zero to one</b>, <b>growing</b> them and <b>changing how teams work</b>. Product teams of <b>more than ten people</b> led so far, with <b>AI in the loop every day</b> to research, prototype and ship. Based in <b>Zaragoza, Spain</b>, happy working <b>remote</b>.</p>
   </div>
 </section>
 
@@ -509,7 +510,7 @@ body::after{content:""; position:fixed; inset:0; z-index:100; pointer-events:non
       <p class="mono" style="color:var(--muted)">About</p>
       <h2 class="display" style="margin-top:14px">Raised between <span class="outline">paper and pixels.</span></h2>
       <p class="body">I grew up in my grandfather's print shop, watching my mum design on the first Macs. That's where I learned that things should work well and look good. I studied computer engineering, wrote code for six years, then moved into product to decide what's worth building.</p>
-      <div class="chips"><span>Based in Zaragoza</span><span>Spanish &amp; English</span><span>Off screen: drums</span></div>
+      <div class="chips"><span>Based in Zaragoza, Spain</span><span>Spanish &amp; English</span><span>Off screen: drums</span></div>
     </div>
   </div>
 </section>
