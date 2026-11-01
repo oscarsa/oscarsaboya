@@ -1,0 +1,737 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Óscar Saboya, product manager</title>
+<meta name="description" content="Óscar Saboya, product manager en Zaragoza. Seis años programando y seis en producto. Uso la IA donde aporta; el criterio, siempre.">
+<meta name="author" content="Óscar Saboya">
+<meta name="theme-color" content="#141012">
+<link rel="canonical" href="https://oscarsaboya.com/es/">
+<link rel="alternate" hreflang="en" href="https://oscarsaboya.com/">
+<link rel="alternate" hreflang="es" href="https://oscarsaboya.com/es/">
+<link rel="alternate" hreflang="x-default" href="https://oscarsaboya.com/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://oscarsaboya.com/es/">
+<meta property="og:locale" content="es_ES">
+<meta property="og:title" content="Óscar Saboya, product manager">
+<meta property="og:description" content="De escribir código a decidir qué merece construirse.">
+<meta property="og:image" content="https://oscarsaboya.com/og-image-es.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Óscar Saboya, product manager">
+<meta name="twitter:description" content="De escribir código a decidir qué merece construirse.">
+<meta name="twitter:image" content="https://oscarsaboya.com/og-image-es.jpg">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Óscar Saboya","jobTitle":"Product Manager","url":"https://oscarsaboya.com/","address":{"@type":"PostalAddress","addressLocality":"Zaragoza","addressCountry":"ES"},"sameAs":["https://www.linkedin.com/in/oscarsaboya"]}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@400..900&family=Figtree:wght@400..700&family=Fragment+Mono&display=swap">
+<style>
+/* Layout: dark page. Hero (grain gradient + live light) → curved line → journey as stacked cards (Citibox = "now", the brightest) → ZGZ Bus side project (own format: phone) → how I can help → about (portrait on the page, no box) → contact.
+   Single deliberate dark look: every colour set here. */
+:root{
+  --ink:#141012; --ink-2:#1E171B; --bone:#F3EDE6; --papaya:#FF8000; --pomelo:#FF4F3A; --magenta:#E8368F; --violet:#7B3FE4; --plum:#2A1A24; --lilac:#C9B6FF;
+  --muted:#F3EDE699; --rule:#F3EDE626;
+  --f-display:"Rubik", "Arial Black", system-ui, sans-serif;
+  --f-body:"Figtree", system-ui, sans-serif;
+  --f-mono:"Fragment Mono", ui-monospace, Menlo, monospace;
+  --gl:max(20px, env(safe-area-inset-left,0px)); --gr:max(20px, env(safe-area-inset-right,0px));
+  --grain:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .9 -.25'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  --sec:clamp(96px,13vw,208px); /* vertical rhythm between sections */
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0; background:var(--ink); color:var(--bone); font-family:var(--f-body); font-size:17px; line-height:1.5; -webkit-font-smoothing:antialiased; overflow-x:clip}
+h1,h2,h3,p{margin:0}
+::selection{background:var(--lilac); color:var(--ink); -webkit-text-stroke-color:var(--ink)}
+.hero ::selection, .card.c-bone ::selection, .card.c-papaya ::selection, .card.c-pomelo ::selection{background:var(--ink); color:var(--bone)}
+.card.c-grad ::selection, .closer ::selection{background:var(--bone); color:var(--violet)}
+a{color:inherit}
+.mono{font-family:var(--f-mono); font-size:12.5px; letter-spacing:.1em; text-transform:uppercase}
+.display{font-family:var(--f-display); font-weight:800; letter-spacing:-.035em; line-height:.9}
+.outline{color:transparent; -webkit-text-stroke:1.5px var(--stroke, var(--bone))}
+.inner{max-width:1360px; margin:0 auto; padding-left:var(--gl); padding-right:var(--gr)}
+/* Page-wide print grain: a quiet, static paper texture over everything, so the dark never reads as flat digital black */
+body::after{content:""; position:fixed; inset:0; z-index:100; pointer-events:none; background-image:var(--grain); background-size:180px; opacity:.07; transform:translateZ(0)}
+.grain{position:relative; isolation:isolate}
+.grain::after{content:""; position:absolute; inset:0; background-image:var(--grain); background-size:220px; mix-blend-mode:overlay; opacity:.55; pointer-events:none; z-index:2}
+.chips{display:flex; flex-wrap:wrap; gap:6px 22px}
+.chips span{font-family:var(--f-mono); font-size:12px; letter-spacing:.1em; text-transform:uppercase; opacity:.75}
+
+/* ---------- Nav: bare type over the hero; past it, everything gathers into one glass bar ---------- */
+.nav{position:fixed; z-index:40; top:calc(env(safe-area-inset-top,0px) + 14px); left:calc(var(--gl) - 12px); right:var(--gr); display:flex; justify-content:space-between; align-items:center; gap:16px; padding:6px 6px 6px 16px; border-radius:999px; color:var(--ink); transition:color .35s ease}
+/* Glass appears as soon as you scroll: a class toggles once and CSS fades it, so nothing is recomputed per frame.
+   The layers sit at z-index 0 (not negative) so Safari applies their backdrop blur */
+.nav .glass{position:absolute; inset:0; z-index:0; border-radius:inherit; pointer-events:none; opacity:0; transition:opacity .35s ease}
+.nav > :not(.glass){position:relative; z-index:1}
+.nav .glass.light{background:linear-gradient(120deg, rgba(255,255,255,.26), rgba(255,236,220,.12)); border:1px solid rgba(255,255,255,.38); box-shadow:0 8px 30px rgba(40,10,30,.12), inset 0 1px 0 rgba(255,255,255,.35); backdrop-filter:blur(18px) saturate(1.5); -webkit-backdrop-filter:blur(18px) saturate(1.5)}
+.nav .glass.dark{background:rgba(52,44,48,.58); box-shadow:inset 0 1px 0 rgba(243,237,230,.10), 0 10px 30px rgba(0,0,0,.25); backdrop-filter:blur(16px) saturate(1.4); -webkit-backdrop-filter:blur(16px) saturate(1.4)}
+.nav.scrolled .glass.light{opacity:1}
+.nav.solid .glass.light{opacity:0}
+.nav.solid{color:var(--bone)}
+.nav.solid .glass.dark{opacity:1}
+/* Wordmark: lowercase, like zgzbus; a tiny piece of the hero gradient as the mark */
+.logo{display:inline-flex; align-items:center; gap:10px; font-family:var(--f-display); font-weight:700; font-size:clamp(20px,1.6vw,23px); letter-spacing:-.03em; line-height:1; text-decoration:none; color:inherit}
+/* The mark turns with the scroll (driven in JS); flat and grainy like the rest of the page, no rings or bevels */
+.logo i{width:26px; height:26px; border-radius:50%; background:var(--grain), conic-gradient(from 200deg, #FF4F3A, #FF8000, #E8368F, #7B3FE4, #FF4F3A); background-size:60px, auto; background-blend-mode:overlay, normal; will-change:transform}
+.pill{display:flex; gap:clamp(16px,2.2vw,34px)}
+.pill a{position:relative; font-family:var(--f-body); font-size:16px; font-weight:500; text-decoration:none; color:inherit; padding-block:6px}
+.pill a::after{content:""; position:absolute; left:0; right:0; bottom:2px; height:1.5px; background:currentColor; transform:scaleX(0); transform-origin:right; transition:transform .35s cubic-bezier(.6,0,.2,1)}
+.pill a:hover::after{transform:scaleX(1); transform-origin:left}
+.talk{font-family:var(--f-body); font-weight:600; font-size:16px; text-decoration:none; background:var(--ink); color:var(--bone); padding:11px 18px; border-radius:999px; transition:background .35s ease, color .35s ease}
+.end-nav{display:flex; align-items:center; gap:clamp(14px,1.8vw,26px)}
+.lang{display:flex; gap:12px; font-family:var(--f-body); font-weight:600; font-size:15px; letter-spacing:.02em}
+.lang a{position:relative; color:inherit; text-decoration:none; opacity:.5; padding-block:6px; transition:opacity .25s ease}
+.lang a[aria-current]{opacity:1}
+.lang a::after{content:""; position:absolute; left:50%; bottom:-3px; width:5px; height:5px; margin-left:-2.5px; border-radius:50%; background:conic-gradient(from 200deg, #FF4F3A, #FF8000, #E8368F, #7B3FE4, #FF4F3A); transform:scale(0); transition:transform .3s cubic-bezier(.3,1.6,.5,1)}
+.lang a[aria-current]::after{transform:scale(1)}
+.lang a:not([aria-current]):hover{opacity:1}
+.lang a:not([aria-current]):hover::after{transform:scale(1)}
+.lang:has(a:not([aria-current]):hover) a[aria-current]::after{transform:scale(0)}
+.nav.solid .talk{background:var(--bone); color:var(--ink)}
+
+/* ---------- Hero ---------- */
+.hero{position:relative; min-height:clamp(600px, 100svh, 980px); overflow:hidden; background:var(--pomelo); color:var(--ink); cursor:crosshair; touch-action:pan-y; container-type:inline-size}
+/* Sky: colour patches as CSS layers drifting on their own, and a violet light that follows the cursor.
+   Everything moves with transforms only, so Safari composites it on the GPU like Chrome does */
+.hero .sky{position:absolute; inset:0; z-index:0; overflow:hidden; background:#FF4F3A}
+.hero .sky i{position:absolute; left:0; top:0; aspect-ratio:1; border-radius:50%; will-change:transform}
+.sky .b1{width:180vmax; left:calc(5% - 90vmax); top:calc(90% - 90vmax); background:radial-gradient(closest-side, #FF4F3A, rgba(255,79,58,0)); animation:drift-a 39s ease-in-out infinite}
+.sky .b2{width:120vmax; left:calc(30% - 60vmax); top:calc(55% - 60vmax); background:radial-gradient(closest-side, #FF8000, rgba(255,128,0,0)); animation:drift-b 30s ease-in-out infinite}
+.sky .b3{width:110vmax; left:calc(70% - 55vmax); top:calc(35% - 55vmax); background:radial-gradient(closest-side, #E8368F, rgba(232,54,143,0)); animation:drift-a 36s ease-in-out -9s infinite reverse}
+.sky .b4{width:150vmax; left:calc(95% - 75vmax); top:calc(15% - 75vmax); background:radial-gradient(closest-side, #7B3FE4, rgba(123,63,228,0)); animation:drift-b 26s ease-in-out -5s infinite}
+.sky .light{background:radial-gradient(closest-side, rgba(123,63,228,.95), rgba(123,63,228,.55) 60%, rgba(123,63,228,0))}
+@keyframes drift-a{25%{transform:translate(11vw,-7vh)} 50%{transform:translate(0,-12vh)} 75%{transform:translate(-11vw,-5vh)}}
+@keyframes drift-b{25%{transform:translate(-9vw,8vh)} 50%{transform:translate(-12vw,0)} 75%{transform:translate(-4vw,-10vh)}}
+.hero .copy{position:absolute; z-index:4; top:clamp(110px,11cqw,170px); left:var(--gl); right:var(--gr); display:flex; justify-content:space-between; gap:24px; align-items:flex-start}
+.hero .intro{display:grid; gap:clamp(18px,1.8cqw,26px); justify-items:start}
+.hero .tag{display:inline-flex; align-items:center; gap:12px; font-family:var(--f-body); font-weight:600; font-size:16px}
+.hero .tag i{position:relative; width:8px; height:8px; margin-left:4px; border-radius:50%; background:var(--ink)}
+.hero .tag i::after{content:""; position:absolute; inset:-5px; border-radius:50%; border:1.5px solid var(--ink); animation:ring 2s cubic-bezier(.2,.6,.3,1) infinite}
+@keyframes ring{from{transform:scale(.4); opacity:1} to{transform:scale(1.6); opacity:0}}
+.hero .tag b{font-weight:600; border-bottom:1.5px solid currentColor}
+.hero .meta{max-width:34ch; font-size:clamp(20px,1.7cqw,24px); line-height:1.32; font-weight:500; letter-spacing:-.01em}
+/* Single CTA: words + a circle that fills on hover */
+.go{display:inline-flex; align-items:center; gap:12px; font-family:var(--f-body); font-weight:600; font-size:16px; text-decoration:none; color:inherit}
+.go i{display:grid; place-items:center; width:34px; height:34px; border-radius:50%; border:1.5px solid currentColor; transition:background .3s ease, color .3s ease}
+.go svg{width:13px; height:13px; fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round}
+.go:hover i, .go:focus-visible i{background:var(--ink); color:var(--bone)}
+.hero .cta{display:flex; gap:10px; flex-wrap:wrap}
+.btn{font-family:var(--f-body); font-weight:600; font-size:15px; border:1.5px solid currentColor; border-radius:999px; padding:10px 18px; text-decoration:none; color:inherit; background:none; cursor:pointer; white-space:nowrap}
+.btn.solid{background:var(--ink); color:var(--bone); border-color:var(--ink)}
+.hero .layer{position:absolute; inset:0; z-index:3; pointer-events:none}
+.hero h1{position:absolute; left:var(--gl); right:var(--gr); bottom:clamp(36px,4cqw,64px); font-size:8.2cqw}
+/* The bone headline is seen through a moving circle: the circle and its content shift in opposite directions (two transforms, no clip-path repaint) */
+.hero .spot{position:absolute; left:0; top:0; z-index:3; border-radius:50%; overflow:hidden; pointer-events:none; will-change:transform}
+.hero .spot-in{position:absolute; left:0; top:0; color:var(--bone); will-change:transform}
+
+/* ---------- At a glance: one editorial sentence; the keywords carry the scan, the connectors stay quiet ---------- */
+.glance{padding-block:var(--sec) 0}
+.glance .inner{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,5fr); gap:16px clamp(24px,4vw,64px); align-items:start}
+.glance .mono{color:var(--papaya); padding-top:.9em}
+.glance .brief{font-family:var(--f-body); font-weight:500; font-size:clamp(24px,2.9vw,44px); line-height:1.28; letter-spacing:-.018em; color:rgba(243,237,230,.42); max-width:32ch; text-wrap:pretty}
+.glance .brief b{font-weight:600; color:var(--bone)}
+
+/* ---------- Curved line ---------- */
+.bridge{padding-block:var(--sec) calc(var(--sec) * .5); overflow:hidden}
+/* Two type bands crossing in opposite directions; plain HTML text moved by transforms, so it is equally smooth in Safari and Chrome */
+.band{transform:rotate(-3deg); display:grid; gap:.08em; font-family:var(--f-display); font-weight:800; font-size:clamp(46px,8.4vw,140px); letter-spacing:-.04em; line-height:1.05}
+.band .line{display:flex; align-items:center; gap:.32em; width:max-content; white-space:nowrap; will-change:transform}
+.band .l1 span{background:linear-gradient(90deg, #9A7BFF, #E8609F 50%, #FF6A3A); -webkit-background-clip:text; background-clip:text; color:transparent; padding-bottom:.06em}
+.band .l2 span{color:transparent; -webkit-text-stroke:1.5px var(--lilac)}
+/* Separator: a soft editorial asterisk (six round-ended arms). It is a box painted with CSS and cut out by a mask,
+   so the gradient renders the same in Safari and Chrome: filled on top, outlined like the text below */
+.band .ast{flex:none; display:block; width:.58em; height:.58em; -webkit-mask:var(--ast) center / contain no-repeat; mask:var(--ast) center / contain no-repeat}
+.band .l1 .ast{--ast:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240' viewBox='-50 -50 100 100'><path d='M0 -35V35M-30.3 -17.5L30.3 17.5M-30.3 17.5L30.3 -17.5' stroke='%23000' stroke-width='23' stroke-linecap='round'/></svg>"); background:linear-gradient(135deg, #9A7BFF, #E8609F 55%, #FF6A3A)}
+.band .ast-o{flex:none; display:block; width:.6em; height:.6em; overflow:visible; fill:none; stroke:var(--lilac); stroke-width:1.5px; stroke-linejoin:round}
+
+/* ---------- Journey ---------- */
+.journey{padding-block:calc(var(--sec) * .5) var(--sec)}
+.sec-head{display:flex; justify-content:space-between; align-items:flex-end; gap:24px; flex-wrap:wrap; margin-bottom:clamp(40px,5vw,80px)}
+.sec-head h2{font-size:clamp(52px,9vw,148px)}
+.sec-head .mono{color:var(--muted)}
+.stack{display:grid}
+.card{--top:calc(env(safe-area-inset-top,0px) + 86px + var(--i) * 16px); position:sticky; top:var(--top); min-height:min(70vh, 600px); margin-bottom:9vh; border-radius:30px; padding:clamp(22px,3vw,44px); display:grid; grid-template-columns:minmax(0,1.2fr) minmax(0,1fr); grid-template-rows:auto 1fr auto; gap:20px clamp(24px,4vw,64px); transform-origin:50% 0; will-change:transform; backface-visibility:hidden; box-shadow:0 -10px 40px rgba(0,0,0,.25); overflow:hidden}
+.card:last-child{margin-bottom:0}
+.card > *{position:relative; z-index:1}
+.card .top{grid-column:1 / -1; display:flex; justify-content:space-between; align-items:center; gap:16px; flex-wrap:wrap}
+.card .yrs{font-family:var(--f-mono); font-size:12.5px; letter-spacing:.1em}
+.card .role{font-family:var(--f-body); font-weight:600; font-size:clamp(15px,1.3vw,18px)}
+.card .role .arr{display:inline-block; width:1.35em; height:.65em; margin:0 .35em; vertical-align:baseline; position:relative; top:0; fill:none; stroke:currentColor; stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round; overflow:visible}
+.card .state{display:inline-flex; align-items:center; gap:12px; font-family:var(--f-mono); font-size:12.5px; letter-spacing:.1em; text-transform:uppercase}
+.card .state i{position:relative; width:8px; height:8px; margin-left:4px; border-radius:50%; background:currentColor}
+.card .state i::after{content:""; position:absolute; inset:-5px; border-radius:50%; border:1.5px solid currentColor; animation:ring 2s cubic-bezier(.2,.6,.3,1) infinite}
+@keyframes pulse{50%{opacity:.25}}
+.card .who{align-self:end; display:grid; gap:16px; justify-items:start}
+.card .co{font-size:clamp(42px,5.8vw,96px)}
+.card .what{font-size:clamp(19px,1.8vw,26px); line-height:1.3; font-weight:500; max-width:26ch}
+.card .num{align-self:end; justify-self:end; text-align:right; display:grid; gap:8px}
+.card .num b{font-family:var(--f-display); font-weight:800; font-size:clamp(84px,12vw,200px); line-height:.8; letter-spacing:-.05em}
+.card .num span{font-size:clamp(14px,1.2vw,17px); max-width:22ch; justify-self:end}
+.card .foot{grid-column:1 / -1; padding-top:8px}
+/* code ↔ product: one continuous fader; the knob slides in from the previous stage, ghosts mark where I was */
+.mix{width:min(560px,100%); margin-left:auto; display:grid; grid-template-columns:auto minmax(0,1fr) auto auto; align-items:center; column-gap:12px}
+.mix .end{font-family:var(--f-mono); font-size:12px; letter-spacing:.1em; text-transform:uppercase; opacity:.6}
+.mix b{font-family:var(--f-body); font-weight:600; font-size:16px; margin-left:16px; white-space:nowrap}
+.mix .track{position:relative; height:14px; background:linear-gradient(currentColor,currentColor) center/100% 1px no-repeat}
+.mix .ghost{position:absolute; top:50%; width:5px; height:5px; margin:-2.5px 0 0 -2.5px; border-radius:50%; background:currentColor; opacity:.35}
+.knob{position:absolute; top:50%; left:calc(var(--from, var(--p)) * 100%); width:12px; height:12px; margin:-6px 0 0 -6px; border-radius:50%; background:currentColor; transition:left 1.1s cubic-bezier(.6,0,.2,1) .15s}
+.card.in .knob{left:calc(var(--p) * 100%)}
+.card.c-bone{background:var(--bone); color:var(--ink)}
+/* Older stages, condensed into one card: the technical base, without stealing the spotlight */
+/* The prelude: a quiet two-column card that reads in seconds and leaves the spotlight to the stages after it */
+.card-compact{grid-template-columns:minmax(0,1fr) minmax(0,1fr); grid-template-rows:auto auto; min-height:auto; row-gap:clamp(24px,3vw,40px)}
+.card-compact .mini{display:grid; gap:12px; align-content:start; justify-items:start; max-width:46ch}
+.card-compact .line{display:flex; gap:14px; align-items:baseline; flex-wrap:wrap}
+.card-compact .mini + .mini{padding-left:clamp(32px,5vw,80px); border-left:1px solid color-mix(in srgb, currentColor 18%, transparent)}
+.card-compact .co{font-size:clamp(28px,2.6vw,40px); line-height:1}
+.card-compact .what{font-size:clamp(16px,1.2vw,18px); line-height:1.45; max-width:40ch; opacity:.8}
+.card.c-plum{background:var(--plum); color:var(--bone)}
+.card.c-papaya{background:var(--papaya); color:var(--ink)}
+.card.c-pomelo{background:var(--pomelo); color:var(--ink)}
+.card.c-grad{background:radial-gradient(120% 140% at 0% 100%, #FF4F3A 0%, #FF8000 30%, #E8368F 58%, #7B3FE4 85%); color:var(--bone)}
+.card.c-grad::after{content:""; position:absolute; inset:0; background-image:var(--grain); background-size:220px; mix-blend-mode:overlay; opacity:.6; pointer-events:none; z-index:0}
+
+/* ---------- How I work: what goes to AI (quiet) vs. what stays with me (loud) ---------- */
+.craft{padding-block:var(--sec) 0}
+.craft .eyebrow{color:var(--muted); margin-bottom:14px}
+.craft h2{font-size:clamp(40px,7.4vw,124px)}
+.craft .intro{font-size:clamp(19px,1.6vw,23px); line-height:1.45; max-width:44ch; margin:clamp(24px,3vw,40px) 0 clamp(40px,5vw,72px)}
+/* two columns read as one table: same row height, rows line up across the gap, no vertical rule */
+.split{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.3fr); column-gap:clamp(32px,5vw,88px)}
+/* matching column labels: same style, colour tells them apart */
+.split h3{display:flex; align-items:center; gap:10px; font-family:var(--f-mono); font-weight:400; font-size:12.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); padding-bottom:16px; border-bottom:1px solid var(--rule)}
+.split h3::before{content:""; width:7px; height:7px; border-radius:50%; background:currentColor}
+.split .mine h3{color:var(--papaya)}
+.split ul{list-style:none; margin:0; padding:0}
+.split li{display:flex; align-items:center; min-height:64px; border-bottom:1px dashed var(--rule); color:var(--muted); font-size:18px}
+.split .mine li{color:var(--bone); font-weight:600; font-size:clamp(20px,1.8vw,25px); letter-spacing:-.01em}
+/* one full-width line under the table */
+.workspace{display:flex; flex-wrap:wrap; align-items:baseline; gap:8px 20px; margin-top:clamp(32px,4vw,56px)}
+.workspace .mono{color:var(--papaya)}
+.workspace p:not(.mono){font-size:18px; color:var(--bone)}
+
+/* ---------- Side project ---------- */
+.side{padding-block:var(--sec) 0}
+.side .grid{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.1fr); gap:clamp(32px,6vw,96px); align-items:center}
+.side h2{font-size:clamp(64px,11vw,190px); color:var(--lilac); --stroke:var(--lilac)}
+.side .lead{font-size:clamp(18px,1.6vw,23px); line-height:1.45; max-width:36ch; margin-block:24px}
+.side .chips{color:var(--lilac)}
+.side .platforms{display:flex; flex-wrap:wrap; align-items:baseline; gap:6px 14px; font-weight:600; font-size:17px}
+.side .platforms .mono{color:var(--lilac)}
+.side .try{margin-top:32px; display:inline-block; color:var(--lilac)}
+.side .try:hover{background:var(--lilac); color:var(--ink)}
+/* Showcase: real screens rising out of a grainy violet field, cropped by the panel */
+/* Showcase: every zgzbus line drifting on its own behind the phones; the scroll only fans the phones apart */
+.showcase{position:relative; margin:0; height:clamp(460px,46vw,640px); border-radius:30px; overflow:hidden; isolation:isolate; background:#1C1218}
+.showcase.grain::after{z-index:3; mix-blend-mode:normal; opacity:.14}
+.showcase .rows{position:absolute; inset:-12% -6%; display:grid; align-content:center; gap:14px; transform:rotate(-8deg)}
+.showcase .row{display:flex; gap:14px; white-space:nowrap; will-change:transform}
+.showcase .ln{flex:none; display:grid; place-items:center; min-width:clamp(64px,7vw,96px); height:clamp(54px,6vw,80px); padding-inline:14px; border-radius:16px; font-family:var(--f-display); font-weight:800; font-size:clamp(26px,3vw,42px); letter-spacing:-.03em}
+.device{position:absolute; left:50%; top:50%; z-index:2; width:clamp(170px,16vw,240px); padding:7px; border-radius:clamp(34px,3.4vw,46px); background:#0E0B0D; box-shadow:0 2px 0 1px rgba(255,255,255,.12) inset, 0 40px 80px -20px rgba(10,4,20,.75); transform:translate(-50%,-50%); will-change:transform}
+.device img{display:block; width:100%; height:auto; border-radius:clamp(28px,2.9vw,40px)}
+
+/* ---------- How I can help ---------- */
+.help{padding-block:var(--sec) 0}
+/* Offers: three quiet columns; the audience line leads, the title stays small enough not to compete with the section heading */
+.offers{list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); border-top:1px solid var(--rule)}
+.offers li{display:grid; gap:14px; align-content:start; padding:clamp(28px,3vw,40px) clamp(24px,3vw,44px) 0; border-left:1px solid var(--rule)}
+.offers li:first-child{border-left:0; padding-left:0}
+.offers .for{color:var(--papaya)}
+.offers h3{font-family:var(--f-body); font-weight:600; font-size:clamp(24px,2.1vw,30px); line-height:1.15; letter-spacing:-.015em}
+.offers p:not(.mono){color:var(--muted); font-size:17px; line-height:1.5; max-width:32ch}
+.offers .proof{margin-top:10px; color:var(--bone); opacity:.75}
+
+/* ---------- About ---------- */
+.about{padding-block:var(--sec)}
+.about .grid{display:grid; grid-template-columns:minmax(0,4fr) minmax(0,6fr); gap:clamp(24px,5vw,80px); align-items:center}
+.portrait{position:relative; aspect-ratio:1/1; max-width:100%}
+.portrait svg{display:block; width:100%; height:100%; overflow:visible}
+.about h2{font-size:clamp(46px,6.6vw,108px)}
+.about p.body{font-size:clamp(18px,1.6vw,23px); line-height:1.45; max-width:38ch; margin-top:26px}
+.about .chips{margin-top:28px; color:var(--muted)}
+
+/* ---------- Contact ---------- */
+.contact{padding-block:calc(var(--sec) * .5) 0}
+.marquee{overflow:hidden; white-space:nowrap; padding-block:10px}
+.marquee .track{display:inline-flex; gap:.35em; font-size:clamp(84px,15vw,250px); animation:slide 26s linear infinite; padding-right:.35em}
+.marquee .track span{color:var(--lilac)}
+.marquee .track .outline{color:transparent; -webkit-text-stroke:2px var(--lilac)}
+@keyframes slide{to{transform:translateX(-50%)}}
+.links{margin-top:clamp(28px,4vw,60px); border-top:1px dashed var(--rule)}
+.links a{display:grid; grid-template-columns:minmax(0,1fr) auto; gap:4px 20px; align-items:end; padding-block:clamp(22px,3vw,40px); border-bottom:1px dashed var(--rule); text-decoration:none}
+.links .mono{grid-column:1 / -1; color:var(--muted)}
+.links b{font-family:var(--f-display); font-weight:800; font-size:clamp(22px,5.6vw,84px); letter-spacing:-.035em; line-height:1; overflow-wrap:anywhere}
+.links a:hover b{color:var(--papaya)}
+.links .ar{font-size:clamp(28px,3vw,48px); color:var(--lilac)}
+.closer{margin:clamp(48px,6vw,90px) var(--gr) calc(24px + env(safe-area-inset-bottom,0px)) var(--gl); border-radius:30px; overflow:hidden; padding:clamp(28px,4vw,64px); background:radial-gradient(120% 160% at 0% 100%, #FF4F3A 0%, #FF8000 26%, #E8368F 52%, #7B3FE4 78%, #5A2FC0 100%); display:grid; grid-template-columns:minmax(0,1.4fr) minmax(0,1fr); gap:32px; align-items:end}
+.closer > *{position:relative; z-index:3}
+.closer p.big{font-family:var(--f-display); font-weight:800; font-size:clamp(28px,3.4vw,52px); line-height:1.05; letter-spacing:-.035em}
+.closer nav{display:grid; grid-template-columns:1fr 1fr; gap:6px 32px; justify-self:end; font-size:16px}
+.closer nav b{font-weight:600; margin-bottom:6px}
+.closer nav a{text-decoration:none; opacity:.9}
+.closer nav a:hover{text-decoration:underline}
+.closer small{grid-column:1 / -1; font-size:13px; opacity:.85}
+
+:focus-visible{outline:2px solid var(--papaya); outline-offset:3px}
+
+@media (min-width:901px) and (max-width:1180px){
+  .offers{grid-template-columns:1fr 1fr}
+  .offers li:nth-child(odd){border-left:0; padding-left:0}
+  .offers li:nth-child(n+3){margin-top:32px; border-top:1px solid var(--rule)}
+}
+/* ---------- Native scroll-driven animations ---------- */
+@media (prefers-reduced-motion: no-preference){
+  @supports (animation-timeline: scroll()){
+    .logo i{animation:mark-spin linear both; animation-timeline:scroll(root block)}
+    @keyframes mark-spin{to{transform:rotate(var(--spin, 2400deg))}}
+  }
+  @supports (animation-timeline: view()){
+    .bridge{view-timeline-name:--bridge}
+    .band .line{animation:linear both; animation-timeline:--bridge; animation-range:cover 0% cover 100%}
+    .band .l1{animation-name:band-l1}
+    .band .l2{animation-name:band-l2}
+    @keyframes band-l1{from{transform:translateX(var(--a0, 0px))} to{transform:translateX(var(--a1, 0px))}}
+    @keyframes band-l2{from{transform:translateX(var(--b0, 0px))} to{transform:translateX(var(--b1, 0px))}}
+    .band .ast, .band .ast-o{animation:ast-spin linear both; animation-timeline:--bridge; animation-range:cover 0% cover 100%}
+    .band .ast-o{animation-direction:reverse}
+    @keyframes ast-spin{from{transform:rotate(0deg)} to{transform:rotate(-180deg)}}
+    .showcase{view-timeline-name:--show}
+    .showcase .device{animation:linear both; animation-timeline:--show; animation-range:cover 15% cover 55%; animation-timing-function:cubic-bezier(.65,0,.35,1)}
+    .showcase .back{animation-name:fan-back}
+    .showcase .front{animation-name:fan-front}
+    @keyframes fan-back{from{transform:translate(-50%,-46%) rotate(-2deg)} to{transform:translate(-102%,-50%) rotate(-11deg)}}
+    @keyframes fan-front{from{transform:translate(-50%,-50%) rotate(2deg)} to{transform:translate(-6%,-52%) rotate(8deg)}}
+  }
+}
+
+/* ---------- Mobile ---------- */
+@media (max-width:900px){
+  .pill{display:none}
+  .logo, .talk, .lang{white-space:nowrap}
+  .logo{font-size:18px; gap:8px}
+  .logo i{width:22px; height:22px}
+  .end-nav{gap:12px}
+  .lang{gap:9px; font-size:14px}
+  .talk{font-size:15px; padding:10px 15px}
+  .hero{min-height:max(660px, 92svh)}
+  .hero .copy{flex-direction:column; gap:18px}
+  .hero h1{font-size:12cqw; bottom:44px}
+  .card{grid-template-columns:1fr; grid-template-rows:auto; min-height:auto; margin-bottom:5vh; border-radius:24px; --top:calc(env(safe-area-inset-top,0px) + 70px + var(--i) * 10px)}
+  .card .num{justify-self:start; text-align:left}
+  .mix{margin-left:0; grid-template-columns:auto minmax(0,1fr) auto}
+  .mix b{grid-column:1 / -1; order:-1; margin:0 0 8px}
+  .card-compact .mini + .mini{padding-left:0; border-left:0; padding-top:24px; border-top:1px solid color-mix(in srgb, currentColor 22%, transparent)}
+  .card .num span{justify-self:start}
+  .side .grid, .about .grid{grid-template-columns:1fr}
+  .glance .inner{grid-template-columns:1fr}
+  .glance .mono{padding-top:0}
+  .offers{grid-template-columns:1fr}
+  .split{grid-template-columns:1fr}
+  .split .mine{margin-top:36px}
+  .split li{min-height:56px}
+  .workspace{flex-direction:column; gap:8px}
+  .offers li{border-left:0; padding:32px 0 36px; border-top:1px solid var(--rule)}
+  .offers li:first-child{border-top:0}
+  .portrait{max-width:420px}
+  .showcase{height:440px}
+  .device{width:44%; padding:5px; border-radius:30px}
+  .device img{border-radius:25px}
+  .closer{grid-template-columns:1fr}
+  .closer nav{justify-self:start}
+}
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  *{transition:none!important; animation:none!important}
+}
+</style>
+</head>
+<body>
+<!-- ============ NAV ============ -->
+<div class="nav">
+  <span class="glass light" aria-hidden="true"></span><span class="glass dark" aria-hidden="true"></span>
+  <a class="logo" href="#top" aria-label="Óscar Saboya, volver arriba"><i aria-hidden="true"></i>óscar saboya</a>
+  <nav class="pill" aria-label="Principal"><a href="#journey">trayectoria</a><a href="#side">proyecto personal</a><a href="#help">cómo ayudo</a><a href="#about">sobre mí</a></nav>
+  <div class="end-nav">
+    <nav class="lang" aria-label="Idioma"><a href="/" hreflang="en" lang="en">EN</a><a href="/es/" hreflang="es" lang="es" aria-current="true">ES</a></nav>
+    <a class="talk" href="#contact">Hablemos</a>
+  </div>
+</div>
+
+<!-- ============ HERO ============ -->
+<header class="hero grain" id="top">
+  <div class="sky" aria-hidden="true"><i class="b1"></i><i class="b2"></i><i class="b3"></i><i class="b4"></i><i class="light"></i></div>
+  <div class="copy">
+    <div class="intro">
+      <p class="tag"><i aria-hidden="true"></i><span>Product manager en <b>Citibox</b></span></p>
+      <p class="meta">Hoy construir cuesta poco. Lo difícil es saber qué merece la pena. A eso me dedico.</p>
+      <a class="go" href="#journey"><i aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M8 2v12M3 9l5 5 5-5"/></svg></i>Ver mi trayectoria</a>
+    </div>
+  </div>
+  <div class="layer"><h1 class="display">De escribir código a decidir qué merece construirse.</h1></div>
+  <div class="spot" aria-hidden="true"><div class="spot-in"><h1 class="display">De escribir código a decidir qué merece construirse.</h1></div></div>
+</header>
+
+<!-- ============ AT A GLANCE ============ -->
+<section class="glance" aria-label="De un vistazo">
+  <div class="inner">
+    <p class="mono">De un vistazo</p>
+    <p class="brief"><b>Ingeniero informático</b>. Pasé <b>seis años programando</b> y llevo <b>seis en producto</b>. Lo mío es <b>arrancar productos desde cero</b>, <b>hacerlos crecer</b> y <b>cambiar la forma de trabajar de los equipos</b>. He dirigido equipos de producto de <b>más de diez personas</b> y uso <b>IA a diario</b> para investigar, prototipar y sacar cosas adelante. Vivo en <b>Zaragoza</b> y trabajo <b>en remoto</b> sin problema.</p>
+  </div>
+</section>
+
+<!-- ============ CURVED LINE ============ -->
+<section class="bridge" aria-label="Decidir qué merece construirse, y sacarlo adelante">
+  <div class="band" aria-hidden="true">
+    <div class="line l1"><span>decidir qué merece construirse</span><i class="ast"></i><span>decidir qué merece construirse</span><i class="ast"></i><span>decidir qué merece construirse</span><i class="ast"></i><span>decidir qué merece construirse</span><i class="ast"></i></div>
+    <div class="line l2"><span>y sacarlo adelante</span><svg class="ast-o" viewBox="-50 -50 100 100" aria-hidden="true"><path d="M-11.50 -19.92 L-11.50 -35.00 A11.5 11.5 0 0 1 11.50 -35.00 L11.50 -19.92 L24.56 -27.46 A11.5 11.5 0 0 1 36.06 -7.54 L23.00 0.00 L36.06 7.54 A11.5 11.5 0 0 1 24.56 27.46 L11.50 19.92 L11.50 35.00 A11.5 11.5 0 0 1 -11.50 35.00 L-11.50 19.92 L-24.56 27.46 A11.5 11.5 0 0 1 -36.06 7.54 L-23.00 -0.00 L-36.06 -7.54 A11.5 11.5 0 0 1 -24.56 -27.46 Z" vector-effect="non-scaling-stroke"/></svg><span>y sacarlo adelante</span><svg class="ast-o" viewBox="-50 -50 100 100" aria-hidden="true"><path d="M-11.50 -19.92 L-11.50 -35.00 A11.5 11.5 0 0 1 11.50 -35.00 L11.50 -19.92 L24.56 -27.46 A11.5 11.5 0 0 1 36.06 -7.54 L23.00 0.00 L36.06 7.54 A11.5 11.5 0 0 1 24.56 27.46 L11.50 19.92 L11.50 35.00 A11.5 11.5 0 0 1 -11.50 35.00 L-11.50 19.92 L-24.56 27.46 A11.5 11.5 0 0 1 -36.06 7.54 L-23.00 -0.00 L-36.06 -7.54 A11.5 11.5 0 0 1 -24.56 -27.46 Z" vector-effect="non-scaling-stroke"/></svg><span>y sacarlo adelante</span><svg class="ast-o" viewBox="-50 -50 100 100" aria-hidden="true"><path d="M-11.50 -19.92 L-11.50 -35.00 A11.5 11.5 0 0 1 11.50 -35.00 L11.50 -19.92 L24.56 -27.46 A11.5 11.5 0 0 1 36.06 -7.54 L23.00 0.00 L36.06 7.54 A11.5 11.5 0 0 1 24.56 27.46 L11.50 19.92 L11.50 35.00 A11.5 11.5 0 0 1 -11.50 35.00 L-11.50 19.92 L-24.56 27.46 A11.5 11.5 0 0 1 -36.06 7.54 L-23.00 -0.00 L-36.06 -7.54 A11.5 11.5 0 0 1 -24.56 -27.46 Z" vector-effect="non-scaling-stroke"/></svg><span>y sacarlo adelante</span><svg class="ast-o" viewBox="-50 -50 100 100" aria-hidden="true"><path d="M-11.50 -19.92 L-11.50 -35.00 A11.5 11.5 0 0 1 11.50 -35.00 L11.50 -19.92 L24.56 -27.46 A11.5 11.5 0 0 1 36.06 -7.54 L23.00 0.00 L36.06 7.54 A11.5 11.5 0 0 1 24.56 27.46 L11.50 19.92 L11.50 35.00 A11.5 11.5 0 0 1 -11.50 35.00 L-11.50 19.92 L-24.56 27.46 A11.5 11.5 0 0 1 -36.06 7.54 L-23.00 -0.00 L-36.06 -7.54 A11.5 11.5 0 0 1 -24.56 -27.46 Z" vector-effect="non-scaling-stroke"/></svg><span>y sacarlo adelante</span><svg class="ast-o" viewBox="-50 -50 100 100" aria-hidden="true"><path d="M-11.50 -19.92 L-11.50 -35.00 A11.5 11.5 0 0 1 11.50 -35.00 L11.50 -19.92 L24.56 -27.46 A11.5 11.5 0 0 1 36.06 -7.54 L23.00 0.00 L36.06 7.54 A11.5 11.5 0 0 1 24.56 27.46 L11.50 19.92 L11.50 35.00 A11.5 11.5 0 0 1 -11.50 35.00 L-11.50 19.92 L-24.56 27.46 A11.5 11.5 0 0 1 -36.06 7.54 L-23.00 -0.00 L-36.06 -7.54 A11.5 11.5 0 0 1 -24.56 -27.46 Z" vector-effect="non-scaling-stroke"/></svg><span>y sacarlo adelante</span><svg class="ast-o" viewBox="-50 -50 100 100" aria-hidden="true"><path d="M-11.50 -19.92 L-11.50 -35.00 A11.5 11.5 0 0 1 11.50 -35.00 L11.50 -19.92 L24.56 -27.46 A11.5 11.5 0 0 1 36.06 -7.54 L23.00 0.00 L36.06 7.54 A11.5 11.5 0 0 1 24.56 27.46 L11.50 19.92 L11.50 35.00 A11.5 11.5 0 0 1 -11.50 35.00 L-11.50 19.92 L-24.56 27.46 A11.5 11.5 0 0 1 -36.06 7.54 L-23.00 -0.00 L-36.06 -7.54 A11.5 11.5 0 0 1 -24.56 -27.46 Z" vector-effect="non-scaling-stroke"/></svg></div>
+  </div>
+</section>
+
+<!-- ============ JOURNEY ============ -->
+<section class="journey" id="journey" aria-label="Trayectoria">
+  <div class="inner">
+    <div class="sec-head">
+      <h2 class="display">Producto, <span class="outline">desde<br>el código.</span></h2>
+      <p class="mono">2014 → hoy</p>
+    </div>
+
+    <div class="stack" id="stack">
+      <article class="card c-bone card-compact" style="--i:0">
+        <div class="top"><span class="yrs">Los inicios</span></div>
+        <div class="mini"><p class="line"><span class="yrs">2014 – 2017</span><span class="role">Desarrollador de software</span></p><h3 class="co display">Neki, Apex44, Ibercivis</h3><p class="what">Antes de terminar la carrera ya tenía tres apps en uso: wearables para mayores, clínicas de fisio y ciencia ciudadana.</p></div>
+        <div class="mini"><p class="line"><span class="yrs">2018 – 2020</span><span class="role">Ingeniero de producto</span></p><h3 class="co display">Frogtek</h3><p class="what">Convertimos las ventas de tiendas de barrio de toda Latinoamérica en informes para marcas como Coca-Cola. 15.000 $ de facturación el primer mes.</p></div>
+        <div class="foot"><div class="mix" style="--p:.15"><span class="end">código</span><div class="track"><i class="knob"></i></div><span class="end">producto</span><b>Sobre todo código</b></div></div>
+      </article>
+
+      <article class="card c-papaya" style="--i:1">
+        <div class="top"><span class="yrs">2020 – 2023</span><span class="role">Product maker<svg class="arr" viewBox="0 0 30 14" aria-label="to"><path d="M2 7c6-5 12 5 18 0" /><path d="M21.5 2.5 27 7l-5.5 4.5"/><path d="M20 7h7"/></svg>Product manager</span></div>
+        <div class="who"><h3 class="co display">Minimum.run</h3><p class="what">De la idea al producto en marcha, para startups y grandes empresas como Iberia o Kpler.</p></div>
+        <div class="num"><b>Semanas</b><span>para pasar de la idea a un MVP en producción, no trimestres</span></div>
+        <div class="foot"><div class="mix" style="--p:.5"><span class="end">código</span><div class="track"><i class="knob"></i></div><span class="end">producto</span><b>Mitad y mitad</b></div></div>
+      </article>
+
+      <article class="card c-pomelo" style="--i:2">
+        <div class="top"><span class="yrs">2023 – 2025</span><span class="role">Product manager</span></div>
+        <div class="who"><h3 class="co display">The Hotels Network</h3><p class="what">Lancé SafeDirect, un seguro de viaje que anima al huésped a reservar en la web del hotel, integrado con aseguradoras y PMS. También generación de contenido con IA y KITT, el primer recepcionista con IA para hoteles.</p></div>
+        <div class="num"><b>10x</b><span>los ingresos de SafeDirect en un año, y un 12 % más de conversión para los hoteles</span></div>
+        <div class="foot"><div class="mix" style="--p:.8"><span class="end">código</span><div class="track"><i class="knob"></i></div><span class="end">producto</span><b>Más producto</b></div></div>
+      </article>
+
+      <article class="card c-grad" style="--i:3">
+        <div class="top"><span class="state"><i aria-hidden="true"></i>Ahora, desde 2025</span><span class="role">Product manager</span></div>
+        <div class="who"><h3 class="co display">Citibox</h3><p class="what">Llevo el producto de una red de 5.000 tiendas de recogida. Mi equipo, de 15 personas, se guía por métricas y no por fechas, y tiene la IA integrada en su forma de trabajar.</p></div>
+        <div class="num"><b>500K</b><span>paquetes al mes en España y Portugal</span></div>
+        <div class="foot"><div class="mix" style="--p:.92"><span class="end">código</span><div class="track"><i class="knob"></i></div><span class="end">producto</span><b>Sobre todo producto</b></div></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ HOW I WORK ============ -->
+<section class="craft" id="craft" aria-label="Cómo trabajo">
+  <div class="inner">
+    <p class="mono eyebrow">Cómo trabajo</p>
+    <h2 class="display">Las herramientas pasan.<br><span class="outline">El criterio se queda.</span></h2>
+    <p class="intro">Uso la IA donde de verdad mejora el trabajo, no por postureo. Lo que no puede sustituir es lo que he aprendido en años sacando productos adelante.</p>
+    <div class="split">
+      <div><h3>Se lo dejo a la IA</h3><ul><li>Investigar y resumir</li><li>Prototipos y código</li><li>Analizar datos</li><li>Primeras versiones de las specs</li><li>Tareas repetitivas</li></ul></div>
+      <div class="mine"><h3>Me lo quedo yo</h3><ul><li>Qué problema merece la pena resolver</li><li>Qué necesita de verdad el usuario</li><li>Qué se queda fuera</li><li>El nivel de calidad</li><li>Que el equipo se lo crea</li></ul></div>
+    </div>
+    <div class="workspace"><p class="mono">Mi espacio de trabajo</p><p>Reuniones, tareas, datos y specs viven en un mismo repo, con la IA trabajando encima.</p></div>
+  </div>
+</section>
+
+<!-- ============ SIDE PROJECT ============ -->
+<section class="side" id="side" aria-label="Proyecto personal">
+  <div class="inner grid">
+    <div>
+      <p class="mono" style="color:var(--muted)">Por mi cuenta</p>
+      <h2 class="display" style="margin-top:14px">zgz<span class="outline">bus</span></h2>
+      <p class="lead">Los datos del bus y el tranvía de Zaragoza son públicos, pero no había una buena app para consultarlos. Así que me hice una en unos cuantos fines de semana. La IA escribió el código; las decisiones de producto, los tests y los despliegues fueron cosa mía.</p>
+      <p class="platforms"><span class="mono">Disponible en</span> iOS, Android y web</p>
+      <a class="btn try" href="https://zgzbus.com" target="_blank" rel="noopener">Pruébala en la web ↗</a>
+    </div>
+    <figure class="showcase grain" id="showcase">
+      <div class="rows" aria-hidden="true"></div>
+      <div class="device back"><img src="/img/zgz-paraiso.jpg" alt="zgzbus: parada de Plaza Paraíso seleccionada en el mapa, con sus próximos autobuses" width="720" height="1565" loading="lazy"></div>
+      <div class="device front"><img src="/img/zgz-favs.jpg" alt="zgzbus: paradas favoritas con tiempos de llegada en directo" width="720" height="1565" loading="lazy"></div>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ HOW I CAN HELP ============ -->
+<section class="help" id="help" aria-label="Cómo puedo ayudar">
+  <div class="inner">
+    <div class="sec-head"><h2 class="display">Cómo puedo <span class="outline">ayudar.</span></h2><p class="mono">Lo que mejor se me da</p></div>
+    <ol class="offers">
+      <li><p class="for mono">Para fundadores y proyectos nuevos</p><h3>Sacar ideas adelante</h3><p>De una idea a medio cocinar a un producto que la gente usa. Prototipos en días, y que sean los usuarios quienes decidan qué se queda.</p><p class="proof mono">Minimum.run, zgzbus</p></li>
+      <li><p class="for mono">Para productos con tracción</p><h3>Hacer crecer lo que ya está en marcha</h3><p>Encontrar qué mueve la conversión y los ingresos, probarlo rápido y escalar lo que funciona.</p><p class="proof mono">SafeDirect: 10x en ingresos el primer año, +12 % de conversión</p></li>
+      <li><p class="for mono">Para empresas que quieren meter IA</p><h3>Llevar la IA al producto</h3><p>Ponerla donde de verdad ayuda al usuario, lanzarla y medirla. En producción, no en una demo.</p><p class="proof mono">The Hotels Network: recepcionista y contenido con IA</p></li>
+      <li><p class="for mono">Para equipos que necesitan foco</p><h3>Cambiar cómo trabaja un equipo</h3><p>Pasar de entregar tareas a conseguir resultados, con objetivos y métricas que todo el mundo ve.</p><p class="proof mono">Citibox: un equipo de 15 que ahora trabaja con métricas</p></li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section class="about" id="about" aria-label="Sobre mí">
+  <div class="inner grid">
+    <div class="portrait" id="portrait">
+      <svg viewBox="80 60 300 400" role="img" aria-label="Retrato a línea de Óscar: calvo, con gafas, barba corta y sonriendo">
+        <defs>
+          <pattern id="dots" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(18)"><circle cx="2.5" cy="2.5" r="1.1" fill="#1A0F14" fill-opacity=".55"/></pattern>
+          <filter id="pgrain" x="0" y="0" width="100%" height="100%">
+            <feTurbulence type="fractalNoise" baseFrequency="1.1" numOctaves="2" seed="4" result="n"/>
+            <feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -0.7 1.3" result="mask"/>
+            <feComposite in="SourceGraphic" in2="mask" operator="in"/>
+          </filter>
+        </defs>
+        <g class="riso" filter="url(#pgrain)">
+          <circle cx="238" cy="196" r="112" fill="#FF8000"/>
+          <path id="beard" d="M164 250 C 168 298, 200 334, 232 334 C 264 334, 296 298, 300 240 L 293 254 C 290 284, 276 304, 256 310 C 244 313, 220 313, 208 310 C 188 304, 174 284, 171 258 Z" fill="#FF4F3A"/>
+          <path d="M164 250 C 168 298, 200 334, 232 334 C 264 334, 296 298, 300 240 L 293 254 C 290 284, 276 304, 256 310 C 244 313, 220 313, 208 310 C 188 304, 174 284, 171 258 Z" fill="url(#dots)"/>
+          <path d="M207 271 C 214 263, 222 262, 228 266 C 234 262, 242 263, 249 271 C 242 269, 235 269, 228 271 C 221 269, 214 269, 207 271 Z" fill="#FF4F3A"/>
+          <path d="M100 460 C 106 414, 150 384, 204 374 L 266 374 C 322 384, 366 414, 372 460 Z" fill="#7B3FE4"/>
+        </g>
+        <g class="draw" fill="none" stroke="#F3EDE6" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M152 214 C 146 168, 158 132, 184 112 C 204 97, 236 94, 258 102 C 290 114, 306 148, 302 200 C 301 214, 299 226, 296 236"/>
+          <path d="M152 214 C 153 228, 156 240, 160 250"/>
+          <path d="M200 118 C 210 112, 222 110, 232 111" stroke-width="1.8"/>
+          <path d="M154 204 C 142 194, 132 206, 136 222 C 139 234, 148 240, 158 236"/>
+          <path d="M146 212 C 143 218, 145 226, 151 228" stroke-width="1.8"/>
+          <path d="M300 202 C 312 192, 322 204, 318 220 C 315 232, 306 238, 297 234"/>
+          <path d="M308 210 C 311 216, 309 224, 303 226" stroke-width="1.8"/>
+          <path d="M178 176 C 188 170, 200 169, 210 172"/>
+          <path d="M242 172 C 252 169, 264 170, 274 176"/>
+          <path d="M170 188 C 170 184, 173 182, 177 182 L 214 182 C 218 182, 220 185, 220 189 L 218 210 C 217 218, 212 222, 204 222 L 186 222 C 177 222, 172 217, 171 209 Z"/>
+          <path d="M232 189 C 232 185, 234 182, 238 182 L 275 182 C 279 182, 282 184, 282 188 L 281 209 C 280 217, 275 222, 266 222 L 248 222 C 240 222, 235 218, 234 210 Z"/>
+          <path d="M220 192 C 223 187, 229 187, 232 192"/>
+          <path d="M170 191 L 156 196"/><path d="M282 191 L 298 196"/>
+          <path d="M178 190 L 186 190" stroke-width="1.6"/><path d="M240 190 L 248 190" stroke-width="1.6"/>
+          <path d="M184 205 C 189 199, 199 199, 204 205"/>
+          <path d="M248 205 C 253 199, 263 199, 268 205"/>
+          <path d="M164 212 l-5 3" stroke-width="1.6"/><path d="M288 212 l5 3" stroke-width="1.6"/>
+          <path d="M227 206 C 225 222, 219 234, 222 241 C 226 245, 234 245, 239 240"/>
+          <path d="M160 250 C 164 296, 196 330, 228 330 C 260 330, 292 296, 296 236"/>
+          <path d="M208 309 C 220 312, 244 312, 256 309" stroke-width="1.6"/>
+          <path d="M207 270 C 214 263, 222 262, 228 266 C 234 262, 242 263, 249 270"/>
+          <path d="M205 278 C 214 296, 242 296, 252 278"/>
+          <path d="M206 279 C 220 284, 238 284, 251 279" stroke-width="1.8"/>
+          <path d="M196 318 C 196 338, 194 354, 192 366"/>
+          <path d="M262 316 C 262 336, 264 352, 266 366"/>
+          <path d="M94 460 C 98 416, 140 386, 192 374 C 208 394, 250 394, 266 374 C 318 386, 360 416, 364 460"/>
+          <path d="M142 452 C 146 438, 150 428, 156 420" stroke-width="1.8"/>
+          <path d="M316 452 C 312 438, 308 428, 302 420" stroke-width="1.8"/>
+        </g>
+      </svg>
+    </div>
+    <div>
+      <p class="mono" style="color:var(--muted)">Sobre mí</p>
+      <h2 class="display" style="margin-top:14px">Criado entre <span class="outline">papel y píxeles.</span></h2>
+      <p class="body">Me crie en la imprenta de mi abuelo, viendo a mi madre diseñar con los primeros Mac. Ahí aprendí que las cosas tienen que funcionar y, además, verse bien. Estudié Ingeniería Informática, pasé seis años programando y luego di el salto a producto para decidir qué merece la pena construir.</p>
+      <div class="chips"><span>Vivo en Zaragoza</span><span>Español e inglés</span><span>Fuera del trabajo: batería</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="contact" id="contact" aria-label="Contacto">
+  <div class="marquee" aria-hidden="true"><div class="track display">
+    <span>Hablemos</span><span class="outline">Hablemos</span><span>Hablemos</span><span class="outline">Hablemos</span>
+    <span>Hablemos</span><span class="outline">Hablemos</span><span>Hablemos</span><span class="outline">Hablemos</span>
+  </div></div>
+  <div class="inner">
+    <div class="links">
+      <a href="mailto:oscar@oscarsaboya.com" id="mail"><span class="mono">Correo</span><b>oscar@oscarsaboya.com</b><span class="ar">↗</span></a>
+      <a href="https://www.linkedin.com/in/oscarsaboya" target="_blank" rel="noopener"><span class="mono">LinkedIn</span><b>in/oscarsaboya</b><span class="ar">↗</span></a>
+    </div>
+  </div>
+  <footer class="closer grain">
+    <p class="big">Siempre me apetece una buena charla.<br>Sobre trabajo, colaboraciones o, simplemente, buenas ideas.</p>
+    <nav aria-label="Pie de página"><b>Explorar</b><b>En otros sitios</b><a href="#journey">Trayectoria</a><a href="https://www.linkedin.com/in/oscarsaboya" target="_blank" rel="noopener">LinkedIn</a><a href="#side">Proyecto personal</a><a href="#mail">Correo</a><a href="#help">Cómo ayudo</a><span></span></nav>
+    <small>© 2026 Óscar Saboya, Zaragoza</small>
+  </footer>
+</section>
+
+<script>
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- Hero: the light (and the bone headline under it) follows the cursor, eased ---------- */
+  const hero = document.querySelector('.hero'), light = hero.querySelector('.light');
+  const spot = hero.querySelector('.spot'), spotIn = spot.firstElementChild;
+  let sx = .7, sy = .5, tx = .7, ty = .5, hw = 0, hh = 0, R = 0, L = 0, heroMoving = false;
+  function sizeHero(){
+    hw = hero.offsetWidth; hh = hero.offsetHeight;
+    R = Math.max(hw, hh) * (innerWidth <= 900 ? .26 : .2); // radius of the bone reveal
+    L = Math.max(hw, hh) * .38;                            // radius of the violet light
+    spot.style.width = spot.style.height = 2 * R + 'px';
+    spotIn.style.width = hw + 'px'; spotIn.style.height = hh + 'px';
+    light.style.width = 2 * L + 'px';
+    placeLight();
+  }
+  function placeLight(){
+    const x = sx * hw, y = sy * hh;
+    light.style.transform = `translate3d(${(x - L).toFixed(1)}px, ${(y - L).toFixed(1)}px, 0)`;
+    spot.style.transform = `translate3d(${(x - R).toFixed(1)}px, ${(y - R).toFixed(1)}px, 0)`;
+    spotIn.style.transform = `translate3d(${(R - x).toFixed(1)}px, ${(R - y).toFixed(1)}px, 0)`;
+  }
+  function heroTick(){
+    const dx = tx - sx, dy = ty - sy;
+    if (Math.abs(dx) + Math.abs(dy) < .0008){ sx = tx; sy = ty; placeLight(); heroMoving = false; return; }
+    sx += dx * .09; sy += dy * .09;
+    placeLight();
+    requestAnimationFrame(heroTick);
+  }
+  // Safari resizes the hero as its toolbar settles (svh): keep the reveal matched to the real size
+  if ('ResizeObserver' in window) new ResizeObserver(() => sizeHero()).observe(hero);
+  hero.addEventListener('pointermove', e => {
+    const r = hero.getBoundingClientRect(); tx = (e.clientX - r.left) / r.width; ty = (e.clientY - r.top) / r.height;
+    if (reduce){ sx = tx; sy = ty; placeLight(); return; }
+    if (!heroMoving){ heroMoving = true; requestAnimationFrame(heroTick); }
+  });
+
+  /* ---------- Bands: the top line slides left and the bottom one right as the section passes ---------- */
+  const bridge = document.querySelector('.bridge'), l1 = bridge.querySelector('.l1'), l2 = bridge.querySelector('.l2');
+  let a0 = 0, a1 = 0, b0 = 0, b1 = 0;
+  function layoutBand(){
+    const vw = bridge.offsetWidth, s1 = l1.children[2]; // the second phrase of the top line
+    // it starts just inside the left edge, with the end of the previous phrase and a disc before it, and travels far enough to be read whole
+    a0 = -s1.offsetLeft + vw * .24;
+    a1 = a0 - Math.max(vw * .5, s1.offsetWidth - vw * .55);
+    b0 = -l2.children[6].offsetLeft + vw * .1;
+    b1 = b0 + vw * .4;
+    l1.style.setProperty('--a0', a0.toFixed(1) + 'px'); l1.style.setProperty('--a1', a1.toFixed(1) + 'px');
+    l2.style.setProperty('--b0', b0.toFixed(1) + 'px'); l2.style.setProperty('--b1', b1.toFixed(1) + 'px');
+  }
+  const cssBand = CSS.supports('animation-timeline: view()');
+  function drawBridge(){
+    if (cssBand) return; // the browser drives it
+    const q = Math.min(1, Math.max(0, (vh - (geo.bridge - sY)) / (vh + geo.bridgeH)));
+    l1.style.transform = `translate3d(${(a0 + (a1 - a0) * q).toFixed(1)}px, 0, 0)`;
+    l2.style.transform = `translate3d(${(b0 + (b1 - b0) * q).toFixed(1)}px, 0, 0)`;
+  }
+
+  /* ---------- Stacked cards: earlier cards recede ---------- */
+  const cards = [...document.querySelectorAll('.card')], stackEl = document.getElementById('stack');
+  function drawStack(){
+    geo.cards.forEach((g, i) => {
+      const next = geo.cards[i+1];
+      if (!next) return;
+      // the next card's natural (unstuck) top on screen; it covers this one as it rises
+      const cover = Math.min(1, Math.max(0, 1 - (next.top - sY - g.stick) / g.h));
+      const v = Math.round(cover * 500);
+      if (v === g.v) return;
+      g.v = v;
+      cards[i].style.transform = `scale(${1 - cover * .05})`;
+    });
+  }
+
+  /* ---------- Fader: every card shows the whole trajectory as ghosts; its knob slides in from the stage before ---------- */
+  const stages = [...document.querySelectorAll('#stack .mix, #stack [data-p]')].map(el => el.dataset.p || el.style.getPropertyValue('--p'));
+  document.querySelectorAll('#stack .mix').forEach(m => {
+    const own = m.style.getPropertyValue('--p'), track = m.querySelector('.track'), k = stages.indexOf(own);
+    stages.filter(p => p !== own).forEach(p => { const g = document.createElement('i'); g.className = 'ghost'; g.style.left = `calc(${p} * 100%)`; track.prepend(g); });
+    if (!reduce && k > 0) m.style.setProperty('--from', stages[k - 1]);
+  });
+  const cardIO = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting){ e.target.classList.add('in'); cardIO.unobserve(e.target); } }), {threshold:.5});
+  cards.forEach(c => cardIO.observe(c));
+
+  /* ---------- Logo mark: turns with the eased scroll, both ways ---------- */
+  const mark = document.querySelector('.logo i');
+
+  /* ---------- zgzbus showcase: all 47 real lines drift on their own; scroll only fans the phones ---------- */
+  const zLines = [["L1","#e91e8c","#FFFFFF"],["Ci1","#e45514","#FFFFFF"],["Ci2","#5b106f","#FFFFFF"],["Ci3","#af1380","#FFFFFF"],["Ci4","#2b4b88","#FFFFFF"],["C1","#7e860d","#FFFFFF"],["C4","#773283","#FFFFFF"],["21","#847272","#FFFFFF"],["22","#00787e","#FFFFFF"],["23","#407926","#FFFFFF"],["25","#e19100","#FFFFFF"],["28","#b67100","#FFFFFF"],["29","#efb500","#FFFFFF"],["30","#16a8c9","#FFFFFF"],["31","#c30c17","#FFFFFF"],["32","#dc4b8d","#FFFFFF"],["33","#b8c500","#FFFFFF"],["34","#660033","#FFFFFF"],["35","#35478c","#FFFFFF"],["36","#0080c5","#FFFFFF"],["38","#7a9a13","#FFFFFF"],["39","#5b428e","#FFFFFF"],["40","#920051","#FFFFFF"],["41","#c28c38","#FFFFFF"],["42","#1ea7b3","#FFFFFF"],["43","#f49d0d","#FFFFFF"],["44","#259a2a","#FFFFFF"],["50","#b11765","#FFFFFF"],["51","#d23b3f","#FFFFFF"],["52","#115143","#FFFFFF"],["53","#d00053","#FFFFFF"],["54","#cd2e15","#FFFFFF"],["55","#43246c","#FFFFFF"],["56","#0c9a80","#FFFFFF"],["57","#053420","#FFFFFF"],["58","#007035","#FFFFFF"],["59","#95be13","#FFFFFF"],["60","#361851","#FFFFFF"],["N1","#17143b","#82b541"],["N2","#17143b","#d64289"],["N3","#17143b","#00a3e0"],["N4","#17143b","#e50065"],["N5","#17143b","#f7941d"],["N6","#17143b","#009688"],["N7","#17143b","#ffd700"],["ES1","#4a5568","#FFFFFF"],["TR1","#4a5568","#FFFFFF"]];
+  const show = document.getElementById('showcase'), zRowsEl = show.querySelector('.rows'), zRows = [];
+  const zBack = show.querySelector('.back'), zFront = show.querySelector('.front');
+  for (let r = 0; r < 7; r++){
+    const row = document.createElement('div'); row.className = 'row';
+    const seq = zLines.slice(r * 7).concat(zLines.slice(0, r * 7)); // each row starts at a different line
+    for (let k = 0; k < 2; k++) seq.forEach(([n, bg, fg]) => { const b = document.createElement('span'); b.className = 'ln'; b.textContent = n; b.style.background = bg; b.style.color = fg; row.append(b); });
+    zRowsEl.append(row); zRows.push({el: row, dir: r % 2 ? 1 : -1, speed: 14 + (r * 5) % 14});
+  }
+  const zEase = t => t < .5 ? 4*t*t*t : 1 - Math.pow(-2*t + 2, 3) / 2;
+  function drawFan(){
+    const p = Math.min(1, Math.max(0, (vh - (geo.show - sY)) / (vh + geo.showH)));
+    const k = Math.round(zEase(Math.min(1, Math.max(0, (p - .15) / .4))) * 1000) / 1000;
+    if (k === geo.fanK) return;
+    geo.fanK = k;
+    zBack.style.transform  = `translate(${-50 - 52 * k}%, ${-46 - 4 * k}%) rotate(${-2 - 9 * k}deg)`;
+    zFront.style.transform = `translate(${-50 + 44 * k}%, ${-50 - 2 * k}%) rotate(${2 + 6 * k}deg)`;
+  }
+  let zOn = false, zLast = 0, zTime = 0;
+  function ticker(t){
+    const dt = Math.min(.05, (t - zLast) / 1000 || 0); zLast = t; zTime += dt;
+    zRows.forEach(r => { const w = r.el.scrollWidth / 2, x = (zTime * r.speed) % w; r.el.style.transform = `translateX(${r.dir > 0 ? x - w : -x}px)`; });
+    if (zOn) requestAnimationFrame(ticker);
+  }
+  // only animate the ticker while the showcase is on screen
+  if (!reduce) new IntersectionObserver(([e]) => { if (e.isIntersecting && !zOn){ zOn = true; zLast = performance.now(); requestAnimationFrame(ticker); } else if (!e.isIntersecting) zOn = false; }).observe(show);
+
+  /* ---------- Scroll engine: measure the page once (and on resize), then each frame every effect reads one eased
+     scroll value and writes only transforms, opacity and the curve offset. No layout reads while scrolling. ---------- */
+  const nav = document.querySelector('.nav');
+  const docTop = el => el.getBoundingClientRect().top + scrollY;
+  let vh = innerHeight, geo = {cards: []}, sY = scrollY, scrollOn = false, solid = null;
+  function measure(){
+    vh = innerHeight;
+    geo.hero = hero.offsetHeight;
+    geo.bridge = docTop(bridge);
+    geo.show = docTop(show); geo.showH = show.offsetHeight; geo.fanK = NaN;
+    geo.portrait = docTop(portrait); geo.portraitH = portrait.offsetHeight; geo.pv = NaN;
+    // sticky cards: rebuild their natural tops from the stack's top plus each card's height and margin
+    let y = docTop(stackEl);
+    geo.cards = cards.map(c => { const cs = getComputedStyle(c), g = {top: y, stick: parseFloat(cs.top) || 0, h: c.offsetHeight}; y += g.h + (parseFloat(cs.marginBottom) || 0); return g; });
+    geo.bridgeH = bridge.offsetHeight; layoutBand();
+    document.querySelector('.logo i').style.setProperty('--spin', ((document.documentElement.scrollHeight - vh) * .45).toFixed(0) + 'deg');
+  }
+  const cssSpin = CSS.supports('animation-timeline: scroll()'), cssFan = CSS.supports('animation-timeline: view()');
+  let scrolled = null;
+  function render(){
+    const isScrolled = sY > 8, isSolid = geo.hero - sY < 70;
+    if (isScrolled !== scrolled){ scrolled = isScrolled; nav.classList.toggle('scrolled', scrolled); }
+    if (isSolid !== solid){ solid = isSolid; nav.classList.toggle('solid', solid); }
+    if (!cssSpin && !reduce) mark.style.transform = `rotate(${(sY * .45).toFixed(1)}deg)`;
+    drawBridge(); drawStack(); if (!cssFan) drawFan(); drawPortrait();
+  }
+  function frame(){
+    const d = scrollY - sY;
+    sY = Math.abs(d) < .5 ? scrollY : sY + d * .35; // light easing evens out uneven scroll events on phones
+    render();
+    if (sY !== scrollY) requestAnimationFrame(frame); else scrollOn = false;
+  }
+  addEventListener('scroll', () => { if (!scrollOn){ scrollOn = true; requestAnimationFrame(frame); } }, {passive:true});
+
+  /* ---------- Portrait: drawn by the scroll, stroke after stroke (and undrawn going back up) ---------- */
+  const portrait = document.getElementById('portrait');
+  const strokes = [...portrait.querySelectorAll('.draw > *')].map(el => ({el, len: el.getTotalLength()}));
+  const riso = portrait.querySelector('.riso');
+  const total = strokes.reduce((a, s) => a + s.len, 0);
+  let acc = 0;
+  strokes.forEach(s => { s.a = acc / total; acc += s.len; s.b = acc / total; s.el.style.strokeDasharray = s.len; });
+  function drawPortrait(){
+    const top = geo.portrait - sY, start = vh * .92, end = vh * .5 - geo.portraitH / 2;
+    const p = reduce ? 1 : Math.min(1, Math.max(0, (start - top) / (start - end)));
+    const v = Math.round(p * 600);
+    if (v === geo.pv) return;
+    geo.pv = v;
+    const d = Math.min(1, p / .85);
+    strokes.forEach(s => { const k = Math.min(1, Math.max(0, (d - s.a) / (s.b - s.a))); s.el.style.strokeDashoffset = s.len * (1 - k); });
+    riso.style.opacity = Math.min(1, Math.max(0, (p - .8) / .2));
+  }
+
+
+  /* ---------- Loop ---------- */
+  const relayout = () => { measure(); sY = scrollY; render(); };
+  addEventListener('resize', () => { sizeHero(); relayout(); });
+  addEventListener('load', relayout);
+  if (document.fonts) document.fonts.ready.then(relayout); // web fonts change heights
+  sizeHero(); relayout();
+})();
+</script>
+</body>
+</html>
